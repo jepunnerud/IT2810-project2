@@ -1,6 +1,6 @@
 .card {
   padding: 2rem;
-  background-color: #424242;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
   height: 15rem;
   display: flex;
@@ -32,29 +32,4 @@
 
 .card:hover {
   transform: scale(1.05);
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-header {
-  position: relative;
-  top: 0;
-  z-index: 999;
-  margin-bottom: 10px;
-}
-
-main {
-  padding: 0;
 }
