@@ -2,10 +2,8 @@
 //Fetcher drinks fra databasen/json. Ikke ferdig
 import { useQuery } from '@tanstack/react-query';
 import { Drink } from '../types.ts';
-
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
 
 function readDrinksFromJson() {
     const drinksFilePath = path.join(__dirname, '.../drinks.json');
