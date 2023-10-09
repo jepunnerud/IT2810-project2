@@ -5,10 +5,9 @@ import InfoPage from './pages/Info'
 import FavouritesPage from './pages/Favourites'
 import NavBar from './components/NavBar'
 import { NavBarItem } from './types'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const queryClient = new QueryClient()
-
 
 const navBarItems: NavBarItem[] = [
   {
@@ -31,7 +30,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="info/:idDrink" element={<InfoPage />}></Route>
+            <Route path="info/:drinkid" element={<InfoPage />}></Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>
           </Routes>
         </BrowserRouter>

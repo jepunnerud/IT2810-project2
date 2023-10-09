@@ -4,33 +4,34 @@ import { useDrink } from '../hooks/Drinks'
 import '../utils/Loader.css'
 
 export default function InfoPage() {
-  let { idDrink } = useParams<{ idDrink: string }>()
-  idDrink = idDrink ? idDrink : ''
+  let { drinkid } = useParams<{ drinkid: string }>()
+  drinkid = drinkid ? drinkid : ''
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
+  const { data, isLoading, error } = useDrink(drinkid)
 
   const storedFavourites = JSON.parse(
     localStorage.getItem('favourites') || '[]'
   )
 
   useEffect(() => {
-    setIsFavourite(storedFavourites.includes(idDrink))
+    setIsFavourite(storedFavourites.includes(drinkid))
     setMessage(
-      storedFavourites.includes(idDrink)
+      storedFavourites.includes(drinkid)
         ? 'Fjern fra favoritter'
         : 'Legg til favoritt'
     )
-  }, [storedFavourites, idDrink])
+  }, [storedFavourites, drinkid])
 
   function handleOnClick() {
     if (!isFavourite) {
-      storedFavourites.push(idDrink)
+      storedFavourites.push(drinkid)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
       setMessage('Fjern fra favoritter')
     } else {
       const newList: string[] = storedFavourites.filter(
-        (id: string) => id !== idDrink
+        (id: string) => id !== drinkid
       )
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
@@ -38,23 +39,17 @@ export default function InfoPage() {
     }
   }
 
-  const { data, isLoading } = useDrink(idDrink)
-
   if (isLoading) return <span className="loader"></span>
+  if (error) return <span>Error</span>
 
-  if (Array.isArray(data)) {
-    const drink = data[0]; // Now TypeScript knows 'data' is an array
-    // Rest of your code here
-    return (
-      <>
-        <h1>{drink.name}</h1>
-        <div>
-          <img src={drink.DrinkPicture.png} alt={drink.name.common} />
-          {<button onClick={handleOnClick}>{message}</button>}
-        </div>
-        <div className="infoSection">
-        </div>
-      </>
-    )
-  }
+  return (
+    <>
+      <h1>{data!.name}</h1>
+      <div>
+        <img src={data!.picture} alt={data!.name} />
+        {<button onClick={handleOnClick}>{message}</button>}
+      </div>
+      <div className="infoSection"></div>
+    </>
+  )
 }

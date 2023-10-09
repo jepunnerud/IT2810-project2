@@ -7,11 +7,13 @@
   border-radius: 50% 50% 0 0;
   border-bottom: 10px solid #ff3d00;
   background-color: #fff;
-  background-image: radial-gradient(ellipse at center,
+  background-image: radial-gradient(
+      ellipse at center,
       #fff 34%,
       #ff3d00 35%,
       #ff3d00 54%,
-      #fff 55%),
+      #fff 55%
+    ),
     linear-gradient(#ff3d00 10px, transparent 0);
   background-size: 28px 28px;
   background-position:
@@ -43,10 +45,12 @@
   width: 34px;
   height: 34px;
   top: 112%;
-  background: radial-gradient(ellipse at center,
-      #ffdf00 8%,
-      rgba(249, 62, 0, 0.6) 24%,
-      rgba(0, 0, 0, 0) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    #ffdf00 8%,
+    rgba(249, 62, 0, 0.6) 24%,
+    rgba(0, 0, 0, 0) 100%
+  );
   border-radius: 50% 50% 0;
   background-repeat: no-repeat;
   background-position: -44px -44px;
@@ -57,7 +61,6 @@
 }
 
 @keyframes animloaderBack {
-
   0%,
   30%,
   70% {
