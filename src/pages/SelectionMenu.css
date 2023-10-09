@@ -1,0 +1,45 @@
+select {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: #ffffff1a;
+  border: 1px solid transparent;
+  color: white;
+  outline: none;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+}
+
+select:hover {
+  border: 1px solid gray;
+  cursor: pointer;
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+select option {
+  background-color: #424242;
+  color: white;
+}
+
+select option:checked {
+  background-color: #424242;
+  color: white;
+}
+
+select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

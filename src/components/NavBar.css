@@ -1,0 +1,35 @@
+.nav-bar-parent {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  justify-content: right;
+  margin-right: 10px;
+}
+
+.nav-bar-item {
+  box-sizing: border-box;
+  height: 60px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  user-select: none;
+}
+
+.nav-bar-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: white;
+  transition: width 0.3s ease;
+}
+
+.nav-bar-item:hover::before {
+  width: 100%;
+  transition: width 0.3s ease;
+}
