@@ -2,7 +2,7 @@
   display: flex;
   width: fit-content;
   height: 50px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid black;
   align-items: center;
 }
 
@@ -12,11 +12,11 @@
   border: none;
   padding: 10px;
   width: 300px;
+  color: black;
 
   &::placeholder {
     color: gray;
     user-select: none;
-    letter-spacing: normal !important;
   }
 
   &:focus {

@@ -2,9 +2,9 @@ select {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  background-color: #ffffff1a;
+  background-color: var(--primary-color);
   border: 1px solid transparent;
-  color: white;
+  color: black;
   outline: none;
   transition:
     border-color 0.3s,

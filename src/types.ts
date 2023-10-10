@@ -28,4 +28,4 @@ interface IconData {
   [key: string]: string
 }
 
-export type { Drink, SortingMap, NavBarItem, IconData }
+export type { Drink, SortingMap, NavBarItem, IconData, Ingredient }
