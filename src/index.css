@@ -1,11 +1,17 @@
 :root {
+  --background-color: #c7f9cc;
+  --primary-color: #80ed99;
+  --secondary-color: #57cc99;
+  --tertiary-color: #38a3a5;
+  --quaternary-color: #22577a;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: white;
-  background-color: #f8f40dee;
+  color: black;
+  background-color: var(--background-color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
