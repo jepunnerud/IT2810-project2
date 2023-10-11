@@ -55,7 +55,6 @@ export default function InfoPage() {
   //For back jump
   //Henter forrige element lagret i drinkorder lista og setter som ny url
   function handleBackButton() {
-    console.log('Back button clicked')
     if (currentDrinkIndex != null && currentDrinkIndex > 0) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
     }
@@ -65,7 +64,6 @@ export default function InfoPage() {
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    console.log('Forward button clicked')
     if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     }

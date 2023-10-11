@@ -18,9 +18,7 @@ function HomePage() {
     if (data && data.length > 0) {
       const newDrinkOrder = data.map(drink => drink.drinkid)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
-      console.log(newDrinkOrder)
     }
-    console.log('drink order updated')
   }
 
   updateDrinkOrder()
