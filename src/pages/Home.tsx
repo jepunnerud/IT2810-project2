@@ -4,16 +4,23 @@ import '../utils/Loader.css'
 import { useState } from 'react'
 import { sortingFns } from '../utils/constants'
 import './Home.css'
-import './SelectionMenu.css'
 import './SearchBar.css'
 import { useDrinks } from '../hooks/Drinks'
+import FilterDropdown from '../components/FilterDropdown'
 
 function HomePage() {
-  const [sortParam, setSortParam] = useState('alphabetically')
+  const [filterParam, setFilterParam] = useState<string>('')
+
+  const includes_ingredient = (d: Drink, param: string) => {
+    if (!param) {
+      return true
+    }
+    const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
+    return ingredients.includes(param)
+  }
 
   //Add data from JSON, extraxt with function
   //Dummy variables:
-
   const { data, isLoading, error } = useDrinks()
 
   if (isLoading) return <span className="loader"></span>
@@ -34,24 +41,20 @@ function HomePage() {
             //onInput={search}
           ></input>
         </div>
-        <div className="dropdown-container">
-          <label htmlFor="sorting-parameter">Sort by </label>
-          <select
-            id="sorting-parameter"
-            value={sortParam}
-            onChange={(e) => {
-              setSortParam(e.target.value)
-            }}
-          >
-            <option value="alphabetically">Name</option>
-          </select>
-        </div>
+        <FilterDropdown
+          value={filterParam}
+          changeHandler={setFilterParam}
+          label="Filter by ingredient"
+        />
       </div>
       {
         <div className="card-container">
-          {data!.sort(sortingFns[sortParam]).map((d: Drink) => (
-            <DrinkCard drink={d} key={d.drinkid} /> // Use 'idDrink' as the key instead of 'name'
-          ))}
+          {data!
+            .sort(sortingFns['alphabetically'])
+            .filter((d: Drink) => includes_ingredient(d, filterParam))
+            .map((d: Drink) => (
+              <DrinkCard drink={d} key={d.drinkid} /> // Use 'idDrink' as the key instead of 'name'
+            ))}
         </div>
       }
     </>
