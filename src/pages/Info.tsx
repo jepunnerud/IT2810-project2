@@ -59,7 +59,7 @@ export default function InfoPage() {
     if (currentDrinkIndex != null && currentDrinkIndex > 0) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
     }
-    return ''
+    return '' + drinkid
   }
 
   //For forward jump
@@ -69,7 +69,7 @@ export default function InfoPage() {
     if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     }
-    return ''
+    return '' + drinkid
   }
 
   if (isLoading) return <span className="loader"></span>
