@@ -299,7 +299,7 @@ export const drinks = [
       { ingredient: 'Tequila', measure: '1 1/2 oz ' },
       { ingredient: 'Triple sec', measure: '1/2 oz ' },
       { ingredient: 'Lime juice', measure: '1 oz ' },
-      { ingredient: 'Salt', measure: null },
+      { ingredient: 'Salt' },
     ],
   },
   {
@@ -355,7 +355,7 @@ export const drinks = [
       { ingredient: 'Lime', measure: 'Juice of 1 ' },
       { ingredient: 'Sugar', measure: '2 tsp ' },
       { ingredient: 'Mint', measure: '2-4 ' },
-      { ingredient: 'Soda water', measure: null },
+      { ingredient: 'Soda water' },
     ],
   },
   {
@@ -499,7 +499,7 @@ export const drinks = [
       { ingredient: 'Tequila', measure: '1/2 oz ' },
       { ingredient: 'Triple sec', measure: '1/2 oz' },
       { ingredient: 'Lemon', measure: 'Juice of 1/2 ' },
-      { ingredient: 'Coca-Cola', measure: null },
+      { ingredient: 'Coca-Cola' },
     ],
   },
   {
@@ -587,7 +587,7 @@ export const drinks = [
     ingredients: [
       { ingredient: 'Light rum', measure: '2 oz ' },
       { ingredient: 'Lime', measure: 'Juice of 1/2 ' },
-      { ingredient: 'Coca-Cola', measure: null },
+      { ingredient: 'Coca-Cola' },
     ],
   },
   {
