@@ -5,18 +5,27 @@ import { useState } from 'react'
 import { sortingFns } from '../utils/constants'
 import './Home.css'
 import './SelectionMenu.css'
-import './SearchBar.css'
+import '../components/SearchBar.css'
 import { useDrinks } from '../hooks/Drinks'
+import SearchBar from '../components/SearchBar'
+import Fuse from 'fuse.js'
 
 function HomePage() {
   const [sortParam, setSortParam] = useState('alphabetically')
 
+  const [searchInput, setSearchInput] = useState<string>('')
+  const [queryData, setQueryData] = useState<string[]>([])
+  //Add data from JSON, extraxt with function
+  //Dummy variables:
 
   const { data, isLoading, error } = useDrinks()
 
   function updateDrinkOrder() {
     if (data && data.length > 0) {
-      const newDrinkOrder = data.map(drink => drink.drinkid)
+      const newDrinkOrder = data.sort(sortingFns[
+        'alphabetically'
+      ])
+        .map(drink => drink.drinkid)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }
@@ -25,22 +34,29 @@ function HomePage() {
 
   if (isLoading) return <span className="loader"></span>
   if (error) return <span>Error</span>
+
+  const search = (query: string) => {
+    const searchOptions = {
+      keys: ['value'],
+      threshold: 0.3,
+    }
+    const fuse = new Fuse(
+      data!.map((d: Drink) => d.name),
+      searchOptions
+    )
+    const fuseResults: Fuse.FuseResult<string>[] = fuse.search(query)
+    const results = [] as string[]
+    fuseResults.map((result) => results.push(result.item))
+    setQueryData(results)
+  }
   return (
     <>
       <div className="home-top-container">
-        <div className="searchbar-container">
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-          />
-          <span className="material-symbols-outlined">search</span>
-          <input
-            id="input"
-            className="searchbar-input"
-            placeholder={'Search'}
-          //onInput={search}
-          ></input>
-        </div>
+        <SearchBar
+          placeholder="Search"
+          searchHandler={search}
+          inputHandler={setSearchInput}
+        />
         <div className="dropdown-container">
           <label htmlFor="sorting-parameter">Sort by </label>
           <select
@@ -57,9 +73,17 @@ function HomePage() {
       </div>
       {
         <div className="card-container">
-          {data!.sort(sortingFns[sortParam]).map((d: Drink) => (
-            <DrinkCard drink={d} key={d.drinkid} /> // Use 'idDrink' as the key instead of 'name'
-          ))}
+          {queryData.length === 0 && searchInput.length > 0 ? (
+            <span>No drinks matched your query</span>
+          ) : (
+            data
+              ?.filter(
+                (d: Drink) =>
+                  queryData.includes(d.name) || queryData.length === 0
+              )
+              ?.sort(sortingFns[sortParam])
+              ?.map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
+          )}
         </div>
       }
     </>

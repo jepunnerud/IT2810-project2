@@ -11,10 +11,24 @@ export default function InfoPage() {
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
   const { data, isLoading, error } = useDrink(drinkid)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const storedFavourites = JSON.parse(
     localStorage.getItem('favourites') || '[]'
   )
+
+  useEffect(() => {
+    // Update the window width whenever the window is resized
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    // Add a window resize event listener
+    window.addEventListener('resize', handleResize)
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowWidth])
 
   const drinkOrder = JSON.parse(
     localStorage.getItem('drinkOrder') || '[]'
@@ -37,6 +51,7 @@ export default function InfoPage() {
 
   function handleOnClick() {
     if (!isFavourite) {
+      console.log(currentDrinkIndex)
       storedFavourites.push(drinkid)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
@@ -58,16 +73,22 @@ export default function InfoPage() {
     if (currentDrinkIndex != null && currentDrinkIndex > 0) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
     }
-    return '' + drinkid
+    else if (drinkid != null) {
+      return '' + drinkid.toString()
+    }
+    return ''
   }
 
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length) {
+    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length - 1) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     }
-    return '' + drinkid
+    else if (drinkid != null) {
+      return '' + drinkid.toString()
+    }
+    return ''
   }
 
   if (isLoading) return <span className="loader"></span>
@@ -84,10 +105,22 @@ export default function InfoPage() {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       />
       <h1>{data!.name}</h1>
+      {windowWidth <= 997 && (
+        <div className="mobile-arrows">
+          <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
+            arrow_back_ios
+          </a>
+          <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
+            arrow_forward_ios
+          </a>
+        </div>
+      )}
       <div className="content-parent">
-        <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
-          arrow_back_ios
-        </a>
+        {windowWidth > 997 && (
+          <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
+            arrow_back_ios
+          </a>
+        )}
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
           {<button onClick={handleOnClick}>{message}</button>}
@@ -109,9 +142,11 @@ export default function InfoPage() {
           <p>Glass: {data!.glass}</p>
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
-        <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
-          arrow_forward_ios
-        </a>
+        {windowWidth > 997 && (
+          <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
+            arrow_forward_ios
+          </a>
+        )}
       </div>
     </div>
   )
