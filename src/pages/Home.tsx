@@ -22,10 +22,9 @@ function HomePage() {
 
   function updateDrinkOrder() {
     if (data && data.length > 0) {
-      const newDrinkOrder = data.sort(sortingFns[
-        'alphabetically'
-      ])
-        .map(drink => drink.drinkid)
+      const newDrinkOrder = data
+        .sort(sortingFns['alphabetically'])
+        .map((drink) => drink.drinkid)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }

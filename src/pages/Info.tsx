@@ -30,15 +30,11 @@ export default function InfoPage() {
     }
   }, [windowWidth])
 
-  const drinkOrder = JSON.parse(
-    localStorage.getItem('drinkOrder') || '[]'
-  )
-  const currentDrinkIndex = drinkOrder.indexOf(drinkid);
-
+  const drinkOrder = JSON.parse(localStorage.getItem('drinkOrder') || '[]')
+  const currentDrinkIndex = drinkOrder.indexOf(drinkid)
 
   console.log(drinkOrder)
-  console.log("Index: " + currentDrinkIndex)
-
+  console.log('Index: ' + currentDrinkIndex)
 
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(drinkid))
@@ -66,14 +62,12 @@ export default function InfoPage() {
     }
   }
 
-
   //For back jump
   //Henter forrige element lagret i drinkorder lista og setter som ny url
   function handleBackButton() {
     if (currentDrinkIndex != null && currentDrinkIndex > 0) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
-    }
-    else if (drinkid != null) {
+    } else if (drinkid != null) {
       return '' + drinkid.toString()
     }
     return ''
@@ -82,10 +76,12 @@ export default function InfoPage() {
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length - 1) {
+    if (
+      currentDrinkIndex != null &&
+      currentDrinkIndex < drinkOrder.length - 1
+    ) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
-    }
-    else if (drinkid != null) {
+    } else if (drinkid != null) {
       return '' + drinkid.toString()
     }
     return ''
@@ -107,17 +103,26 @@ export default function InfoPage() {
       <h1>{data!.name}</h1>
       {windowWidth <= 997 && (
         <div className="mobile-arrows">
-          <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
+          <a
+            href={`/info/${handleBackButton()}`}
+            className="material-symbols-outlined arrow"
+          >
             arrow_back_ios
           </a>
-          <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
+          <a
+            href={`/info/${handleForwardButton()}`}
+            className="material-symbols-outlined arrow"
+          >
             arrow_forward_ios
           </a>
         </div>
       )}
       <div className="content-parent">
         {windowWidth > 997 && (
-          <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
+          <a
+            href={`/info/${handleBackButton()}`}
+            className="material-symbols-outlined arrow"
+          >
             arrow_back_ios
           </a>
         )}
@@ -143,7 +148,10 @@ export default function InfoPage() {
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
         {windowWidth > 997 && (
-          <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
+          <a
+            href={`/info/${handleForwardButton()}`}
+            className="material-symbols-outlined arrow"
+          >
             arrow_forward_ios
           </a>
         )}
