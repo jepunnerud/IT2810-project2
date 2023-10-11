@@ -1,27 +1,23 @@
-# React + TypeScript + Vite
+# The project - Cocktail Connoisseur
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+After cloning the project, do `yarn` or `npm install` in the project's root folder.
 
-Currently, two official plugins are available:
+To start the local server, do `yarn dev` or `npm run dev`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The website shows a collection of different drinks.
 
-## Expanding the ESLint configuration
+The home page displays the drinks with a picture and the name. Using a dropdown bar, you can filter the drinks by different ingredients. <br />
+Clicking on a drink card will lead to an info page for this drink. Here, the user will be shown the image of the drink, along with ingredients, measurements for those ingredients, an instruction, some general information, and a button to add or remove from favourites. Favourites are stored using local storage, and can be found on the favourites page. After clicking on a drink, you can toogle between differnt drinks using to arrow-buttons.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## The progress
 
-- Configure the top-level `parserOptions` property like this:
+We set up some tools at the start of the project:
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+- Prettier to avoid merge conflicts due to formatting.
+- CI pipeline to avoid merging code with build or linting errors, or that is not formatted correctly.
+- Protection of the main branch to maintain integrity.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### Design
+
+- Extensive use of flexbox to ensure responsive design
+- Use of Fuse.js library to implement fuzzy search since this would have taken too much time to implement on our own
