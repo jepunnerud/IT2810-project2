@@ -34,8 +34,8 @@ export default function InfoPage() {
     setIsFavourite(storedFavourites.includes(drinkid))
     setMessage(
       storedFavourites.includes(drinkid)
-        ? 'Fjern fra favoritter'
-        : 'Legg til favoritt'
+        ? 'Remove from favourites'
+        : 'Add to favourites'
     )
   }, [storedFavourites, drinkid])
 
@@ -44,14 +44,12 @@ export default function InfoPage() {
       storedFavourites.push(drinkid)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
-      setMessage('Fjern fra favoritter')
     } else {
       const newList: string[] = storedFavourites.filter(
         (id: string) => id !== drinkid
       )
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
-      setMessage('Legg til favoritt')
     }
   }
 
