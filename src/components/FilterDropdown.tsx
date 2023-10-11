@@ -25,9 +25,9 @@ function FilterDropdown(props: {
             props.changeHandler(e.target.value)
           }}
         >
-          {possibleFilterParams.map((p) => {
+          {possibleFilterParams.map((p, idx) => {
             return (
-              <option value={p}>
+              <option value={p} key={idx}>
                 {p.charAt(0).toUpperCase() + p.slice(1)}
               </option>
             )
