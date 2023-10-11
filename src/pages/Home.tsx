@@ -39,6 +39,17 @@ function HomePage() {
   //Dummy variables:
   const { data, isLoading, error } = useDrinks()
 
+  function updateDrinkOrder() {
+    if (data && data.length > 0) {
+      const newDrinkOrder = data
+        .sort(sortingFns['alphabetically'])
+        .map((drink) => drink.drinkid)
+      localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
+    }
+  }
+
+  updateDrinkOrder()
+
   if (isLoading) return <span className="loader"></span>
   if (error) return <span>Error</span>
 
