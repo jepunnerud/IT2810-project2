@@ -11,10 +11,19 @@ import { useDrinks } from '../hooks/Drinks'
 function HomePage() {
   const [sortParam, setSortParam] = useState('alphabetically')
 
-  //Add data from JSON, extraxt with function
-  //Dummy variables:
 
   const { data, isLoading, error } = useDrinks()
+
+  function updateDrinkOrder() {
+    if (data && data.length > 0) {
+      const newDrinkOrder = data.map(drink => drink.drinkid)
+      localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
+      console.log(newDrinkOrder)
+    }
+    console.log('drink order updated')
+  }
+
+  updateDrinkOrder()
 
   if (isLoading) return <span className="loader"></span>
   if (error) return <span>Error</span>
@@ -31,7 +40,7 @@ function HomePage() {
             id="input"
             className="searchbar-input"
             placeholder={'Search'}
-            //onInput={search}
+          //onInput={search}
           ></input>
         </div>
         <div className="dropdown-container">
@@ -41,6 +50,7 @@ function HomePage() {
             value={sortParam}
             onChange={(e) => {
               setSortParam(e.target.value)
+              updateDrinkOrder()
             }}
           >
             <option value="alphabetically">Name</option>

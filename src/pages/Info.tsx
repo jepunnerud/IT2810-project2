@@ -16,6 +16,16 @@ export default function InfoPage() {
     localStorage.getItem('favourites') || '[]'
   )
 
+  const drinkOrder = JSON.parse(
+    localStorage.getItem('drinkOrder') || '[]'
+  )
+  const currentDrinkIndex = drinkOrder.indexOf(drinkid);
+
+
+  console.log(drinkOrder)
+  console.log("Index: " + currentDrinkIndex)
+
+
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(drinkid))
     setMessage(
@@ -41,6 +51,27 @@ export default function InfoPage() {
     }
   }
 
+
+  //For back jump
+  //Henter forrige element lagret i drinkorder lista og setter som ny url
+  function handleBackButton() {
+    console.log('Back button clicked')
+    if (currentDrinkIndex != null && currentDrinkIndex > 0) {
+      return '' + drinkOrder[currentDrinkIndex - 1].toString()
+    }
+    return ''
+  }
+
+  //For forward jump
+  //Henter neste element lagret i drinkorder lista og setter som ny url
+  function handleForwardButton() {
+    console.log('Forward button clicked')
+    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length) {
+      return '' + drinkOrder[currentDrinkIndex + 1].toString()
+    }
+    return ''
+  }
+
   if (isLoading) return <span className="loader"></span>
   if (error) return <span>Error</span>
 
@@ -56,7 +87,9 @@ export default function InfoPage() {
       />
       <h1>{data!.name}</h1>
       <div className="content-parent">
-        <span className="material-symbols-outlined arrow">arrow_back_ios</span>
+        <a href={`/info/${handleBackButton()}`} className="material-symbols-outlined arrow">
+          arrow_back_ios
+        </a>
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
           {<button onClick={handleOnClick}>{message}</button>}
@@ -78,9 +111,9 @@ export default function InfoPage() {
           <p>Glass: {data!.glass}</p>
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
-        <span className="material-symbols-outlined arrow">
+        <a href={`/info/${handleForwardButton()}`} className="material-symbols-outlined arrow">
           arrow_forward_ios
-        </span>
+        </a>
       </div>
     </div>
   )
