@@ -16,7 +16,21 @@ function HomePage() {
       return true
     }
     const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
-    return ingredients.includes(param)
+    if (param === 'whisky') {
+      const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
+      for (const ingredient of ingredients) {
+        for (const accept of accepted) {
+          if (ingredient.includes(accept)) {
+            return true
+          }
+        }
+      }
+    }
+    for (const ingredient of ingredients) {
+      if (ingredient.includes(param)) {
+        return true
+      }
+    }
   }
 
   //Add data from JSON, extraxt with function
