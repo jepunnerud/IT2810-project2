@@ -46,6 +46,13 @@
   }
 }
 
+.mobile-arrows {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  width: 100%;
+}
+
 p {
   margin: 0px 0px;
 }
