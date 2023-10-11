@@ -1,23 +1,42 @@
-import { Drink } from '../types'
 import DrinkCard from '../components/DrinkCard'
-import '../utils/Loader.css'
-import { useState } from 'react'
-import { sortingFns } from '../utils/constants'
-import './Home.css'
-import './SelectionMenu.css'
-import '../components/SearchBar.css'
-import { useDrinks } from '../hooks/Drinks'
+import FilterDropdown from '../components/FilterDropdown'
 import SearchBar from '../components/SearchBar'
+import { Drink } from '../types'
+import { sortingFns } from '../utils/constants'
+import '../utils/Loader.css'
+import { useDrinks } from '../hooks/Drinks'
+import './Home.css'
 import Fuse from 'fuse.js'
+import { useState } from 'react'
 
 function HomePage() {
-  const [sortParam, setSortParam] = useState('alphabetically')
-
+  const [filterParam, setFilterParam] = useState<string>('')
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
+
+  const includes_ingredient = (d: Drink, param: string) => {
+    if (!param) {
+      return true
+    }
+    const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
+    if (param === 'whisky') {
+      const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
+      for (const ingredient of ingredients) {
+        for (const accept of accepted) {
+          if (ingredient.includes(accept)) {
+            return true
+          }
+        }
+      }
+    }
+    for (const ingredient of ingredients) {
+      if (ingredient.includes(param)) {
+        return true
+      }
+    }
+  }
   //Add data from JSON, extraxt with function
   //Dummy variables:
-
   const { data, isLoading, error } = useDrinks()
 
   function updateDrinkOrder() {
@@ -56,32 +75,25 @@ function HomePage() {
           searchHandler={search}
           inputHandler={setSearchInput}
         />
-        <div className="dropdown-container">
-          <label htmlFor="sorting-parameter">Sort by </label>
-          <select
-            id="sorting-parameter"
-            value={sortParam}
-            onChange={(e) => {
-              setSortParam(e.target.value)
-              updateDrinkOrder()
-            }}
-          >
-            <option value="alphabetically">Name</option>
-          </select>
-        </div>
+        <FilterDropdown
+          value={filterParam}
+          changeHandler={setFilterParam}
+          label="Filter by ingredient"
+        />
       </div>
       {
         <div className="card-container">
           {queryData.length === 0 && searchInput.length > 0 ? (
             <span>No drinks matched your query</span>
           ) : (
-            data
-              ?.filter(
+            data!
+              .filter(
                 (d: Drink) =>
                   queryData.includes(d.name) || queryData.length === 0
               )
-              ?.sort(sortingFns[sortParam])
-              ?.map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
+              .sort(sortingFns['alphabetically'])
+              .filter((d: Drink) => includes_ingredient(d, filterParam))
+              .map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
           )}
         </div>
       }

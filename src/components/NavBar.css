@@ -33,3 +33,22 @@
   width: 100%;
   transition: width 0.3s ease;
 }
+
+img {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.nav-bar-parent-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 500px) {
+  .nav-bar-parent-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
