@@ -11,10 +11,24 @@ export default function InfoPage() {
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
   const { data, isLoading, error } = useDrink(drinkid)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const storedFavourites = JSON.parse(
     localStorage.getItem('favourites') || '[]'
   )
+
+  useEffect(() => {
+    // Update the window width whenever the window is resized
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    // Add a window resize event listener
+    window.addEventListener('resize', handleResize)
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowWidth])
 
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(drinkid))
@@ -55,8 +69,22 @@ export default function InfoPage() {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       />
       <h1>{data!.name}</h1>
+      {windowWidth <= 997 && (
+        <div className="mobile-arrows">
+          <span className="material-symbols-outlined arrow">
+            arrow_back_ios
+          </span>
+          <span className="material-symbols-outlined arrow">
+            arrow_forward_ios
+          </span>
+        </div>
+      )}
       <div className="content-parent">
-        <span className="material-symbols-outlined arrow">arrow_back_ios</span>
+        {windowWidth > 997 && (
+          <span className="material-symbols-outlined arrow">
+            arrow_back_ios
+          </span>
+        )}
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
           {<button onClick={handleOnClick}>{message}</button>}
@@ -78,9 +106,11 @@ export default function InfoPage() {
           <p>Glass: {data!.glass}</p>
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
-        <span className="material-symbols-outlined arrow">
-          arrow_forward_ios
-        </span>
+        {windowWidth > 997 && (
+          <span className="material-symbols-outlined arrow">
+            arrow_forward_ios
+          </span>
+        )}
       </div>
     </div>
   )
