@@ -1,14 +1,13 @@
-import { Drink } from '../types'
 import DrinkCard from '../components/DrinkCard'
-import '../utils/Loader.css'
-import { useState } from 'react'
-import { sortingFns } from '../utils/constants'
-import './Home.css'
-import './SearchBar.css'
-import { useDrinks } from '../hooks/Drinks'
-import SearchBar from '../components/SearchBar'
-import Fuse from 'fuse.js'
 import FilterDropdown from '../components/FilterDropdown'
+import SearchBar from '../components/SearchBar'
+import { Drink } from '../types'
+import { sortingFns } from '../utils/constants'
+import '../utils/Loader.css'
+import { useDrinks } from '../hooks/Drinks'
+import './Home.css'
+import Fuse from 'fuse.js'
+import { useState } from 'react'
 
 function HomePage() {
   const [filterParam, setFilterParam] = useState<string>('')

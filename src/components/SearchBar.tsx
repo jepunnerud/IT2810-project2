@@ -1,3 +1,4 @@
+import './SearchBar.css'
 function SearchBar(props: {
   placeholder: string
   searchHandler: (q: string) => void
@@ -5,7 +6,6 @@ function SearchBar(props: {
 }) {
   return (
     <>
-      {' '}
       <div className="searchbar-container">
         <link
           rel="stylesheet"
