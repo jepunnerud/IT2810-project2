@@ -91,8 +91,8 @@ export default function InfoPage() {
         </div>
         <div className="info-card">
           <h2>Ingredients</h2>
-          {data!.ingredients.map((ingredient: Ingredient) => (
-            <div>
+          {data!.ingredients.map((ingredient: Ingredient, idx) => (
+            <div key={idx}>
               <p>
                 {ingredient.ingredient +
                   (ingredient.measure ? ': ' + ingredient.measure : '')}
