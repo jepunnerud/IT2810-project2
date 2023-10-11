@@ -12,7 +12,7 @@ import Fuse from 'fuse.js'
 
 function HomePage() {
   const [sortParam, setSortParam] = useState('alphabetically')
-    const [searchInput, setSearchInput] = useState<string>('')
+  const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
   //Add data from JSON, extraxt with function
   //Dummy variables:
@@ -22,7 +22,7 @@ function HomePage() {
   if (isLoading) return <span className="loader"></span>
   if (error) return <span>Error</span>
 
-const search = (query: string) => {
+  const search = (query: string) => {
     const searchOptions = {
       keys: ['value'],
       threshold: 0.3,
@@ -39,7 +39,11 @@ const search = (query: string) => {
   return (
     <>
       <div className="home-top-container">
-        <SearchBar placeholder="Search" searchHandler={search} inputHandler={setSearchInput} />
+        <SearchBar
+          placeholder="Search"
+          searchHandler={search}
+          inputHandler={setSearchInput}
+        />
         <div className="dropdown-container">
           <label htmlFor="sorting-parameter">Sort by </label>
           <select
@@ -56,16 +60,16 @@ const search = (query: string) => {
       {
         <div className="card-container">
           {queryData.length === 0 && searchInput.length > 0 ? (
-          <span>No drinks matched your query</span>
-        ) : (
-          data
-            ?.filter(
-              (d: Drink) =>
-                queryData.includes(d.name) || queryData.length === 0
-            )
-            ?.sort(sortingFns[sortParam])
-            ?.map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
-        )}
+            <span>No drinks matched your query</span>
+          ) : (
+            data
+              ?.filter(
+                (d: Drink) =>
+                  queryData.includes(d.name) || queryData.length === 0
+              )
+              ?.sort(sortingFns[sortParam])
+              ?.map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
+          )}
         </div>
       }
     </>
