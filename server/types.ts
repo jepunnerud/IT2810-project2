@@ -1,34 +1,32 @@
-import type { Model, Types, Document, HydratedDocument } from "mongoose";
-
-export interface UserType extends Document {
-  _id: string;
-  firstName: string;
-  lastName: string;
-  email: String;
-  password: String;
+interface Drink {
+  name: string
+  drinkid: string
+  category: string
+  picture: string
+  instructions: string
+  alcoholic: boolean
+  ingredients: Ingredient[]
+  glass: string
 }
 
-export interface Gametype extends Document {
-  _id: string;
-  players: Types.ObjectId[];
-  completed: boolean;
-  winner: Types.ObjectId;
-  mostKills: Types.ObjectId;
+interface Ingredient {
+  ingredient: string
+  measure?: string
 }
 
-export interface HitOrderType extends Document {
-  game: Types.ObjectId;
-  player: Types.ObjectId;
-  hunting: Types.ObjectId;
+interface SortingMap {
+  [key: string]: (a: Drink, b: Drink) => number
 }
 
-export interface assassinationType extends Document {
-  game: Types.ObjectId;
-  player: Types.ObjectId;
-  assassinated: Types.ObjectId;
+interface NavBarItem {
+  text: string
+  icon?: string
+  path: string
 }
 
-export interface assassinationModel
-  extends Model<assassinationType, Record<string, never>> {
-  getBestKiller(gameId: string): Promise<HydratedDocument<assassinationType>>;
+interface IconData {
+  [key: string]: string
 }
+
+export type { Drink, SortingMap, NavBarItem, IconData, Ingredient }
+
