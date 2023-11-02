@@ -14,19 +14,17 @@ interface Ingredient {
   measure?: string
 }
 
-interface SortingMap {
-  [key: string]: (a: Drink, b: Drink) => number
+
+
+interface DrinkInput {
+  name: string
+  category: string
+  picture: string
+  instructions: string
+  alcoholic: boolean
+  ingredients: Ingredient[]
+  glass: string
 }
 
-interface NavBarItem {
-  text: string
-  icon?: string
-  path: string
-}
-
-interface IconData {
-  [key: string]: string
-}
-
-export type { Drink, SortingMap, NavBarItem, IconData, Ingredient }
+export type { Drink, Ingredient, DrinkInput }
 

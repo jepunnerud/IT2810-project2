@@ -18,13 +18,32 @@ const typeDefs = gql`
     ingredients: [Ingredient]
   }
 
+  input DrinkInput {
+    drinkid: String
+    name: String
+    category: String
+    alcoholic: Boolean
+    glass: String
+    instructions: String
+    picture: String
+    ingredients: [IngredientInput]
+  }
+
+  input IngredientInput {
+    ingredient: String
+    measure: String
+  }
+
+
   type Query {
     drinks: [Drink]
     drink: Drink
   }
 
   type Mutation {
-    addDrink(name: String!): Drink
+    addDrink(input: DrinkInput): Drink!
+    updateDrink(drinkid: ID!, input: DrinkInput): Drink
+    deleteDrink(drinkid: ID!): Boolean
   }
 `;
 
