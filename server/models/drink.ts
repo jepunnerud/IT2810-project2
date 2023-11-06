@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Drink, Ingredient } from "../types";
+import { DrinkType, IngredientType } from "../types";
 
 const ingredientSchema = new mongoose.Schema({
   ingredient: { type: String, required: true, trim: true },
@@ -19,6 +19,6 @@ const drinkSchema = new mongoose.Schema({
 
 });
 
-export default mongoose.model<Drink & mongoose.Document>("Drink", drinkSchema);
+export default mongoose.model<DrinkType & mongoose.Document>("DrinkType", drinkSchema);
 
 

@@ -17,10 +17,11 @@ const resolvers = {
         async addDrink(
             _: any,
             {
-                input: { name, category, picture, instructions, alcoholic, ingredients, glass },
+                input: { drinkid, name, category, picture, instructions, alcoholic, ingredients, glass },
             }: { input: DrinkInput }
         ) {
             const addedDrink = new Drink({
+                drinkid,
                 name,
                 category,
                 picture,
