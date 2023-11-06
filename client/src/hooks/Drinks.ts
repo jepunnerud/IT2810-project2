@@ -77,12 +77,12 @@ const ADD_DRINK_MUTATION = gql`
 
 
 // Function to load all drinks from the server
-async function loadAllDrinksFromServer() {
+async function loadAllDrinksFromServer(): Promise<Drink[]> {
   try {
     const { data } = await client.query({
       query: GET_ALL_DRINKS_QUERY
     });
-    return data.drinks;
+    return data.drinks as Drink[];
   } catch (error) {
     console.error("Error fetching drinks from server:", error);
     return [];

@@ -4,10 +4,11 @@ import SearchBar from '../components/SearchBar'
 import { Drink } from '../types'
 import { sortingFns } from '../utils/constants'
 import '../utils/Loader.css'
-import { useDrinks } from '../hooks/Drinks'
+import { useDrinks, loadAllDrinksFromServer } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
 import { useState } from 'react'
+import { useQuery } from 'react-query'
 
 function HomePage() {
   const [filterParam, setFilterParam] = useState<string>('')
@@ -37,7 +38,9 @@ function HomePage() {
   }
   //Add data from JSON, extraxt with function
   //Dummy variables:
-  const { data, isLoading, error } = useDrinks()
+  //const { data, isLoading, error } = useDrinks()
+  const { data: data, isLoading, error } = useQuery(['drinks'], loadAllDrinksFromServer);
+
 
   function updateDrinkOrder() {
     if (data && data.length > 0) {
