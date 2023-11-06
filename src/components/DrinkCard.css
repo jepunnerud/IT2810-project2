@@ -29,11 +29,6 @@
 }
 
 .material-symbols-outlined {
-  font-variation-settings:
-    'FILL' 0,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 24;
   &:hover {
     font-variation-settings:
       'FILL' 1,
@@ -41,6 +36,7 @@
       'GRAD' 0,
       'opsz' 24;
   }
+  color: var(--tertiary-color);
 }
 
 .favourite {
@@ -49,10 +45,17 @@
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
-  color: yellow;
+  &:hover {
+    font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+  }
+  color: var(--quaternary-color);
 }
 
-.icon-wrapper {
+.favourite-icon-wrapper {
   height: fit-content;
   width: fit-content;
   z-index: 999;
@@ -65,7 +68,7 @@
   user-select: none;
 }
 
-.wrapper {
+.card-wrapper {
   height: fit-content;
   width: fit-content;
   display: flex;

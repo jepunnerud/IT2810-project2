@@ -33,8 +33,8 @@ function DrinkCard(props: { drink: Drink }) {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
-      <div className="wrapper">
-        <div className="icon-wrapper">
+      <div className="card-wrapper">
+        <div className="favourite-icon-wrapper">
           <span
             className={`material-symbols-outlined ${
               isFavourite && 'favourite'
