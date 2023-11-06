@@ -11,7 +11,7 @@ function DrinkCard(props: { drink: Drink }) {
 
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(props.drink.drinkid))
-  }, [storedFavourites])
+  }, [storedFavourites, props.drink.drinkid])
 
   function handleOnClick() {
     if (!isFavourite) {
@@ -36,8 +36,8 @@ function DrinkCard(props: { drink: Drink }) {
       <div className="card-wrapper">
         <div className="favourite-icon-wrapper">
           <span
-            className={`material-symbols-outlined ${
-              isFavourite && 'favourite'
+            className={`material-symbols-outlined favourite-icon ${
+              isFavourite && 'is-favourite'
             }`}
             onClick={() => handleOnClick()}
           >
