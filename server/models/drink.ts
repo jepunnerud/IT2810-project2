@@ -3,7 +3,7 @@ import { DrinkType, IngredientType } from "../types";
 
 const ingredientSchema = new mongoose.Schema({
   ingredient: { type: String, required: true, trim: true },
-  measure: { type: String, required: true, trim: true }
+  measure: { type: String, required: false, trim: true }
 })
 
 const drinkSchema = new mongoose.Schema({
