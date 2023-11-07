@@ -1,8 +1,8 @@
 //Fetcher drinks fra databasen/json. Ikke ferdig
-import { useQuery } from '@tanstack/react-query'
 import { Drink } from '../types.ts'
 import { drinks } from '../assets/drinks.ts'
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { useQuery } from '@tanstack/react-query'
 
 function readDrinksFromJson(): Drink[] {
   return drinks
@@ -31,7 +31,7 @@ function useDrink(idDrink: string) {
 
 
 // Set up Apollo Client
-const GRAPHQL_SERVER_URI = 'http://localhost:3000/graphql';
+const GRAPHQL_SERVER_URI = 'http://localhost:8000/graphql';
 
 const client = new ApolloClient({
   uri: GRAPHQL_SERVER_URI,
@@ -77,6 +77,7 @@ const ADD_DRINK_MUTATION = gql`
 
 
 // Function to load all drinks from the server
+/*
 async function loadAllDrinksFromServer(): Promise<Drink[]> {
   try {
     const { data } = await client.query({
@@ -88,6 +89,23 @@ async function loadAllDrinksFromServer(): Promise<Drink[]> {
     return [];
   }
 }
+
+*/
+// Set up Apollo Client
+
+// Custom hook using useQuery
+export function loadAllDrinksFromServer() {
+  return useQuery<Drink[], Error>({
+    queryKey: ['drinks'],
+    queryFn: async () => {
+      const response = await client.query({
+        query: GET_ALL_DRINKS_QUERY,
+      });
+      return response.data.drinks;
+    },
+  });
+}
+
 
 
 loadAllDrinksFromServer().then(drinks => {
