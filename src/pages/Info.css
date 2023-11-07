@@ -33,15 +33,24 @@
   justify-content: flex-start;
   align-items: flex-start;
   transition: all 0.25s ease-in-out;
+  &.dark {
+    background-color: var(--dark-primary-color);
+  }
 }
 
 .arrow {
   color: var(--quaternary-color);
   user-select: none;
+  &.dark {
+    color: var(--dark-quaternary-color);
+  }
   &:hover {
     cursor: pointer;
     &:not(:active) {
       color: var(--secondary-color);
+      &.dark {
+        color: var(--dark-secondary-color);
+      }
     }
   }
 }
@@ -67,8 +76,11 @@ img {
   max-height: 400px;
 }
 
-button {
+.favourite-button {
   background-color: var(--primary-color);
+  &.dark {
+    background-color: var(--dark-primary-color);
+  }
   color: black;
   border-radius: 1rem;
   margin: 0.5rem;
@@ -79,6 +91,9 @@ button {
     cursor: pointer;
     &:not(:active) {
       background-color: var(--secondary-color);
+      &.dark {
+        background-color: var(--dark-secondary-color);
+      }
     }
   }
 }
