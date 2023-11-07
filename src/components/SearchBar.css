@@ -17,7 +17,11 @@
     color: gray;
     user-select: none;
   }
-
+  &.dark {
+    &::placeholder {
+      color: black;
+    }
+  }
   &:focus {
     outline: none;
   }

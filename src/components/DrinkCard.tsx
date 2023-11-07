@@ -1,6 +1,8 @@
+import { Link } from 'react-router-dom'
 import { Drink } from '../types'
 import './DrinkCard.css'
 import { useState, useEffect } from 'react'
+import { useTheme } from '../hooks/ThemeContext'
 
 function DrinkCard(props: { drink: Drink }) {
   const [isFavourite, setIsFavourite] = useState(false)
@@ -27,6 +29,8 @@ function DrinkCard(props: { drink: Drink }) {
     }
   }
 
+  const theme = useTheme()
+
   return (
     <>
       <link
@@ -38,18 +42,18 @@ function DrinkCard(props: { drink: Drink }) {
           <span
             className={`material-symbols-outlined favourite-icon ${
               isFavourite && 'is-favourite'
-            }`}
+            } ${theme}`}
             onClick={() => handleOnClick()}
           >
             star
           </span>
         </div>
-        <a href={'/info/' + props.drink.drinkid}>
-          <div className="card">
+        <Link to={'/info/' + props.drink.drinkid}>
+          <div className={`card ${theme}`}>
             <img src={props.drink.picture} alt={props.drink.name} />
             <p>{props.drink.name}</p>
           </div>
-        </a>
+        </Link>
       </div>
     </>
   )

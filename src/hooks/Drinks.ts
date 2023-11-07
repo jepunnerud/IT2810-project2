@@ -19,12 +19,13 @@ function useDrinks() {
 
 function useDrink(idDrink: string) {
   return useQuery<Drink | undefined>({
+    queryKey: ['drink', idDrink],
     queryFn: async () => {
       const drinks = readDrinksFromJson()
       const drink = drinks.find((d: Drink) => d.drinkid === idDrink)
       return drink
     },
-    queryKey: ['drink'],
+    enabled: !!idDrink,
   })
 }
 

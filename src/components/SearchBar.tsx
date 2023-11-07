@@ -1,9 +1,11 @@
+import { useTheme } from '../hooks/ThemeContext'
 import './SearchBar.css'
 function SearchBar(props: {
   placeholder: string
   searchHandler: (q: string) => void
   inputHandler: React.Dispatch<React.SetStateAction<string>>
 }) {
+  const theme = useTheme()
   return (
     <>
       <div className="searchbar-container">
@@ -14,7 +16,7 @@ function SearchBar(props: {
         <span className="material-symbols-outlined">search</span>
         <input
           id="input"
-          className="searchbar-input"
+          className={`searchbar-input ${theme}`}
           placeholder={props.placeholder}
           onInput={(e) => {
             const q = e.currentTarget.value

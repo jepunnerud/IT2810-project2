@@ -11,6 +11,10 @@
   flex-direction: column;
   position: relative;
   justify-content: center;
+  transition: all 0.25s ease-in-out;
+  &.dark {
+    background-color: var(--dark-primary-color);
+  }
 }
 
 .card p {
@@ -40,6 +44,9 @@
 
 .favourite-icon {
   color: var(--tertiary-color);
+  &.dark {
+    color: var(--dark-tertiary-color);
+  }
 }
 
 .is-favourite {
@@ -56,6 +63,9 @@
       'opsz' 24;
   }
   color: var(--quaternary-color);
+  &.dark {
+    color: var(--dark-quaternary-color);
+  }
 }
 
 .favourite-icon-wrapper {
