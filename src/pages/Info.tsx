@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDrink } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Info.css'
 import { Ingredient } from '../types'
+import { useTheme } from '../hooks/ThemeContext'
 
 export default function InfoPage() {
-  let { drinkid } = useParams<{ drinkid: string }>()
-  drinkid = drinkid ? drinkid : ''
+  const { drinkid = '' } = useParams<{ drinkid?: string }>()
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
   const { data, isLoading, error } = useDrink(drinkid)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const theme = useTheme()
 
   const storedFavourites = JSON.parse(
     localStorage.getItem('favourites') || '[]'
@@ -101,34 +102,41 @@ export default function InfoPage() {
       <h1>{data!.name}</h1>
       {windowWidth <= 997 && (
         <div className="mobile-arrows">
-          <a
-            href={`/info/${handleBackButton()}`}
-            className="material-symbols-outlined arrow"
+          <Link
+            to={`/info/${handleBackButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_back_ios
-          </a>
-          <a
-            href={`/info/${handleForwardButton()}`}
-            className="material-symbols-outlined arrow"
+          </Link>
+          <Link
+            to={`/info/${handleForwardButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_forward_ios
-          </a>
+          </Link>
         </div>
       )}
       <div className="content-parent">
         {windowWidth > 997 && (
-          <a
-            href={`/info/${handleBackButton()}`}
-            className="material-symbols-outlined arrow"
+          <Link
+            to={`/info/${handleBackButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_back_ios
-          </a>
+          </Link>
         )}
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
-          {<button onClick={handleOnClick}>{message}</button>}
+          {
+            <button
+              onClick={handleOnClick}
+              className={`favourite-button ${theme}`}
+            >
+              {message}
+            </button>
+          }
         </div>
-        <div className="info-card">
+        <div className={`info-card ${theme}`}>
           <h2>Ingredients</h2>
           {data!.ingredients.map((ingredient: Ingredient, idx) => (
             <div key={idx}>
@@ -146,12 +154,12 @@ export default function InfoPage() {
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
         {windowWidth > 997 && (
-          <a
-            href={`/info/${handleForwardButton()}`}
-            className="material-symbols-outlined arrow"
+          <Link
+            to={`/info/${handleForwardButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_forward_ios
-          </a>
+          </Link>
         )}
       </div>
     </div>

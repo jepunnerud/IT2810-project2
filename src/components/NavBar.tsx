@@ -1,18 +1,23 @@
+import { Link } from 'react-router-dom'
 import { NavBarItem } from '../types'
 import './NavBar.css'
+import ToggleThemeButton from './ToggleThemeButton'
 
 const NavBar = (props: { items: NavBarItem[] }) => {
   return (
     <div className="nav-bar-parent-container">
-      <a href="/" key="logo">
+      <Link to="/" key="logo">
         <img src="/logo.png" width="270" height="80"></img>
-      </a>
+      </Link>
       <div className="nav-bar-parent">
         {props.items.map((item: NavBarItem) => (
-          <a href={item.path} key={item.text}>
+          <Link to={item.path} key={item.text}>
             <div className="nav-bar-item">{item.text}</div>
-          </a>
+          </Link>
         ))}
+        <div className="toggle-theme-button-wrapper">
+          <ToggleThemeButton></ToggleThemeButton>
+        </div>
       </div>
     </div>
   )

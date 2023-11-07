@@ -12,6 +12,9 @@
   position: relative;
   justify-content: center;
   transition: all 0.25s ease-in-out;
+  &.dark {
+    background-color: var(--dark-primary-color);
+  }
 }
 
 .card p {
