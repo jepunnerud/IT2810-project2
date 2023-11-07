@@ -13,6 +13,7 @@ export default function InfoPage() {
   const { data, isLoading, error } = useDrink(drinkid)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const theme = useTheme()
+  const breakPoint = 1024
 
   const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
 
@@ -89,7 +90,7 @@ export default function InfoPage() {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       />
       <h1>{data!.name}</h1>
-      {windowWidth <= 997 && (
+      {windowWidth <= breakPoint && (
         <div className="mobile-arrows">
           <Link
             to={`/info/${handleBackButton()}`}
@@ -106,7 +107,7 @@ export default function InfoPage() {
         </div>
       )}
       <div className="content-parent">
-        {windowWidth > 997 && (
+        {windowWidth > breakPoint && (
           <Link
             to={`/info/${handleBackButton()}`}
             className={`material-symbols-outlined arrow ${theme}`}
@@ -136,7 +137,7 @@ export default function InfoPage() {
           <p>Glass: {data!.glass}</p>
           <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
         </div>
-        {windowWidth > 997 && (
+        {windowWidth > breakPoint && (
           <Link
             to={`/info/${handleForwardButton()}`}
             className={`material-symbols-outlined arrow ${theme}`}
