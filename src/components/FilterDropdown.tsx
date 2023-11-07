@@ -7,14 +7,7 @@ function FilterDropdown(props: {
   changeHandler: React.Dispatch<React.SetStateAction<string>>
 }) {
   const theme = useTheme()
-  const possibleFilterParams: string[] = [
-    '',
-    'vodka',
-    'gin',
-    'whisky',
-    'tequila',
-    'rum',
-  ]
+  const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
 
   return (
     <>

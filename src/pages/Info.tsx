@@ -14,9 +14,7 @@ export default function InfoPage() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const theme = useTheme()
 
-  const storedFavourites = JSON.parse(
-    localStorage.getItem('favourites') || '[]'
-  )
+  const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
 
   useEffect(() => {
     // Update the window width whenever the window is resized
@@ -39,11 +37,7 @@ export default function InfoPage() {
 
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(drinkid))
-    setMessage(
-      storedFavourites.includes(drinkid)
-        ? 'Remove from favourites'
-        : 'Add to favourites'
-    )
+    setMessage(storedFavourites.includes(drinkid) ? 'Remove from favourites' : 'Add to favourites')
   }, [storedFavourites, drinkid])
 
   function handleOnClick() {
@@ -53,9 +47,7 @@ export default function InfoPage() {
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
-      const newList: string[] = storedFavourites.filter(
-        (id: string) => id !== drinkid
-      )
+      const newList: string[] = storedFavourites.filter((id: string) => id !== drinkid)
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
     }
@@ -75,10 +67,7 @@ export default function InfoPage() {
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    if (
-      currentDrinkIndex != null &&
-      currentDrinkIndex < drinkOrder.length - 1
-    ) {
+    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length - 1) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     } else if (drinkid != null) {
       return '' + drinkid.toString()
@@ -128,10 +117,7 @@ export default function InfoPage() {
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
           {
-            <button
-              onClick={handleOnClick}
-              className={`favourite-button ${theme}`}
-            >
+            <button onClick={handleOnClick} className={`favourite-button ${theme}`}>
               {message}
             </button>
           }
@@ -140,10 +126,7 @@ export default function InfoPage() {
           <h2>Ingredients</h2>
           {data!.ingredients.map((ingredient: Ingredient, idx) => (
             <div key={idx}>
-              <p>
-                {ingredient.ingredient +
-                  (ingredient.measure ? ': ' + ingredient.measure : '')}
-              </p>
+              <p>{ingredient.ingredient + (ingredient.measure ? ': ' + ingredient.measure : '')}</p>
             </div>
           ))}
           <h2>Instructions</h2>
