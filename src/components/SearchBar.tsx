@@ -9,7 +9,8 @@ function SearchBar(props: {
   const theme = useTheme()
   const [inputValue, setInputValue] = useState('')
   const clearInput = () => {
-    ;(document.getElementById('input') as HTMLInputElement).value = ''
+    const inputField = document.getElementById('input') as HTMLInputElement
+    inputField.value = ''
     setInputValue('')
   }
 
