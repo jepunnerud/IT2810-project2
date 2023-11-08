@@ -23,6 +23,10 @@ const navBarItems: NavBarItem[] = [
     text: 'Favourites',
     path: '/favourites',
   },
+  {
+    text: 'Add drink',
+    path: '/add-drink',
+  },
 ]
 
 function App() {
@@ -30,14 +34,13 @@ function App() {
     <>
       <ThemeProvider>
         <ApolloProvider client={apolloClient}>
-          <header>
-            <NavBar items={navBarItems}></NavBar>
-          </header>
           <BrowserRouter>
-            <App />
+            <header>
+              <NavBar items={navBarItems}></NavBar>
+            </header>
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
-              <Route path="info/:drinkid" element={<InfoPage />}></Route>
+              <Route path="info/:id" element={<InfoPage />}></Route>
               <Route path="favourites" element={<FavouritesPage />}></Route>
               <Route path="add-drink" element={<AddDrink />}></Route>
             </Routes>

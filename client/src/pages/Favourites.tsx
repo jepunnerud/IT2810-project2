@@ -9,7 +9,7 @@ export default function FavouritesPage() {
   const storedFavourites = localStorage.getItem('favourites')
   const { data, loading } = useDrinks()
   const favoriteDrinks: Drink[] = data
-    ? data.filter((drink: Drink) => storedFavourites?.includes(drink.id))
+    ? data.drinks.filter((drink: Drink) => storedFavourites?.includes(drink.id))
     : []
   if (loading) return <span className="loader"></span>
   return (

@@ -1,41 +1,33 @@
-//Fetcher drinks fra databasen/json. Ikke ferdig
-import { Drink } from '../types.ts'
-import { drinks } from '../assets/drinks.ts'
-import { gql, useQuery } from '@apollo/client';
-import request from 'graphql-request'
-
-
-function readDrinksFromJson(): Drink[] {
-  return drinks
-}
-
+import { gql, useQuery } from '@apollo/client'
 
 function useDrinks() {
   return useQuery(GET_ALL_DRINKS_QUERY)
 }
 
 function useDrink(id: string) {
-  // return useQuery<Drink | undefined>({
-  //   queryFn: async () => {
-  //     const drinks = loadAllDrinksFromServer()
-  //     const drink = (await drinks).find((d: Drink) => d.id === id)
-  //     return drink
-  //   },
-  //   queryKey: ['drink'],
-  // })
+  return useQuery(GET_SINGLE_DRINK_QUERY, {
+    variables: { id },
+  })
 }
-
-
-
-
-// Set up Apollo Client
-const GRAPHQL_SERVER_URI = 'http://localhost:8000/graphql';
-
 
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
   query GetAllDrinks {
     drinks {
+      id
+      name
+      picture
+      ingredients {
+        ingredient
+      }
+    }
+  }
+`
+
+const GET_SINGLE_DRINK_QUERY = gql`
+  query GetSingleDrink($id: ID!) {
+    drink(id: $id) {
+      id
       name
       category
       alcoholic
@@ -48,42 +40,24 @@ const GET_ALL_DRINKS_QUERY = gql`
       }
     }
   }
-`;
+`
 
-
-const ADD_DRINK_MUTATION = gql`
-  mutation AddDrink($input: DrinkInput!) {
-    addDrink(input: $input) {
-      name
-      category
-      alcoholic
-      glass
-      instructions
-      picture
-      ingredients {
-        ingredient
-        measure
-      }
-    }
-  }
-`;
-
-
-
-/*
-async function loadAllDrinksFromServer() {
-  const { data } = useQuery({
-    queryKey: ['drinks'],
-    queryFn: async () =>
-      request(
-        GRAPHQL_SERVER_URI,
-        GET_ALL_DRINKS_QUERY,
-        { first: 10 },
-      ),
-  })
-  return data
-}
-*/
+// const ADD_DRINK_MUTATION = gql`
+//   mutation AddDrink($input: DrinkInput!) {
+//     addDrink(input: $input) {
+//       name
+//       category
+//       alcoholic
+//       glass
+//       instructions
+//       picture
+//       ingredients {
+//         ingredient
+//         measure
+//       }
+//     }
+//   }
+// `
 
 // async function loadAllDrinksFromServer() {
 //   try {
@@ -96,8 +70,6 @@ async function loadAllDrinksFromServer() {
 //     return [];
 //   }
 // }
-
-
 
 // //Funker
 // async function addDrinkToServer(Drink: Drink) {
@@ -115,43 +87,4 @@ async function loadAllDrinksFromServer() {
 //   }
 // }
 
-
-// loadAllDrinksFromServer().then(drinks => {
-//   console.log(drinks)
-// })
-
-
-export { useDrinks, useDrink/*, addDrinkToServer, loadAllDrinksFromServer*/ }
-
-
-
-
-
-
-
-
-
-
-/*
-const newDrink = {
-  name: 'Mojito',
-  category: 'Cocktail',
-  alcoholic: true,
-  glass: 'Highball glass',
-  instructions: 'Muddle mint leaves with sugar and lime juice...',
-  picture: 'https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg',
-  ingredients: [
-    { ingredient: 'White rum', measure: '2-3 oz' },
-    { ingredient: 'Mint', measure: 'Leaves' },
-  ]
-};
-
-
-
-addDrinkToServer(newDrink).then(addedDrink => {
-  console.log(addedDrink);
-}).catch(error => {
-  console.error(error);
-});
-
-*/
+export { useDrinks, useDrink /*, addDrinkToServer, loadAllDrinksFromServer*/ }

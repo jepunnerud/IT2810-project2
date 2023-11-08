@@ -7,7 +7,7 @@ import '../utils/Loader.css'
 import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 function HomePage() {
   const [filterParam, setFilterParam] = useState<string>('')
@@ -18,6 +18,7 @@ function HomePage() {
     if (!param) {
       return true
     }
+    console.log(d.ingredients)
     const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
     if (param === 'whisky') {
       const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
@@ -42,13 +43,19 @@ function HomePage() {
   //const {data}= loadAllDrinksFromServer();
 
   function updateDrinkOrder() {
-    if (data && data.length > 0) {
-      const newDrinkOrder = data.sort(sortingFns['alphabetically']).map((drink: Drink) => drink.id)
+    if (data) {
+      const drinks = [...data!.drinks]
+      const newDrinkOrder = drinks
+        .sort(sortingFns['alphabetically'])
+        .map((drink: Drink) => drink.id)
+      console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }
 
-  updateDrinkOrder()
+  useEffect(() => {
+    updateDrinkOrder()
+  }, [data])
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
