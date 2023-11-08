@@ -41,12 +41,9 @@ function HomePage() {
   console.log(data)
   //const {data}= loadAllDrinksFromServer();
 
-
   function updateDrinkOrder() {
     if (data && data.length > 0) {
-      const newDrinkOrder = data
-        .sort(sortingFns['alphabetically'])
-        .map((drink: Drink) => drink.id)
+      const newDrinkOrder = data.sort(sortingFns['alphabetically']).map((drink: Drink) => drink.id)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }
@@ -73,11 +70,7 @@ function HomePage() {
   return (
     <>
       <div className="home-top-container">
-        <SearchBar
-          placeholder="Search"
-          searchHandler={search}
-          inputHandler={setSearchInput}
-        />
+        <SearchBar placeholder="Search" searchHandler={search} inputHandler={setSearchInput} />
         <FilterDropdown
           value={filterParam}
           changeHandler={setFilterParam}
@@ -90,10 +83,7 @@ function HomePage() {
             <span>No drinks matched your query</span>
           ) : (
             data!.drinks
-              .filter(
-                (d: Drink) =>
-                  queryData.includes(d.name) || queryData.length === 0
-              )
+              .filter((d: Drink) => queryData.includes(d.name) || queryData.length === 0)
               .sort(sortingFns['alphabetically'])
               .filter((d: Drink) => includes_ingredient(d, filterParam))
               .map((d: Drink) => <DrinkCard drink={d} key={d.id} />)

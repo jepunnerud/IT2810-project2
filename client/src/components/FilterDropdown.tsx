@@ -1,3 +1,4 @@
+import { useTheme } from '../hooks/ThemeContext'
 import './Dropdown.css'
 
 function FilterDropdown(props: {
@@ -5,14 +6,8 @@ function FilterDropdown(props: {
   label: string
   changeHandler: React.Dispatch<React.SetStateAction<string>>
 }) {
-  const possibleFilterParams: string[] = [
-    '',
-    'vodka',
-    'gin',
-    'whisky',
-    'tequila',
-    'rum',
-  ]
+  const theme = useTheme()
+  const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
 
   return (
     <>
@@ -24,6 +19,7 @@ function FilterDropdown(props: {
           onChange={(e) => {
             props.changeHandler(e.target.value)
           }}
+          className={theme}
         >
           {possibleFilterParams.map((p, idx) => {
             return (

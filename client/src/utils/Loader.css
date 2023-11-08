@@ -7,13 +7,7 @@
   border-radius: 50% 50% 0 0;
   border-bottom: 10px solid #ff3d00;
   background-color: #fff;
-  background-image: radial-gradient(
-      ellipse at center,
-      #fff 34%,
-      #ff3d00 35%,
-      #ff3d00 54%,
-      #fff 55%
-    ),
+  background-image: radial-gradient(ellipse at center, #fff 34%, #ff3d00 35%, #ff3d00 54%, #fff 55%),
     linear-gradient(#ff3d00 10px, transparent 0);
   background-size: 28px 28px;
   background-position:

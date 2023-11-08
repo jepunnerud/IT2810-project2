@@ -15,8 +15,7 @@ export const drinks = [
       'Versare il liquore Galliano su ghiaccio.\r\nRiempi il resto del bicchiere con ginger ale e questo è tutto.\r\nOra hai il tuo GG personale.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg',
     ingredients: [
       {
         ingredient: 'Galliano',
@@ -47,8 +46,7 @@ export const drinks = [
       'Versare tutti gli ingredienti in uno shaker, mescolare e servire con ghiaccio in un bicchiere freddo.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '1 3/4 shot ' },
       { ingredient: 'Grand Marnier', measure: '1 Shot ' },
@@ -73,8 +71,7 @@ export const drinks = [
       'Shakerare tutti gli ingredienti in uno shaker e ghiaccio, quindi filtrare in un bicchiere freddo.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/l3cd7f1504818306.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/l3cd7f1504818306.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '2 shots ' },
       { ingredient: 'Grenadine', measure: '1/2 shot ' },
@@ -98,8 +95,7 @@ export const drinks = [
     strInstructionsIT: 'Versa Kahlua, Baileys e poi Frangelico.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg',
     ingredients: [
       { ingredient: 'Kahlua', measure: '1/3 part ' },
       { ingredient: 'Baileys irish cream', measure: '1/3 part ' },
@@ -112,18 +108,15 @@ export const drinks = [
     category: 'Ordinary Drink',
     alcoholic: true,
     glass: 'Wine Glass',
-    instructions:
-      'Add the crème de cassis to the bottom of the glass, then top up with wine.',
+    instructions: 'Add the crème de cassis to the bottom of the glass, then top up with wine.',
     strInstructionsES: null,
-    strInstructionsDE:
-      'Gib die Creme de Cassis auf den Boden des Glases und füge dann Wein hinzu.',
+    strInstructionsDE: 'Gib die Creme de Cassis auf den Boden des Glases und füge dann Wein hinzu.',
     strInstructionsFR: null,
     strInstructionsIT:
       'Aggiungere la crème de cassis sul fondo del bicchiere, quindi rabboccare con il vino.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/apneom1504370294.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/apneom1504370294.jpg',
     ingredients: [
       { ingredient: 'Creme de Cassis', measure: '1 part ' },
       { ingredient: 'Champagne', measure: '5 parts ' },
@@ -143,8 +136,7 @@ export const drinks = [
       "Versa in ordine di lettera i vari ingredienti. 1/3 del bicchiere va riempito con l'Amaretto, 1/3 di Baileys e il restante di Cognac.",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/tqpvqp1472668328.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/tqpvqp1472668328.jpg',
     ingredients: [
       { ingredient: 'Amaretto', measure: '1/3 ' },
       { ingredient: 'Baileys irish cream', measure: '1/3 ' },
@@ -157,8 +149,7 @@ export const drinks = [
     category: 'Shot',
     alcoholic: true,
     glass: 'Shot glass',
-    instructions:
-      'Add both ingredients to shot glass, shoot, and get drunk quick',
+    instructions: 'Add both ingredients to shot glass, shoot, and get drunk quick',
     strInstructionsES: null,
     strInstructionsDE: 'Beide Zutaten in ein Schnapsglas geben.',
     strInstructionsFR: null,
@@ -166,8 +157,7 @@ export const drinks = [
       'Aggiungi entrambi gli ingredienti al bicchierino, bevi e ubriacati velocemente',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/rtpxqw1468877562.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/rtpxqw1468877562.jpg',
     ingredients: [
       { ingredient: '151 proof rum', measure: '1/2 shot Bacardi ' },
       { ingredient: 'Wild Turkey', measure: '1/2 shot ' },
@@ -180,17 +170,14 @@ export const drinks = [
     alcoholic: true,
     glass: 'Highball Glass',
     instructions: 'Pour Vodka and Gin over ice, add Tonic and Stir',
-    strInstructionsES:
-      'Vierta el vodka y la ginebra sobre el hielo, agregue la tónica y revuelva.',
-    strInstructionsDE:
-      'Wodka und Gin über das Eis gießen, Tonic hinzufügen und umrühren.',
+    strInstructionsES: 'Vierta el vodka y la ginebra sobre el hielo, agregue la tónica y revuelva.',
+    strInstructionsDE: 'Wodka und Gin über das Eis gießen, Tonic hinzufügen und umrühren.',
     strInstructionsFR: null,
     strInstructionsIT:
       "Versare la vodka e il gin sul ghiaccio, aggiungere l'acqua tonica e mescolare",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/rhhwmp1493067619.jpg',
     ingredients: [
       { ingredient: 'Absolut Vodka', measure: '1 oz ' },
       { ingredient: 'Gin', measure: '1 oz ' },
@@ -210,8 +197,7 @@ export const drinks = [
     strInstructionsIT: 'Metti tutto insieme e servi freddo.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/rx8k8e1504365812.jpg',
     ingredients: [
       { ingredient: 'Red wine', measure: '1/3 part' },
       { ingredient: 'Peach schnapps', measure: '1 shot' },
@@ -231,12 +217,10 @@ export const drinks = [
     strInstructionsDE:
       'Schichte die Kahlua, Sambucca und Grand Marnier in dieser Reihenfolge in ein Schnapsglas ein. Besser als B-52',
     strInstructionsFR: null,
-    strInstructionsIT:
-      "Metti Kahlua, Sambuca e Grand Marnier in un bicchierino in quest'ordine. ",
+    strInstructionsIT: "Metti Kahlua, Sambuca e Grand Marnier in un bicchierino in quest'ordine. ",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/rwqxrv1461866023.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/rwqxrv1461866023.jpg',
     ingredients: [
       {
         ingredient: 'Kahlua',
@@ -269,8 +253,7 @@ export const drinks = [
       'In uno shaker riempito a metà con cubetti di ghiaccio, unire tutti gli ingredienti.Agitare bene.Filtrare in un bicchiere da cocktail.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/v0at4i1582478473.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/v0at4i1582478473.jpg',
     ingredients: [
       { ingredient: 'Dark rum', measure: '2 oz ' },
       { ingredient: 'Lemon juice', measure: '1 oz ' },
@@ -293,8 +276,7 @@ export const drinks = [
       'Strofina il bordo del bicchiere con la fetta di lime per far aderire il sale.\r\nAvere cura di inumidire solo il bordo esterno e cospargere di sale.\r\nIl sale dovrebbe presentarsi alle labbra del bevitore e non mescolarsi mai al cocktail.\r\nShakerare gli altri ingredienti con ghiaccio, quindi versarli delicatamente nel bicchiere.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
     ingredients: [
       { ingredient: 'Tequila', measure: '1 1/2 oz ' },
       { ingredient: 'Triple sec', measure: '1/2 oz ' },
@@ -318,8 +300,7 @@ export const drinks = [
       'Colmate un bicchiere highball di ghiaccio, versate il gin, colmate con acqua tonica e spremete uno spicchio di limone e guarnite con una fetta di limone. ',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/qcgz0t1643821443.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/qcgz0t1643821443.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '4 cl' },
       { ingredient: 'Tonic Water', measure: '10 cl' },
@@ -331,8 +312,7 @@ export const drinks = [
     id: '11000',
     name: 'Mojito',
     strDrinkAlternate: null,
-    strTags:
-      'IBA,ContemporaryClassictrueUSA,Asia,Vegan,Citrus,Brunch,Hangover,Mild',
+    strTags: 'IBA,ContemporaryClassictrueUSA,Asia,Vegan,Citrus,Brunch,Hangover,Mild',
     strVideo: null,
     category: 'Cocktail',
     strIBA: 'Contemporary Classics',
@@ -348,8 +328,7 @@ export const drinks = [
       'Pestare le foglie di menta con lo zucchero e il succo di lime.\r\nAggiungere una spruzzata di acqua di seltz e riempi il bicchiere con ghiaccio tritato.\r\nVersare il rum e riempire con acqua di seltz.\r\nGuarnire con una fetta di lime, servire con una cannuccia.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/metwgh1606770327.jpg',
     ingredients: [
       { ingredient: 'Light rum', measure: '2-3 oz ' },
       { ingredient: 'Lime', measure: 'Juice of 1 ' },
@@ -377,8 +356,7 @@ export const drinks = [
       "Dritto: Versare tutti gli ingredienti nel mixing glass con cubetti di ghiaccio. Mescolare bene. Filtrare in una coppetta da cocktail Martini ghiacciata. Spremi l'olio della scorza di limone sulla bevanda o guarnisci con l'oliva.",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '1 2/3 oz ' },
       { ingredient: 'Dry Vermouth', measure: '1/3 oz ' },
@@ -397,15 +375,12 @@ export const drinks = [
     glass: 'Old-fashioned glass',
     instructions: 'Stir into glass over ice, garnish and serve.',
     strInstructionsES: null,
-    strInstructionsDE:
-      'In ein Glas über das Eis gießen, garnieren und servieren.',
+    strInstructionsDE: 'In ein Glas über das Eis gießen, garnieren und servieren.',
     strInstructionsFR: null,
-    strInstructionsIT:
-      'Mescolare nel bicchiere con ghiaccio, guarnire e servire.',
+    strInstructionsIT: 'Mescolare nel bicchiere con ghiaccio, guarnire e servire.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '1 oz ' },
       { ingredient: 'Campari', measure: '1 oz ' },
@@ -432,8 +407,7 @@ export const drinks = [
       'Versare tutti gli ingredienti nello shaker con cubetti di ghiaccio.Filtrare in una coppetta da cocktail ghiacciata. Agitare bene',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg',
     ingredients: [
       { ingredient: 'Light rum', measure: '1 1/2 oz ' },
       { ingredient: 'Lime', measure: 'Juice of 1/2 ' },
@@ -460,8 +434,7 @@ export const drinks = [
       'Shakerare con ghiaccio. Filtrare in un bicchiere freddo, guarnire e servire.Se servito "On the rocks", filtra gli ingredienti in un bicchiere vecchio stile pieno di ghiaccio.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/hbkfsh1589574990.jpg',
     ingredients: [
       { ingredient: 'Blended whiskey', measure: '2 oz ' },
       { ingredient: 'Lemon', measure: 'Juice of 1/2 ' },
@@ -490,8 +463,7 @@ export const drinks = [
       'Mescolare tutto il contenuto in un bicchiere highball e mescolare delicatamente.\r\nAggiungere un pizzico di Coca-Cola per la colorazione e guarnire con una scorza di limone o lime.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/wx7hsg1504370510.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/wx7hsg1504370510.jpg',
     ingredients: [
       { ingredient: 'Vodka', measure: '1/2 oz ' },
       { ingredient: 'Light rum', measure: '1/2 oz ' },
@@ -522,8 +494,7 @@ export const drinks = [
       "Mettere la zolletta di zucchero nel bicchiere vecchio stile e saturare con il bitter, aggiungere un goccio di acqua naturale.\r\nPestare finché non si scioglie.\r\nRiempi il bicchiere con cubetti di ghiaccio e aggiungi il whisky.\r\nGuarnire con una scorza d'arancia e una ciliegina al maraschino.",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg',
     ingredients: [
       { ingredient: 'Bourbon', measure: '4.5 cL' },
       { ingredient: 'Angostura bitters', measure: '2 dashes' },
@@ -551,8 +522,7 @@ export const drinks = [
       "In uno shaker riempito a metà con cubetti di ghiaccio, unisci il gin, il succo di limone e lo zucchero.Mescolate e guarnite con la ciliegia e la fetta d'arancia.Filtrare in un bicchiere collins pieno di cubetti di ghiaccio.Aggiungi la soda club.Agitare bene.",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/7cll921606854636.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/7cll921606854636.jpg',
     ingredients: [
       { ingredient: 'Gin', measure: '2 oz ' },
       { ingredient: 'Lemon juice', measure: '1 oz ' },
@@ -582,8 +552,7 @@ export const drinks = [
       'Mettere tutti gli ingredienti in un bicchiere Collins pieno di ghiaccio. Guarnire con uno spicchio di lime.',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/wmkbfj1606853905.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/wmkbfj1606853905.jpg',
     ingredients: [
       { ingredient: 'Light rum', measure: '2 oz ' },
       { ingredient: 'Lime', measure: 'Juice of 1/2 ' },
@@ -610,8 +579,7 @@ export const drinks = [
       'Versare gli ingredienti in uno shaker pieno di ghiaccio, shakerare energicamente e filtrare in un bicchiere da martini freddo',
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
-    picture:
-      'https://www.thecocktaildb.com/images/media/drink/n0sx531504372951.jpg',
+    picture: 'https://www.thecocktaildb.com/images/media/drink/n0sx531504372951.jpg',
     ingredients: [
       { ingredient: 'Vodka', measure: '4 cl' },
       { ingredient: 'Kahlua', measure: '3 cl' },
