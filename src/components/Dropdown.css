@@ -11,6 +11,7 @@ select {
     box-shadow 0.3s;
   &.dark {
     background-color: var(--dark-primary-color);
+    color: white;
   }
 }
 

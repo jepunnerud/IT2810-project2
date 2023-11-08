@@ -133,9 +133,15 @@ export default function InfoPage() {
           <h2>Instructions</h2>
           <p>{data!.instructions}</p>
           <h2>Info</h2>
-          <p>Category: {data!.category}</p>
-          <p>Glass: {data!.glass}</p>
-          <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
+          <p>
+            <b>Category:</b> {data!.category}
+          </p>
+          <p>
+            <b>Glass:</b> {data!.glass}
+          </p>
+          <p>
+            <b>Alcoholic</b>: {data!.alcoholic ? 'Yes' : 'No'}
+          </p>
         </div>
         {windowWidth > breakPoint && (
           <Link

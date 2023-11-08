@@ -5,6 +5,9 @@
   height: 50px;
   border-bottom: 1px solid black;
   align-items: center;
+  &.dark {
+    border-bottom: 1px solid white;
+  }
 }
 
 .searchbar-input {
@@ -19,9 +22,7 @@
     user-select: none;
   }
   &.dark {
-    &::placeholder {
-      color: black;
-    }
+    color: white;
   }
   &:focus {
     outline: none;
@@ -30,4 +31,13 @@
 
 .clear-button {
   cursor: pointer;
+  &.dark {
+    color: white;
+  }
+}
+
+.search-icon {
+  &.dark {
+    color: white;
+  }
 }

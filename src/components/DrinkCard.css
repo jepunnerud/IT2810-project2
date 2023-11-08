@@ -24,6 +24,9 @@
   align-self: center;
   margin: 0;
   color: black;
+  &.dark {
+    color: white;
+  }
 }
 
 .card img {

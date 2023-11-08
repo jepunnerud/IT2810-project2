@@ -16,16 +16,12 @@ function SearchBar(props: {
 
   return (
     <>
-      <div className="searchbar-container">
+      <div className={`searchbar-container ${theme}`}>
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-        <span className="material-symbols-outlined">search</span>
+        <span className={`material-symbols-outlined search-icon ${theme}`}>search</span>
         <input
           id="input"
           className={`searchbar-input ${theme}`}
@@ -39,7 +35,7 @@ function SearchBar(props: {
         ></input>
         {inputValue !== '' && (
           <span
-            className="material-symbols-outlined clear-button"
+            className={`material-symbols-outlined clear-button ${theme}`}
             onClick={() => {
               clearInput()
               props.searchHandler('')
