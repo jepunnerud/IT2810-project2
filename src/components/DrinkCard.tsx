@@ -47,7 +47,7 @@ function DrinkCard(props: { drink: Drink }) {
         <Link to={'/info/' + props.drink.drinkid}>
           <div className={`card ${theme}`}>
             <img src={props.drink.picture} alt={props.drink.name} />
-            <p>{props.drink.name}</p>
+            <p className={theme}>{props.drink.name}</p>
           </div>
         </Link>
       </div>
