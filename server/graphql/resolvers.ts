@@ -1,67 +1,58 @@
-import Drink from "../models/drink"
-import { DrinkInput } from "../types";
-
-
+import Drink from '../models/drink'
+import { DrinkInput } from '../types'
 
 const resolvers = {
-    Query: {
-        drinks: async () => {
-            return await Drink.find()
-        },
-        async drink(_: any, { drinkID }: { drinkID: string }) {
-            return await Drink.findById(drinkID);
-        },
-
+  Query: {
+    drinks: async () => {
+      return await Drink.find()
     },
-    Mutation: {
-        async addDrink(
-            _: any,
-            {
-                input: { drinkid, name, category, picture, instructions, alcoholic, ingredients, glass },
-            }: { input: DrinkInput }
-        ) {
-            const addedDrink = new Drink({
-                drinkid,
-                name,
-                category,
-                picture,
-                instructions,
-                alcoholic,
-                ingredients,
-                glass
-            });
-            // save the book to the database
-            const res = await addedDrink.save();
-
-            return { id: res.id };
+    async drink(_: any, { id }: { id: string }) {
+      return await Drink.findById(id)
+    },
+  },
+  Mutation: {
+    async addDrink(
+      _: any,
+      {
+        input: {
+          name,
+          category,
+          picture,
+          instructions,
+          alcoholic,
+          ingredients,
+          glass,
         },
-        // updates a book by ID
-        async updateDrink(
-            _: any,
-            {
-                drinkid,
-                input: { name, category, picture, instructions, alcoholic, ingredients, glass },
-            }: { drinkid: String; input: DrinkInput }
-        ) {
-            const updatedDrink = Drink.findByIdAndUpdate(drinkid, {
-                name,
-                category,
-                picture,
-                instructions,
-                alcoholic,
-                ingredients,
-                glass
-            });
-
-            return updatedDrink;
-        },
-        // deletes a book by ID
-        async deleteDrink(_: any, { ID }: { ID: string }) {
-            const wasDeleted = await Drink.findById(ID).deleteOne();
-            return wasDeleted;
-        },
+      }: { input: DrinkInput }
+    ) {
+      const addedDrink = new Drink({
+        name,
+        category,
+        picture,
+        instructions,
+        alcoholic,
+        ingredients,
+        glass,
+      })
+      const res = await addedDrink.save()
+      return { id: res.id }
     },
 
+    updateDrink: async (
+      _: any,
+      { id, input }: { id: string; input: DrinkInput }
+    ) => {
+      const updatedDrink = await Drink.findByIdAndUpdate(id, input, {
+        new: true,
+      })
+      return updatedDrink
+    },
+
+    async deleteDrink(_: any, { id }: { id: string }) {
+      const wasDeleted = await Drink.findByIdAndDelete(id)
+      return wasDeleted != null
+    },
+  },
 }
 
 export default resolvers

@@ -5,9 +5,14 @@ import InfoPage from './pages/Info'
 import FavouritesPage from './pages/Favourites'
 import NavBar from './components/NavBar'
 import { NavBarItem } from './types'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ApolloClient, NormalizedCacheObject, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-const queryClient = new QueryClient()
+
+const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: "http://it2810-06.idi.ntnu.no:3000",
+});
+
 
 const navBarItems: NavBarItem[] = [
   {
@@ -26,15 +31,15 @@ function App() {
       <header>
         <NavBar items={navBarItems}></NavBar>
       </header>
-      <QueryClientProvider client={queryClient}>
+      <ApolloProvider client={apolloClient}>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<HomePage />}></Route>
-            <Route path="info/:drinkid" element={<InfoPage />}></Route>
+            <Route path="info/:id" element={<InfoPage />}></Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>
           </Routes>
         </BrowserRouter>
-      </QueryClientProvider>
+      </ApolloProvider>
     </>
   )
 }

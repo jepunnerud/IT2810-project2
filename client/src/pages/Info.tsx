@@ -6,11 +6,11 @@ import './Info.css'
 import { Ingredient } from '../types'
 
 export default function InfoPage() {
-  let { drinkid } = useParams<{ drinkid: string }>()
-  drinkid = drinkid ? drinkid : ''
+  let { id } = useParams<{ id: string }>()
+  id = id ? id : ''
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
-  const { data, isLoading, error } = useDrink(drinkid)
+  // const { data, loading, error } = useDrink(id)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
 
   const storedFavourites = JSON.parse(
@@ -31,29 +31,29 @@ export default function InfoPage() {
   }, [windowWidth])
 
   const drinkOrder = JSON.parse(localStorage.getItem('drinkOrder') || '[]')
-  const currentDrinkIndex = drinkOrder.indexOf(drinkid)
+  const currentDrinkIndex = drinkOrder.indexOf(IDBFactory)
 
   console.log(drinkOrder)
   console.log('Index: ' + currentDrinkIndex)
 
   useEffect(() => {
-    setIsFavourite(storedFavourites.includes(drinkid))
+    setIsFavourite(storedFavourites.includes(id))
     setMessage(
-      storedFavourites.includes(drinkid)
+      storedFavourites.includes(id)
         ? 'Remove from favourites'
         : 'Add to favourites'
     )
-  }, [storedFavourites, drinkid])
+  }, [storedFavourites, id])
 
   function handleOnClick() {
     if (!isFavourite) {
       console.log(currentDrinkIndex)
-      storedFavourites.push(drinkid)
+      storedFavourites.push(IdleDeadline)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
       const newList: string[] = storedFavourites.filter(
-        (id: string) => id !== drinkid
+        (id_: string) => id_ !== id
       )
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
@@ -65,8 +65,8 @@ export default function InfoPage() {
   function handleBackButton() {
     if (currentDrinkIndex != null && currentDrinkIndex > 0) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
-    } else if (drinkid != null) {
-      return '' + drinkid.toString()
+    } else if (id != null) {
+      return '' + id.toString()
     }
     return ''
   }
@@ -79,13 +79,13 @@ export default function InfoPage() {
       currentDrinkIndex < drinkOrder.length - 1
     ) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
-    } else if (drinkid != null) {
-      return '' + drinkid.toString()
+    } else if (id != null) {
+      return '' + id.toString()
     }
     return ''
   }
 
-  if (isLoading) return <span className="loader"></span>
+  if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
 
   return (

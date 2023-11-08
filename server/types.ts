@@ -1,6 +1,5 @@
 interface DrinkType {
   name: string
-  drinkid: string
   category: string
   picture: string
   instructions: string
@@ -21,7 +20,6 @@ interface IngredientInput {
 
 
 interface DrinkInput {
-  drinkid: string
   name: string
   category: string
   picture: string

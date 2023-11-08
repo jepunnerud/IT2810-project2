@@ -1,5 +1,4 @@
-import { gql } from 'apollo-server-express';
-
+import gql from 'graphql-tag'
 
 const typeDefs = gql`
   type Ingredient {
@@ -8,7 +7,7 @@ const typeDefs = gql`
   }
 
   type Drink {
-    drinkid: String
+    id: ID!
     name: String
     category: String
     alcoholic: Boolean
@@ -19,7 +18,6 @@ const typeDefs = gql`
   }
 
   input DrinkInput {
-    drinkid: String
     name: String
     category: String
     alcoholic: Boolean
@@ -34,18 +32,16 @@ const typeDefs = gql`
     measure: String
   }
 
-
   type Query {
     drinks: [Drink]
-    drink: Drink
+    drink(id: ID!): Drink
   }
 
   type Mutation {
     addDrink(input: DrinkInput): Drink!
-    updateDrink(drinkid: ID!, input: DrinkInput): Drink
-    deleteDrink(drinkid: ID!): Boolean
+    updateDrink(id: ID!, input: DrinkInput): Boolean
+    deleteDrink(id: ID!): Boolean
   }
-`;
+`
 
 export default typeDefs
-
