@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useTheme } from '../hooks/ThemeContext'
+import { useTheme } from '../hooks/ThemeContext.ts'
 import './SearchBar.css'
 function SearchBar(props: {
   placeholder: string

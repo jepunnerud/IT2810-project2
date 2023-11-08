@@ -7,7 +7,7 @@ import '../utils/Loader.css'
 import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 function HomePage() {
   const [filterParam, setFilterParam] = useState<string>('')
@@ -18,6 +18,7 @@ function HomePage() {
     if (!param) {
       return true
     }
+    console.log(d.ingredients)
     const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
     if (param === 'whisky') {
       const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
@@ -37,18 +38,23 @@ function HomePage() {
   }
   //Add data from JSON, extraxt with function
   //Dummy variables:
-  const { data, isLoading, error } = useDrinks()
+  const { data, loading, error } = useDrinks()
+  console.log(data)
 
-  function updateDrinkOrder() {
-    if (data && data.length > 0) {
-      const newDrinkOrder = data.sort(sortingFns['alphabetically']).map((drink) => drink.drinkid)
+  const updateDrinkOrder = useCallback(() => {
+    if (data) {
+      const drinks = [...data!.drinks]
+      const newDrinkOrder = drinks
+        .sort(sortingFns['alphabetically'])
+        .map((drink: Drink) => drink.id)
+      console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
-  }
+  }, [data])
 
   updateDrinkOrder()
 
-  if (isLoading) return <span className="loader"></span>
+  if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
 
   const search = (query: string) => {
@@ -57,7 +63,7 @@ function HomePage() {
       threshold: 0.3,
     }
     const fuse = new Fuse(
-      data!.map((d: Drink) => d.name),
+      data!.drinks.map((d: Drink) => d.name),
       searchOptions
     )
     const fuseResults: Fuse.FuseResult<string>[] = fuse.search(query)
@@ -80,11 +86,11 @@ function HomePage() {
           {queryData.length === 0 && searchInput.length > 0 ? (
             <span>No drinks matched your query</span>
           ) : (
-            data!
+            data!.drinks
               .filter((d: Drink) => queryData.includes(d.name) || queryData.length === 0)
               .sort(sortingFns['alphabetically'])
               .filter((d: Drink) => includes_ingredient(d, filterParam))
-              .map((d: Drink) => <DrinkCard drink={d} key={d.drinkid} />)
+              .map((d: Drink) => <DrinkCard drink={d} key={d.id} />)
           )}
         </div>
       }

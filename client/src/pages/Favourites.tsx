@@ -7,11 +7,11 @@ import './Favourites.css'
 
 export default function FavouritesPage() {
   const storedFavourites = localStorage.getItem('favourites')
-  const { data, isLoading } = useDrinks()
+  const { data, loading } = useDrinks()
   const favoriteDrinks: Drink[] = data
-    ? data.filter((drink: Drink) => storedFavourites?.includes(drink.drinkid))
+    ? data.drinks.filter((drink: Drink) => storedFavourites?.includes(drink.id))
     : []
-  if (isLoading) return <span className="loader"></span>
+  if (loading) return <span className="loader"></span>
   return (
     <div className="favourite-page-container">
       <h1>Favoritter</h1>
