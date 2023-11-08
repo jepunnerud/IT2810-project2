@@ -7,7 +7,6 @@ import NavBar from './components/NavBar'
 import { NavBarItem } from './types'
 import { ApolloClient, NormalizedCacheObject, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from './utils/ThemeContext'
-import AddDrink from './pages/AddDrink'
 
 const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
@@ -22,10 +21,6 @@ const navBarItems: NavBarItem[] = [
   {
     text: 'Favourites',
     path: '/favourites',
-  },
-  {
-    text: 'Add drink',
-    path: '/add-drink',
   },
 ]
 
@@ -42,7 +37,6 @@ function App() {
               <Route path="/" element={<HomePage />}></Route>
               <Route path="info/:id" element={<InfoPage />}></Route>
               <Route path="favourites" element={<FavouritesPage />}></Route>
-              <Route path="add-drink" element={<AddDrink />}></Route>
             </Routes>
           </BrowserRouter>
         </ApolloProvider>

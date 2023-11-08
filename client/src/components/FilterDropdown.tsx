@@ -10,27 +10,25 @@ function FilterDropdown(props: {
   const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
 
   return (
-    <>
-      <div className="dropdown-container">
-        <label htmlFor="filter-parameter">{props.label}</label>
-        <select
-          id="filter-parameter"
-          value={props.value}
-          onChange={(e) => {
-            props.changeHandler(e.target.value)
-          }}
-          className={theme}
-        >
-          {possibleFilterParams.map((p, idx) => {
-            return (
-              <option value={p} key={idx}>
-                {p.charAt(0).toUpperCase() + p.slice(1)}
-              </option>
-            )
-          })}
-        </select>
-      </div>
-    </>
+    <div className="dropdown-container">
+      <label htmlFor="filter-parameter">{props.label}</label>
+      <select
+        id="filter-parameter"
+        value={props.value}
+        onChange={(e) => {
+          props.changeHandler(e.target.value)
+        }}
+        className={`dropdown ${theme}`}
+      >
+        {possibleFilterParams.map((p, idx) => {
+          return (
+            <option value={p} key={idx}>
+              {p.charAt(0).toUpperCase() + p.slice(1)}
+            </option>
+          )
+        })}
+      </select>
+    </div>
   )
 }
 

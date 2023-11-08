@@ -59,18 +59,6 @@ const GET_SINGLE_DRINK_QUERY = gql`
 //   }
 // `
 
-// async function loadAllDrinksFromServer() {
-//   try {
-//     const { data } = await client.query({
-//       query: GET_ALL_DRINKS_QUERY
-//     });
-//     return data.drinks as Drink[];
-//   } catch (error) {
-//     console.error("Error fetching drinks from server:", error);
-//     return [];
-//   }
-// }
-
 // //Funker
 // async function addDrinkToServer(Drink: Drink) {
 //   try {
@@ -87,4 +75,4 @@ const GET_SINGLE_DRINK_QUERY = gql`
 //   }
 // }
 
-export { useDrinks, useDrink /*, addDrinkToServer, loadAllDrinksFromServer*/ }
+export { useDrinks, useDrink /*, addDrinkToServer*/ }

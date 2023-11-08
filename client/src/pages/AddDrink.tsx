@@ -1,4 +1,5 @@
 import { useFieldArray, useForm, Controller } from 'react-hook-form'
+import './AddDrink.css'
 
 function AddDrink() {
   const { register, control, handleSubmit } = useForm()
@@ -13,18 +14,18 @@ function AddDrink() {
   }
 
   return (
-    <>
+    <div className="add-drink-container">
       <h1>Add new drinks here</h1>
-      <div className="info-card">
+      <div className="add-drink-card">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <h2>Name: </h2>
+          <h3>Name: </h3>
           <input
             {...register('name', {
               required: 'Your drink needs a name',
             })}
           ></input>
 
-          <h2>Ingredients: </h2>
+          <h3>Ingredients: </h3>
           <ul>
             {fields.map((item, index) => {
               return (
@@ -40,7 +41,7 @@ function AddDrink() {
                     name={`ingredients.${index}.measure`}
                     control={control}
                   />
-                  <button type="button" onClick={() => remove(index)}>
+                  <button className="button" type="button" onClick={() => remove(index)}>
                     Delete ingredient
                   </button>
                 </p>
@@ -49,6 +50,7 @@ function AddDrink() {
           </ul>
           <section>
             <button
+              className="button"
               type="button"
               onClick={() => {
                 append({ ingredient: '', measure: '' })
@@ -58,7 +60,7 @@ function AddDrink() {
             </button>
           </section>
 
-          <h2>Instructions: </h2>
+          <h3>Instructions: </h3>
           <input
             id="instuctions"
             type="text"
@@ -67,7 +69,7 @@ function AddDrink() {
             })}
           ></input>
 
-          <h2>Info: </h2>
+          <h3>Info: </h3>
           <p>
             Category:
             <select
@@ -115,8 +117,10 @@ function AddDrink() {
               No
             </label>
           </p>
-          <button type="submit">Add drink</button>
-          <h2>Picture: </h2>
+          <button className="button" type="submit">
+            Add drink
+          </button>
+          <h3>Picture: </h3>
           <input
             id="instuctions"
             type="file"
@@ -127,7 +131,7 @@ function AddDrink() {
           ></input>
         </form>
       </div>
-    </>
+    </div>
   )
 }
 

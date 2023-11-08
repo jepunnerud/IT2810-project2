@@ -1,4 +1,4 @@
-select {
+.dropdown {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
@@ -15,16 +15,16 @@ select {
   }
 }
 
-select:hover {
+.dropdown:hover {
   border: 1px solid gray;
   cursor: pointer;
 }
 
-select::-ms-expand {
+.dropdown::-ms-expand {
   display: none;
 }
 
-select::after {
+.dropdown::after {
   content: '\25BC';
   position: absolute;
   top: 50%;
@@ -33,7 +33,7 @@ select::after {
   pointer-events: none;
 }
 
-select:disabled {
+.dropdown:disabled {
   opacity: 0.6;
   cursor: not-allowed;
 }

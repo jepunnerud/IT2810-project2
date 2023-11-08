@@ -1,0 +1,57 @@
+.add-drink-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.add-drink-card {
+  margin-bottom: 20px;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  border-radius: 1rem;
+  height: fit-content;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  justify-content: flex-start;
+  align-items: flex-start;
+  transition: all 0.25s ease-in-out;
+  &.dark {
+    background-color: var(--dark-primary-color);
+  }
+}
+
+h3 {
+  margin: 0px 0px;
+}
+
+input {
+  background-color: white;
+}
+
+.button {
+  font-size: 12px;
+  background-color: var(--tertiary-color);
+  &.dark {
+    background-color: var(--dark-primary-color);
+    color: white;
+  }
+  color: black;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  height: 30px;
+  width: fit-content;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    &:not(:active) {
+      background-color: var(--secondary-color);
+      &.dark {
+        background-color: var(--dark-secondary-color);
+      }
+    }
+  }
+}
