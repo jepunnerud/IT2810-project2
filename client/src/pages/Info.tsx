@@ -33,9 +33,6 @@ export default function InfoPage() {
   const drinkOrder = JSON.parse(localStorage.getItem('drinkOrder') || '[]')
   const currentDrinkIndex = drinkOrder.indexOf(id)
 
-  console.log(drinkOrder)
-  console.log('Index: ' + currentDrinkIndex)
-
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(id))
     setMessage(storedFavourites.includes(id) ? 'Remove from favourites' : 'Add to favourites')
@@ -43,7 +40,6 @@ export default function InfoPage() {
 
   function handleOnClick() {
     if (!isFavourite) {
-      console.log(currentDrinkIndex)
       storedFavourites.push(id)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)

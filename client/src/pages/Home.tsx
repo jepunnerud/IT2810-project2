@@ -7,7 +7,7 @@ import '../utils/Loader.css'
 import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
-import { useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 function HomePage() {
   const [filterParam, setFilterParam] = useState<string>('')
@@ -40,9 +40,8 @@ function HomePage() {
   //Dummy variables:
   const { data, loading, error } = useDrinks()
   console.log(data)
-  //const {data}= loadAllDrinksFromServer();
 
-  function updateDrinkOrder() {
+  const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.drinks]
       const newDrinkOrder = drinks
@@ -51,11 +50,9 @@ function HomePage() {
       console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
-  }
-
-  useEffect(() => {
-    updateDrinkOrder()
   }, [data])
+
+  updateDrinkOrder()
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
