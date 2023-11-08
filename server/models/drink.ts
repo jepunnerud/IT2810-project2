@@ -13,7 +13,6 @@ const drinkSchema = new mongoose.Schema({
   instructions: { type: String, required: true, trim: true },
   alcoholic: { type: Boolean, required: true, trim: true },
   ingredients: [ingredientSchema],
-  //Usikker på om det å lage enda et schema er riktig her
   glass: { type: String, required: true, trim: true },
 })
 
