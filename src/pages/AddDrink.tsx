@@ -8,7 +8,7 @@ function AddDrink() {
     name: 'ingredients',
   })
 
-  function onSubmit(data: any) {
+  function onSubmit(data: object) {
     console.log('data', data)
   }
 
@@ -107,7 +107,7 @@ function AddDrink() {
                 {...register('alcoholic')}
                 type="radio"
                 name="alcoholic"
-                value="yes"
+                value={"yes"}
                 checked
               />
               Yes
@@ -117,7 +117,7 @@ function AddDrink() {
                 {...register('alcoholic')}
                 type="radio"
                 name="alcoholic"
-                value="no"
+                value="false"
               />
               No
             </label>
