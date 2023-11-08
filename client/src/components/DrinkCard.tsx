@@ -7,19 +7,20 @@ import { useTheme } from '../hooks/ThemeContext'
 function DrinkCard(props: { drink: Drink }) {
   const [isFavourite, setIsFavourite] = useState(false)
 
-  const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
-
   useEffect(() => {
+    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
     setIsFavourite(storedFavourites.includes(props.drink.id))
-  }, [storedFavourites, props.drink.id])
+  }, [props.drink.id])
 
   function handleOnClick() {
+    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+
     if (!isFavourite) {
       storedFavourites.push(props.drink.id)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
-      const newList: string[] = storedFavourites.filter((id: string) => id !== props.drink.id)
+      const newList = storedFavourites.filter((id: string) => id !== props.drink.id)
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
     }
