@@ -20,8 +20,10 @@ function DrinkCard(props: { drink: Drink }) {
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
-      const newList = storedFavourites.filter((id: string) => id !== props.drink.id)
-      localStorage.setItem('favourites', JSON.stringify(newList))
+      localStorage.setItem(
+        'favourites',
+        JSON.stringify(storedFavourites.filter((id: string) => id !== props.drink.id))
+      )
       setIsFavourite(false)
     }
   }
