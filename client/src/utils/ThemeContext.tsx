@@ -5,7 +5,7 @@ import { COLORS } from './constants'
 export const ThemeProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [theme, setTheme] = useState<ThemeContextProps>('light')
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'))
+    setTheme((prevTheme: string) => (prevTheme === 'light' ? 'dark' : 'light'))
     document.documentElement.style.backgroundColor =
       theme === 'dark' ? COLORS.lightBackground : COLORS.darkBackround
     document.documentElement.style.color = theme === 'dark' ? 'black' : 'white'

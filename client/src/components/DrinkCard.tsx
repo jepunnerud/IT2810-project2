@@ -7,20 +7,23 @@ import { useTheme } from '../hooks/ThemeContext'
 function DrinkCard(props: { drink: Drink }) {
   const [isFavourite, setIsFavourite] = useState(false)
 
-  const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
-
   useEffect(() => {
-    setIsFavourite(storedFavourites.includes(props.drink.drinkid))
-  }, [storedFavourites, props.drink.drinkid])
+    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+    setIsFavourite(storedFavourites.includes(props.drink.id))
+  }, [props.drink.id])
 
   function handleOnClick() {
+    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+
     if (!isFavourite) {
-      storedFavourites.push(props.drink.drinkid)
+      storedFavourites.push(props.drink.id)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
-      const newList: string[] = storedFavourites.filter((id: string) => id !== props.drink.drinkid)
-      localStorage.setItem('favourites', JSON.stringify(newList))
+      localStorage.setItem(
+        'favourites',
+        JSON.stringify(storedFavourites.filter((id: string) => id !== props.drink.id))
+      )
       setIsFavourite(false)
     }
   }
@@ -44,7 +47,7 @@ function DrinkCard(props: { drink: Drink }) {
             star
           </span>
         </div>
-        <Link to={'/info/' + props.drink.drinkid}>
+        <Link to={'/info/' + props.drink.id}>
           <div className={`card ${theme}`}>
             <img src={props.drink.picture} alt={props.drink.name} />
             <p className={theme}>{props.drink.name}</p>

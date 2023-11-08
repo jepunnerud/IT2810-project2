@@ -10,6 +10,7 @@ Yarn Build:
   stage: Webapp build
   needs: []
   script:
+    - cd client
     - yarn install --frozen-lockfile --cache-folder .yarn
     - yarn build
   retry: 1
@@ -18,6 +19,7 @@ Prettier check:
   stage: Webapp test
   needs: [Yarn Build]
   script:
+    - cd client
     - yarn install --frozen-lockfile --cache-folder .yarn
     - yarn lint:prettier
   retry: 1
@@ -26,6 +28,7 @@ Eslint:
   stage: Webapp test
   needs: [Yarn Build]
   script:
+    - cd client
     - yarn install --frozen-lockfile --cache-folder .yarn
     - yarn lint
   retry: 1
