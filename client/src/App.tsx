@@ -29,14 +29,14 @@ function App() {
     <>
       <ThemeProvider>
         <ApolloProvider client={apolloClient}>
-          <BrowserRouter>
+          <BrowserRouter basename="/project2">
             <header>
               <NavBar items={navBarItems}></NavBar>
             </header>
             <Routes>
               <Route path="/" element={<HomePage />}></Route>
-              <Route path="info/:id" element={<InfoPage />}></Route>
-              <Route path="favourites" element={<FavouritesPage />}></Route>
+              <Route path="/info/:id" element={<InfoPage />}></Route>
+              <Route path="/favourites" element={<FavouritesPage />}></Route>
             </Routes>
           </BrowserRouter>
         </ApolloProvider>
