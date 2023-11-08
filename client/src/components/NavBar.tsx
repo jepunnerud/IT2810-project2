@@ -10,7 +10,11 @@ const NavBar = (props: { items: NavBarItem[] }) => {
   return (
     <div className="nav-bar-parent-container">
       <Link to="/" key="logo">
-        <img src={theme === 'dark' ? '/logowhite.png' : '/logo.png'} width="270" height="80"></img>
+        <img
+          src={theme === 'dark' ? '/project2/logowhite.png' : '/project2/logo.png'}
+          width="270"
+          height="80"
+        ></img>
       </Link>
       <div className="nav-bar-parent">
         {props.items.map((item: NavBarItem) => (
