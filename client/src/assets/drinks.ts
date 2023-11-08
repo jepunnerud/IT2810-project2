@@ -1,6 +1,6 @@
 export const drinks = [
   {
-    drinkid: '15997',
+    id: '15997',
     name: 'GG',
     category: 'Ordinary Drink',
     alcoholic: true,
@@ -30,7 +30,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17222',
+    id: '17222',
     name: 'A1',
     category: 'Cocktail',
     alcoholic: true,
@@ -55,7 +55,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17225',
+    id: '17225',
     name: 'Ace',
     category: 'Cocktail',
     alcoholic: true,
@@ -81,7 +81,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '14229',
+    id: '14229',
     name: '747',
     category: 'Shot',
     alcoholic: true,
@@ -103,7 +103,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17203',
+    id: '17203',
     name: 'Kir',
     category: 'Ordinary Drink',
     alcoholic: true,
@@ -123,7 +123,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '13501',
+    id: '13501',
     name: 'ABC',
     category: 'Shot',
     alcoholic: true,
@@ -144,7 +144,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '15288',
+    id: '15288',
     name: '252',
     category: 'Shot',
     alcoholic: true,
@@ -164,7 +164,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '13938',
+    id: '13938',
     name: 'AT&T',
     category: 'Ordinary Drink',
     alcoholic: true,
@@ -185,7 +185,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17141',
+    id: '17141',
     name: 'Smut',
     category: 'Punch / Party Drink',
     alcoholic: true,
@@ -206,7 +206,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '13332',
+    id: '13332',
     name: 'B-53',
     category: 'Shot',
     alcoholic: true,
@@ -237,7 +237,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17837',
+    id: '17837',
     name: 'Adam',
     category: 'Ordinary Drink',
     alcoholic: true,
@@ -261,7 +261,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11007',
+    id: '11007',
     name: 'Margarita',
     category: 'Ordinary Drink',
     alcoholic: true,
@@ -285,7 +285,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '178365',
+    id: '178365',
     name: 'Gin Tonic',
     category: 'Cocktail',
     alcoholic: true,
@@ -309,7 +309,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11000',
+    id: '11000',
     name: 'Mojito',
     strDrinkAlternate: null,
     strTags: 'IBA,ContemporaryClassictrueUSA,Asia,Vegan,Citrus,Brunch,Hangover,Mild',
@@ -338,7 +338,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11005',
+    id: '11005',
     name: 'Dry Martini',
     strDrinkAlternate: null,
     strTags: 'IBA,Classic,Christmastrue',
@@ -364,7 +364,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11003',
+    id: '11003',
     name: 'Negroni',
     strDrinkAlternate: null,
     strTags: 'IBA,Classic',
@@ -388,7 +388,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11006',
+    id: '11006',
     name: 'Daiquiri',
     strDrinkAlternate: null,
     strTags: 'IBA,Classic,Beach',
@@ -415,7 +415,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11004',
+    id: '11004',
     name: 'Whiskey Sour',
     strDrinkAlternate: null,
     strTags: 'IBA,ClassictrueContemporaryClassic',
@@ -444,7 +444,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17204',
+    id: '17204',
     name: 'Long Island Iced Tea',
     strDrinkAlternate: null,
     strTags: 'IBA,ContemporaryClassic',
@@ -475,7 +475,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11001',
+    id: '11001',
     name: 'Old Fashioned',
     strDrinkAlternate: null,
     strTags: 'IBA,ClassictrueExpensive,Savory',
@@ -503,7 +503,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '12402',
+    id: '12402',
     name: 'Tom Collins',
     strDrinkAlternate: null,
     strTags: null,
@@ -533,7 +533,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '11288',
+    id: '11288',
     name: 'Cuba Libre',
     strDrinkAlternate: null,
     strTags: 'IBA,ContemporaryClassic',
@@ -560,7 +560,7 @@ export const drinks = [
     ],
   },
   {
-    drinkid: '17212',
+    id: '17212',
     name: 'Espresso Martini',
     strDrinkAlternate: null,
     strTags: 'IBA,NewEra',

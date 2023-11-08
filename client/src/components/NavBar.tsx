@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { NavBarItem } from '../types'
 import './NavBar.css'
 import ToggleThemeButton from './ToggleThemeButton'
-import { useTheme } from '../hooks/ThemeContext'
+import { useTheme } from './../hooks/ThemeContext'
 
 const NavBar = (props: { items: NavBarItem[] }) => {
   const theme = useTheme()
@@ -15,9 +15,7 @@ const NavBar = (props: { items: NavBarItem[] }) => {
       <div className="nav-bar-parent">
         {props.items.map((item: NavBarItem) => (
           <Link to={item.path} key={item.text}>
-            <div className={`${theme === 'dark' ? 'nav-bar-item-dark' : 'nav-bar-item'}`}>
-              {item.text}
-            </div>
+            <div className={`nav-bar-item ${theme === 'dark' ? 'dark' : 'light'}`}>{item.text}</div>
           </Link>
         ))}
         <div className="toggle-theme-button-wrapper">
