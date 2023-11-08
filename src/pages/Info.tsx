@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useDrink } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Info.css'
 import { Ingredient } from '../types'
+import { useTheme } from '../hooks/ThemeContext'
 
 export default function InfoPage() {
-  let { drinkid } = useParams<{ drinkid: string }>()
-  drinkid = drinkid ? drinkid : ''
+  const { drinkid = '' } = useParams<{ drinkid?: string }>()
   const [isFavourite, setIsFavourite] = useState(false)
   const [message, setMessage] = useState('')
   const { data, isLoading, error } = useDrink(drinkid)
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const theme = useTheme()
+  const breakPoint = 1024
 
-  const storedFavourites = JSON.parse(
-    localStorage.getItem('favourites') || '[]'
-  )
+  const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
 
   useEffect(() => {
     // Update the window width whenever the window is resized
@@ -38,11 +38,7 @@ export default function InfoPage() {
 
   useEffect(() => {
     setIsFavourite(storedFavourites.includes(drinkid))
-    setMessage(
-      storedFavourites.includes(drinkid)
-        ? 'Remove from favourites'
-        : 'Add to favourites'
-    )
+    setMessage(storedFavourites.includes(drinkid) ? 'Remove from favourites' : 'Add to favourites')
   }, [storedFavourites, drinkid])
 
   function handleOnClick() {
@@ -52,9 +48,7 @@ export default function InfoPage() {
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
-      const newList: string[] = storedFavourites.filter(
-        (id: string) => id !== drinkid
-      )
+      const newList: string[] = storedFavourites.filter((id: string) => id !== drinkid)
       localStorage.setItem('favourites', JSON.stringify(newList))
       setIsFavourite(false)
     }
@@ -74,10 +68,7 @@ export default function InfoPage() {
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    if (
-      currentDrinkIndex != null &&
-      currentDrinkIndex < drinkOrder.length - 1
-    ) {
+    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length - 1) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     } else if (drinkid != null) {
       return '' + drinkid.toString()
@@ -99,59 +90,66 @@ export default function InfoPage() {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       />
       <h1>{data!.name}</h1>
-      {windowWidth <= 997 && (
+      {windowWidth <= breakPoint && (
         <div className="mobile-arrows">
-          <a
-            href={`/info/${handleBackButton()}`}
-            className="material-symbols-outlined arrow"
+          <Link
+            to={`/info/${handleBackButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_back_ios
-          </a>
-          <a
-            href={`/info/${handleForwardButton()}`}
-            className="material-symbols-outlined arrow"
+          </Link>
+          <Link
+            to={`/info/${handleForwardButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_forward_ios
-          </a>
+          </Link>
         </div>
       )}
       <div className="content-parent">
-        {windowWidth > 997 && (
-          <a
-            href={`/info/${handleBackButton()}`}
-            className="material-symbols-outlined arrow"
+        {windowWidth > breakPoint && (
+          <Link
+            to={`/info/${handleBackButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_back_ios
-          </a>
+          </Link>
         )}
         <div className="picture-button-container">
           <img src={data!.picture} alt={data!.name} />
-          {<button onClick={handleOnClick}>{message}</button>}
+          {
+            <button onClick={handleOnClick} className={`favourite-button ${theme}`}>
+              {message}
+            </button>
+          }
         </div>
-        <div className="info-card">
+        <div className={`info-card ${theme}`}>
           <h2>Ingredients</h2>
           {data!.ingredients.map((ingredient: Ingredient, idx) => (
             <div key={idx}>
-              <p>
-                {ingredient.ingredient +
-                  (ingredient.measure ? ': ' + ingredient.measure : '')}
-              </p>
+              <p>{ingredient.ingredient + (ingredient.measure ? ': ' + ingredient.measure : '')}</p>
             </div>
           ))}
           <h2>Instructions</h2>
           <p>{data!.instructions}</p>
           <h2>Info</h2>
-          <p>Category: {data!.category}</p>
-          <p>Glass: {data!.glass}</p>
-          <p>Alcoholic: {data!.alcoholic ? 'Yes' : 'No'}</p>
+          <p>
+            <b>Category:</b> {data!.category}
+          </p>
+          <p>
+            <b>Glass:</b> {data!.glass}
+          </p>
+          <p>
+            <b>Alcoholic</b>: {data!.alcoholic ? 'Yes' : 'No'}
+          </p>
         </div>
-        {windowWidth > 997 && (
-          <a
-            href={`/info/${handleForwardButton()}`}
-            className="material-symbols-outlined arrow"
+        {windowWidth > breakPoint && (
+          <Link
+            to={`/info/${handleForwardButton()}`}
+            className={`material-symbols-outlined arrow ${theme}`}
           >
             arrow_forward_ios
-          </a>
+          </Link>
         )}
       </div>
     </div>

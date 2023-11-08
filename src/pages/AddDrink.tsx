@@ -1,6 +1,6 @@
 import { useFieldArray, useForm, Controller } from 'react-hook-form'
 
-function AddDrinks() {
+function AddDrink() {
   const { register, control, handleSubmit } = useForm()
 
   const { fields, append, remove } = useFieldArray({
@@ -138,4 +138,4 @@ function AddDrinks() {
   )
 }
 
-export default AddDrinks
+export default AddDrink

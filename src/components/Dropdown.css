@@ -9,6 +9,10 @@ select {
   transition:
     border-color 0.3s,
     box-shadow 0.3s;
+  &.dark {
+    background-color: var(--dark-primary-color);
+    color: white;
+  }
 }
 
 select:hover {
@@ -27,16 +31,6 @@ select::after {
   right: 10px;
   transform: translateY(-50%);
   pointer-events: none;
-}
-
-select option {
-  background-color: #424242;
-  color: white;
-}
-
-select option:checked {
-  background-color: #424242;
-  color: white;
 }
 
 select:disabled {

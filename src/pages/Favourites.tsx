@@ -16,9 +16,7 @@ export default function FavouritesPage() {
     <div className="favourite-page-container">
       <h1>Favoritter</h1>
       <div className="card-container">
-        {favoriteDrinks
-          ?.sort(sortingFns['alphabetically'])
-          .map((d) => <DrinkCard drink={d} />)}
+        {favoriteDrinks?.sort(sortingFns['alphabetically']).map((d) => <DrinkCard drink={d} />)}
       </div>
     </div>
   )
