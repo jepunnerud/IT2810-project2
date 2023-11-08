@@ -8,6 +8,7 @@ import HomePage from './pages/Home.tsx'
 import InfoPage from './pages/Info.tsx'
 import FavouritesPage from './pages/Favourites.tsx'
 import { ThemeProvider } from './utils/ThemeContext.tsx'
+import AddDrink from './pages/AddDrink.tsx'
 
 const queryClient = new QueryClient()
 
@@ -21,6 +22,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             <Route path="/" element={<HomePage />}></Route>
             <Route path="info/:drinkid" element={<InfoPage />}></Route>
             <Route path="favourites" element={<FavouritesPage />}></Route>
+            <Route path="add-drink" element={<AddDrink />}></Route>
           </Routes>
         </BrowserRouter>
       </QueryClientProvider>
