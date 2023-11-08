@@ -36,9 +36,7 @@ function AddDrink() {
                     placeholder="ingredient"
                   />
                   <Controller
-                    render={({ field }) => (
-                      <input {...field} placeholder="measure" />
-                    )}
+                    render={({ field }) => <input {...field} placeholder="measure" />}
                     name={`ingredients.${index}.measure`}
                     control={control}
                   />
@@ -107,18 +105,13 @@ function AddDrink() {
                 {...register('alcoholic')}
                 type="radio"
                 name="alcoholic"
-                value={"yes"}
+                value={'yes'}
                 checked
               />
               Yes
             </label>
             <label>
-              <input
-                {...register('alcoholic')}
-                type="radio"
-                name="alcoholic"
-                value="false"
-              />
+              <input {...register('alcoholic')} type="radio" name="alcoholic" value="false" />
               No
             </label>
           </p>

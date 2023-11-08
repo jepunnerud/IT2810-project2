@@ -12,9 +12,9 @@ const navBarItems: NavBarItem[] = [
     path: '/favourites',
   },
   {
-    text: "Add drink",
-    path: "/add-drink"
-  }
+    text: 'Add drink',
+    path: '/add-drink',
+  },
 ]
 
 function App() {
