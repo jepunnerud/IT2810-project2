@@ -3,8 +3,32 @@ import { DrinkInput } from '../types'
 
 const resolvers = {
   Query: {
-    drinks: async () => {
-      return await Drink.find()
+    drinks: async (_: any, { ing }: { ing: string }) => {
+      if (!ing) {
+        return await Drink.find()
+      }
+      if (ing === 'whisky') {
+        return await Drink.find({
+          ingredients: {$elemMatch: {
+            ingredient: [
+                'Whisky',
+                'Bourbon',
+                'Scotch',
+                'Whiskey',
+                'whisky',
+                'bourbon',
+                'scotch',
+                'whiskey',
+              ],
+            }},
+          },
+        )
+      }
+      return await Drink.find({
+        ingredients: {$elemMatch: { 
+          ingredient: [ing, ing.charAt(0).toUpperCase() + ing.slice(1)],
+        }},
+      })
     },
     async drink(_: any, { id }: { id: string }) {
       return await Drink.findById(id)
