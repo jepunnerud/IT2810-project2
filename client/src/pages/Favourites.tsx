@@ -7,7 +7,7 @@ import './Favourites.css'
 
 export default function FavouritesPage() {
   const storedFavourites = localStorage.getItem('favourites')
-  const { data, loading } = useDrinks()
+  const { data, loading } = useDrinks('')
   const favoriteDrinks: Drink[] = data
     ? data.drinks.filter((drink: Drink) => storedFavourites?.includes(drink.id))
     : []

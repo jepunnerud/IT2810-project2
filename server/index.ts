@@ -12,7 +12,7 @@ async function startServer() {
 
   mongoose.set('strictQuery', true)
   mongoose
-    .connect(`mongodb://127.0.0.1:27017`, {
+    .connect(`mongodb://it2810-06.idi.ntnu.no:27017`, {
       dbName: 'connoisseurDB',
       retryWrites: true,
       w: 'majority',

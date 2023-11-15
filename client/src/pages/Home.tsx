@@ -14,32 +14,9 @@ function HomePage() {
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
 
-  const includes_ingredient = (d: Drink, param: string) => {
-    if (!param) {
-      return true
-    }
-    console.log(d.ingredients)
-    const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
-    if (param === 'whisky') {
-      const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
-      for (const ingredient of ingredients) {
-        for (const accept of accepted) {
-          if (ingredient.includes(accept)) {
-            return true
-          }
-        }
-      }
-    }
-    for (const ingredient of ingredients) {
-      if (ingredient.includes(param)) {
-        return true
-      }
-    }
-  }
   //Add data from JSON, extraxt with function
   //Dummy variables:
-  const { data, loading, error } = useDrinks()
-  console.log(data)
+  const { data, loading, error } = useDrinks(filterParam)
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
@@ -89,7 +66,6 @@ function HomePage() {
             data!.drinks
               .filter((d: Drink) => queryData.includes(d.name) || queryData.length === 0)
               .sort(sortingFns['alphabetically'])
-              .filter((d: Drink) => includes_ingredient(d, filterParam))
               .map((d: Drink) => <DrinkCard drink={d} key={d.id} />)
           )}
         </div>
