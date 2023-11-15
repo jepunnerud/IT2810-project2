@@ -10,13 +10,15 @@ import Fuse from 'fuse.js'
 import { useCallback, useState } from 'react'
 
 function HomePage() {
+  const ITEMS_PER_PAGE = 20
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const [filterParam, setFilterParam] = useState<string>('')
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
 
   //Add data from JSON, extraxt with function
   //Dummy variables:
-  const { data, loading, error } = useDrinks(filterParam)
+  const { data, loading, error } = useDrinks(filterParam, (currentPage - 1) * ITEMS_PER_PAGE)
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
@@ -48,6 +50,11 @@ function HomePage() {
     fuseResults.map((result) => results.push(result.item))
     setQueryData(results)
   }
+
+  const changePage = (delta: number) => () => {
+    setCurrentPage(currentPage + delta)
+  }
+
   return (
     <>
       <div className="home-top-container">
@@ -70,6 +77,15 @@ function HomePage() {
           )}
         </div>
       }
+      <div className="page-navigation">
+        <button onClick={changePage(-1)} disabled={currentPage === 1}>
+          Previous
+        </button>
+        <p>Page 1 of 10</p>
+        <button onClick={changePage(1)} disabled={data.drinks.length !== ITEMS_PER_PAGE}>
+          Next
+        </button>
+      </div>
     </>
   )
 }

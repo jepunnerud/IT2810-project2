@@ -31,3 +31,14 @@
   display: flex;
   align-items: center;
 }
+
+.page-navigation {
+  display: flex;
+  width: inherit;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  overflow-x: hidden;
+}

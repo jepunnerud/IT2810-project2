@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 
-function useDrinks(ing: string) {
+function useDrinks(ing: string, skip: number) {
   return useQuery(GET_ALL_DRINKS_QUERY, {
-    variables: { ing },
+    variables: { ing: ing, limit: 20, skip: skip },
   })
 }
 
@@ -14,8 +14,8 @@ function useDrink(id: string) {
 
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
-  query GetAllDrinks($ing: String) {
-    drinks(ing: $ing) {
+  query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
+    drinks(ing: $ing, limit: $limit, skip: $skip) {
       id
       name
       picture

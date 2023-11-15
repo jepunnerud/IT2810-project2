@@ -33,7 +33,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    drinks(ing: String): [Drink]
+    drinks(ing: String, limit: Int, skip: Int): [Drink]
     drink(id: ID!): Drink
   }
 
