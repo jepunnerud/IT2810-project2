@@ -39,7 +39,7 @@ function HomePage() {
       console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
-  }, [data])
+  }, [data, currentPage])
 
   updateDrinkOrder()
 

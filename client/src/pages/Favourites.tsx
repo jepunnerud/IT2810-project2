@@ -24,7 +24,7 @@ export default function FavouritesPage() {
       setCurrentPage(currentPage - 1)
       setIsLastPage(true)
     }
-  }, [data])
+  }, [data, currentPage])
 
   checkLastPage()
 
