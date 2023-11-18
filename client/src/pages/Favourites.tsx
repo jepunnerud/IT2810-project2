@@ -41,7 +41,7 @@ export default function FavouritesPage() {
       <h1>Favoritter</h1>
       <div className="card-container">
         {data.favourites.map((d: Drink) => (
-          <DrinkCard drink={d} />
+          <DrinkCard drink={d} key={d.id} />
         ))}
       </div>
       <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />

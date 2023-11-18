@@ -12,7 +12,11 @@ function FilterDropdown(props: {
   const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
 
   return (
-    <div className="dropdown-container">
+    <div className="dropdown-wrapper">
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+      />
       <label htmlFor="filter-parameter">{props.label}</label>
       <select
         id="filter-parameter"
@@ -32,6 +36,18 @@ function FilterDropdown(props: {
           )
         })}
       </select>
+      {props.value !== '' && (
+        <span
+          className={`material-symbols-outlined clear-button ${theme}`}
+          onClick={() => {
+            props.changeHandler('')
+            props.pageHandler(1)
+            props.lastPageHandler(false)
+          }}
+        >
+          close
+        </span>
+      )}
     </div>
   )
 }
