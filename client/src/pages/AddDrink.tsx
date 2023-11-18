@@ -15,21 +15,21 @@ function AddDrink() {
     console.log(data)
 
     const formData = data as {
-      name: string;
-      category: string;
-      alcoholic: string;
-      picture: string;
-      instructions: string;
-      ingredients: { ingredient: string; measure?: string }[];
-      glass: string;
-    };
+      name: string
+      category: string
+      alcoholic: string
+      picture: string
+      instructions: string
+      ingredients: { ingredient: string; measure?: string }[]
+      glass: string
+    }
 
     const alcoholicBoolean = formData.alcoholic === 'yes'
 
-    const ingredients = formData.ingredients.map(item => ({
+    const ingredients = formData.ingredients.map((item) => ({
       ingredient: item.ingredient,
       measure: item.measure,
-    }));
+    }))
 
     const newDrink: DrinkInput = {
       name: formData.name,
@@ -39,20 +39,20 @@ function AddDrink() {
       instructions: formData.instructions,
       ingredients: ingredients,
       glass: formData.glass,
-    };
+    }
 
     console.log(formData)
 
     try {
-      const valid = await addDrinkToServer(newDrink);
+      const valid = await addDrinkToServer(newDrink)
       if (!valid) {
-        alert("Drink contains profanity. Change the input to add drink")
+        alert('Drink contains profanity. Change the input to add drink')
       } else {
-        alert("Drink added successfully!")
+        alert('Drink added successfully!')
       }
     } catch (error) {
-      console.error("Error in onSubmit:", error);
-      alert("An error occurred while adding drink")
+      console.error('Error in onSubmit:', error)
+      alert('An error occurred while adding drink')
     }
   }
 
