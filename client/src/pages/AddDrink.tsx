@@ -1,31 +1,61 @@
 import { useFieldArray, useForm, Controller } from 'react-hook-form'
 import './AddDrink.css'
+import { useTheme } from '../hooks/ThemeContext'
+import { useEffect, useState } from 'react'
 
 function AddDrink() {
+  const theme = useTheme()
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  const breakPoint = 1024
   const { register, control, handleSubmit } = useForm()
-
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'ingredients',
   })
+  
+  useEffect(() => {
+    // Update the window width whenever the window is resized
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth)
+    }
+    // Add a window resize event listener
+    window.addEventListener('resize', handleResize)
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [windowWidth])
 
   function onSubmit(data: object) {
     console.log('data', data)
   }
 
   return (
-    <div className="add-drink-container">
+  <div className={`add-drink-container ${theme}`}>
+      
       <h1>✨Add new drinks here✨</h1>
-      <div className="add-drink-card">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <h3>Name: </h3>
-          <input
-            {...register('name', {
-              required: 'Your drink needs a name',
-            })}
-          ></input>
-
-          <h3>Ingredients: </h3>
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <div className={`add-drink-card ${theme}`}>
+        
+          <h3>Name: <input
+                    {...register('name', {
+                      required: 'Your drink needs a name',
+                    })}
+                  ></input>
+          </h3>
+          <h3>Ingredients: 
+            <section>
+              <button
+                className={`button ${theme}`}
+                type="button"
+                onClick={() => {
+                  append({ ingredient: '', measure: '' })
+                }}
+              >
+                Add new ingredient
+              </button>
+            </section>
+          </h3>
           <ul>
             {fields.map((item, index) => {
               return (
@@ -41,64 +71,49 @@ function AddDrink() {
                     name={`ingredients.${index}.measure`}
                     control={control}
                   />
-                  <button className="button" type="button" onClick={() => remove(index)}>
+                  <button className={`button ${theme}`} type="button" onClick={() => remove(index)}>
                     Delete ingredient
                   </button>
                 </p>
               )
             })}
           </ul>
-          <section>
-            <button
-              className="button"
-              type="button"
-              onClick={() => {
-                append({ ingredient: '', measure: '' })
-              }}
-            >
-              Add new ingredient
-            </button>
-          </section>
-
           <h3>Instructions: </h3>
-          <input
-            id="instuctions"
-            type="text"
+          <textarea
+            className="instructions-input"
             {...register('instructions', {
               required: 'Instructions is required',
             })}
-          ></input>
+          ></textarea>
 
           <h3>Info: </h3>
           <p>
-            Category:
-            <select
-              {...register('category', {
-                required: 'Category is required',
-              })}
-            >
-              <option value="ordinary">Ordinary drink</option>
-              <option value="cocktail">Cocktail</option>
-              <option value="shot">Shot</option>
-              <option value="punch">Punch / Party Drink</option>
-            </select>
+            Category: <select
+                        {...register('category', {
+                          required: 'Category is required',
+                        })}
+                      >
+                        <option value="ordinary">Ordinary drink</option>
+                        <option value="cocktail">Cocktail</option>
+                        <option value="shot">Shot</option>
+                        <option value="punch">Punch / Party Drink</option>
+                      </select>
           </p>
           <p>
-            Glass:
-            <select
-              {...register('glass', {
-                required: 'Glass is required',
-              })}
-            >
-              <option value="cocktail-glass">Cocktail Glass</option>
-              <option value="collins">Gollins Glass</option>
-              <option value="shot-glass">Shot Glass</option>
-              <option value="martini">Martini Glass</option>
-              <option value="wine">Wine Glass</option>
-              <option value="highball">Highball Glass</option>
-              <option value="beer">Beer Mug</option>
-              <option value="old-fashioned">Old-fashioned Glass</option>
-            </select>
+            Glass: <select
+                      {...register('glass', {
+                        required: 'Glass is required',
+                      })}
+                    >
+                      <option value="cocktail-glass">Cocktail Glass</option>
+                      <option value="collins">Gollins Glass</option>
+                      <option value="shot-glass">Shot Glass</option>
+                      <option value="martini">Martini Glass</option>
+                      <option value="wine">Wine Glass</option>
+                      <option value="highball">Highball Glass</option>
+                      <option value="beer">Beer Mug</option>
+                      <option value="old-fashioned">Old-fashioned Glass</option>
+                    </select>
           </p>
           <p>
             Alcoholic:
@@ -117,20 +132,20 @@ function AddDrink() {
               No
             </label>
           </p>
-          <button className="button" type="submit">
+          <h3>Picture: <input
+                          className='input'
+                          type="text"
+                          {...register('Picture', {
+                            required: 'Picture is required',
+                          })}
+                          placeholder='picture address'
+                        ></input>
+          </h3>
+      </div>
+      <button className={`submit-button ${theme}`} type="submit">
             Add drink
           </button>
-          <h3>Picture: </h3>
-          <input
-            id="instuctions"
-            type="file"
-            {...register('instructions', {
-              required: 'Instructions is required',
-            })}
-            accept="image/png, image/jpeg, image/jpg"
-          ></input>
-        </form>
-      </div>
+      </form>
     </div>
   )
 }
