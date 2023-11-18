@@ -1,5 +1,7 @@
 import { useFieldArray, useForm, Controller } from 'react-hook-form'
 import './AddDrink.css'
+import { addDrinkToServer } from '../hooks/Drinks'
+import { DrinkInput } from '../types'
 
 function AddDrink() {
   const { register, control, handleSubmit } = useForm()
@@ -9,8 +11,49 @@ function AddDrink() {
     name: 'ingredients',
   })
 
-  function onSubmit(data: object) {
-    console.log('data', data)
+  async function onSubmit(data: object) {
+    console.log(data)
+
+    const formData = data as {
+      name: string;
+      category: string;
+      alcoholic: string;
+      picture: string;
+      instructions: string;
+      ingredients: { ingredient: string; measure?: string }[];
+      glass: string;
+    };
+
+    const alcoholicBoolean = formData.alcoholic === 'yes'
+
+    const ingredients = formData.ingredients.map(item => ({
+      ingredient: item.ingredient,
+      measure: item.measure,
+    }));
+
+    const newDrink: DrinkInput = {
+      name: formData.name,
+      category: formData.category,
+      alcoholic: alcoholicBoolean,
+      picture: formData.picture,
+      instructions: formData.instructions,
+      ingredients: ingredients,
+      glass: formData.glass,
+    };
+
+    console.log(formData)
+
+    try {
+      const valid = await addDrinkToServer(newDrink);
+      if (!valid) {
+        alert("Drink contains profanity. Change the input to add drink")
+      } else {
+        alert("Drink added successfully!")
+      }
+    } catch (error) {
+      console.error("Error in onSubmit:", error);
+      alert("An error occurred while adding drink")
+    }
   }
 
   return (
@@ -120,14 +163,11 @@ function AddDrink() {
           <button className="button" type="submit">
             Add drink
           </button>
-          <h3>Picture: </h3>
+          <h3>PictureURL: </h3>
           <input
-            id="instuctions"
-            type="file"
-            {...register('instructions', {
-              required: 'Instructions is required',
+            {...register('picture', {
+              required: 'Your drink needs a picture',
             })}
-            accept="image/png, image/jpeg, image/jpg"
           ></input>
         </form>
       </div>

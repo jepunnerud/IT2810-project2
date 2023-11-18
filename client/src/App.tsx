@@ -52,3 +52,5 @@ function App() {
 }
 
 export default App
+
+export { apolloClient }

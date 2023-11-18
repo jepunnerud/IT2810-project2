@@ -1,0 +1,321 @@
+[
+    {
+        "name": "GG",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Collins Glass",
+        "instructions": "Pour the Galliano liqueur over ice. Fill the remainder of the glass with ginger ale and that's all there is to it. You now have your very own GG.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Galliano",
+                "measure": "2 1/2 shots"
+            },
+            {
+                "ingredient": "Ginger ale"
+            },
+            {
+                "ingredient": "Ice"
+            }
+        ]
+    },
+    {
+        "name": "A1",
+        "category": "Cocktail",
+        "alcoholic": true,
+        "glass": "Cocktail glass",
+        "instructions": "Pour all ingredients into a cocktail shaker, mix and serve over ice into a chilled glass.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Gin",
+                "measure": "1 3/4 shot"
+            },
+            {
+                "ingredient": "Grand Marnier",
+                "measure": "1 Shot"
+            },
+            {
+                "ingredient": "Lemon Juice",
+                "measure": "1/4 Shot"
+            },
+            {
+                "ingredient": "Grenadine",
+                "measure": "1/8 Shot"
+            }
+        ]
+    },
+    {
+        "name": "Ace",
+        "category": "Cocktail",
+        "alcoholic": true,
+        "glass": "Martini Glass",
+        "instructions": "Shake all the ingredients in a cocktail shaker and ice then strain into a cold glass.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/l3cd7f1504818306.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Gin",
+                "measure": "2 shots"
+            },
+            {
+                "ingredient": "Grenadine",
+                "measure": "1/2 shot"
+            },
+            {
+                "ingredient": "Heavy cream",
+                "measure": "1/2 shot"
+            },
+            {
+                "ingredient": "Milk",
+                "measure": "1/2 shot"
+            },
+            {
+                "ingredient": "Egg White",
+                "measure": "1/2 Fresh"
+            }
+        ]
+    },
+    {
+        "name": "747",
+        "category": "Shot",
+        "alcoholic": true,
+        "glass": "Shot glass",
+        "instructions": "Pour Kahlua, then Baileys, then Frangelico not chilled and not layered -- SERVE!!!",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Kahlua",
+                "measure": "1/3 part"
+            },
+            {
+                "ingredient": "Baileys irish cream",
+                "measure": "1/3 part"
+            },
+            {
+                "ingredient": "Frangelico",
+                "measure": "1/3 part"
+            }
+        ]
+    },
+    {
+        "name": "Kir",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Wine Glass",
+        "instructions": "Add the crème de cassis to the bottom of the glass, then top up with wine.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/apneom1504370294.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Creme de Cassis",
+                "measure": "1 part"
+            },
+            {
+                "ingredient": "Champagne",
+                "measure": "5 parts"
+            }
+        ]
+    },
+    {
+        "name": "ABC",
+        "category": "Shot",
+        "alcoholic": true,
+        "glass": "Shot glass",
+        "instructions": "Layered in a shot glass.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/tqpvqp1472668328.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Amaretto",
+                "measure": "1/3"
+            },
+            {
+                "ingredient": "Baileys irish cream",
+                "measure": "1/3"
+            },
+            {
+                "ingredient": "Cognac",
+                "measure": "1/3"
+            }
+        ]
+    },
+    {
+        "name": "Cuba Libre",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Highball glass",
+        "instructions": "Build all ingredients in a Collins glass filled with ice. Garnish with lime wedge.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/ck6d0p1504388696.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Light rum",
+                "measure": "2 oz"
+            },
+            {
+                "ingredient": "Lime",
+                "measure": "Juice of 1"
+            },
+            {
+                "ingredient": "Coca-Cola"
+            }
+        ]
+    },
+    {
+        "name": "Tom Collins",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Collins glass",
+        "instructions": "In a shaker half-filled with ice cubes, combine the gin, lemon juice, and sugar. Shake well. Strain into a Collins glass almost filled with ice cubes. Add the club soda. Stir and garnish with the cherry and the orange slice.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/7cll921606854636.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Gin",
+                "measure": "2 oz"
+            },
+            {
+                "ingredient": "Lemon juice",
+                "measure": "1 oz"
+            },
+            {
+                "ingredient": "Sugar",
+                "measure": "1 tsp superfine"
+            },
+            {
+                "ingredient": "Club soda",
+                "measure": "3 oz"
+            },
+            {
+                "ingredient": "Maraschino cherry",
+                "measure": "1"
+            },
+            {
+                "ingredient": "Orange",
+                "measure": "1 slice"
+            }
+        ]
+    },
+    {
+        "name": "Old Fashioned",
+        "category": "Cocktail",
+        "alcoholic": true,
+        "glass": "Old-fashioned glass",
+        "instructions": "Place sugar cube in old fashioned glass and saturate with bitters, add a dash of plain water. Muddle until dissolved. Fill the glass with ice cubes and add whiskey. Garnish with orange twist, and a cocktail cherry.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Bourbon",
+                "measure": "4.5 cL"
+            },
+            {
+                "ingredient": "Angostura bitters",
+                "measure": "2 dashes"
+            },
+            {
+                "ingredient": "Sugar",
+                "measure": "1 cube"
+            },
+            {
+                "ingredient": "Water",
+                "measure": "dash"
+            }
+        ]
+    },
+    {
+        "name": "Daiquiri",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Cocktail glass",
+        "instructions": "Pour all ingredients into a shaker with ice cubes. Shake well. Strain into a chilled cocktail glass.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/mrz9091589574515.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Light rum",
+                "measure": "1 1/2 oz"
+            },
+            {
+                "ingredient": "Lime",
+                "measure": "Juice of 1/2"
+            },
+            {
+                "ingredient": "Powdered sugar",
+                "measure": "1 tsp"
+            }
+        ]
+    },
+    {
+        "name": "Negroni",
+        "category": "Ordinary Drink",
+        "alcoholic": true,
+        "glass": "Old-fashioned glass",
+        "instructions": "Stir into glass over ice, garnish and serve.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/qgdu971561574065.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Gin",
+                "measure": "1 oz"
+            },
+            {
+                "ingredient": "Campari",
+                "measure": "1 oz"
+            },
+            {
+                "ingredient": "Sweet Vermouth",
+                "measure": "1 oz"
+            }
+        ]
+    },
+    {
+        "name": "Dry Martini",
+        "category": "Cocktail",
+        "alcoholic": true,
+        "glass": "Cocktail glass",
+        "instructions": "Straight: Pour all ingredients into mixing glass with ice cubes. Stir well. Strain into chilled martini cocktail glass. Squeeze oil from lemon peel onto the drink, or garnish with olive.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/6ck9yi1589574317.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Gin",
+                "measure": "1 2/3 oz"
+            },
+            {
+                "ingredient": "Dry Vermouth",
+                "measure": "1/3 oz"
+            },
+            {
+                "ingredient": "Olive",
+                "measure": "1"
+            }
+        ]
+    },
+    {
+        "name": "Mojito",
+        "category": "Cocktail",
+        "alcoholic": true,
+        "glass": "Highball glass",
+        "instructions": "Muddle lime juice, sugar and mint in glass. Fill glass with ice and add rum. Top with soda water. Garnish with mint leaves and a lime wedge.",
+        "picture": "https://www.thecocktaildb.com/images/media/drink/3z6xdi1589574603.jpg",
+        "ingredients": [
+            {
+                "ingredient": "Light rum",
+                "measure": "2-3 oz"
+            },
+            {
+                "ingredient": "Lime",
+                "measure": "Juiced"
+            },
+            {
+                "ingredient": "Sugar",
+                "measure": "2 tsp"
+            },
+            {
+                "ingredient": "Mint",
+                "measure": "2-4 leaves"
+            },
+            {
+                "ingredient": "Soda water",
+                "measure": "fill with soda water"
+            },
+            {
+                "ingredient": "Ice",
+                "measure": "cubes"
+            }
+        ]
+    }
+]
