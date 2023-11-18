@@ -8,18 +8,16 @@ import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
 import { useCallback, useState } from 'react'
-import { useTheme } from '../hooks/ThemeContext'
 import { ITEMS_PER_PAGE } from '../utils/constants'
+import PageNavigation from '../components/PageNavigation'
 
 function HomePage() {
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [filterParam, setFilterParam] = useState<string>('')
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
-  const theme = useTheme()
+  const [isLastPage, setIsLastPage] = useState<boolean>(false)
 
-  //Add data from JSON, extraxt with function
-  //Dummy variables:
   const { data, loading, error } = useDrinks(
     filterParam,
     ITEMS_PER_PAGE,
@@ -29,6 +27,12 @@ function HomePage() {
   const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.drinks]
+      try {
+        if (drinks.length === 0) throw new Error('No drinks found')
+      } catch (error) {
+        setCurrentPage(currentPage - 1)
+        setIsLastPage(true)
+      }
       const newDrinkOrder = drinks
         .sort(sortingFns['alphabetically'])
         .map((drink: Drink) => drink.id)
@@ -57,18 +61,27 @@ function HomePage() {
     setQueryData(results)
   }
 
-  const changePage = (delta: number) => () => {
-    setCurrentPage(currentPage + delta)
+  const changePage = (delta: number) => {
+    if (currentPage + delta > 0) {
+      setCurrentPage(currentPage + delta)
+      setIsLastPage(false)
+    }
   }
 
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      />
       <div className="home-top-container">
         <SearchBar placeholder="Search" searchHandler={search} inputHandler={setSearchInput} />
         <FilterDropdown
           value={filterParam}
           changeHandler={setFilterParam}
           label="Filter by ingredient"
+          pageHandler={setCurrentPage}
+          lastPageHandler={setIsLastPage}
         />
       </div>
       {
@@ -83,23 +96,7 @@ function HomePage() {
           )}
         </div>
       }
-      <div className="page-navigation">
-        <button
-          className={`page-button ${theme}`}
-          onClick={changePage(-1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-        <p>Page {currentPage}</p>
-        <button
-          className={`page-button ${theme}`}
-          onClick={changePage(1)}
-          disabled={data.drinks.length !== ITEMS_PER_PAGE}
-        >
-          Next
-        </button>
-      </div>
+      <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />
     </>
   )
 }

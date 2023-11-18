@@ -34,43 +34,44 @@
 
 .page-navigation {
   display: flex;
-  width: inherit;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 20px;
   align-items: center;
   padding: 2rem;
   text-align: center;
   overflow-x: hidden;
 }
 
-.arrow {
+.button-arrow {
+  width: fit-content;
   color: var(--quaternary-color);
   user-select: none;
   &.dark {
-    color: var(--dark-quaternary-color);
-  }
-  &:hover {
-    cursor: pointer;
-    &:not(:active) {
-      color: var(--secondary-color);
-      &.dark {
-        color: var(--dark-tertiary-color);
-      }
-    }
+    color: white;
   }
 }
 
 .page-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
   background-color: var(--primary-color);
   &.dark {
     background-color: var(--dark-primary-color);
     color: white;
   }
+  &.disabled {
+    background-color: gray !important;
+    opacity: 0.4;
+    cursor: not-allowed !important;
+  }
   color: black;
   border-radius: 1rem;
   margin: 0.5rem;
   height: 40px;
-  width: 160px;
+  width: 110px;
   border: none;
   &:hover {
     cursor: pointer;

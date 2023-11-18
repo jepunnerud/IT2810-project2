@@ -1,26 +1,50 @@
 import { Drink } from '../types'
 import DrinkCard from '../components/DrinkCard'
-import { useDrinks } from '../hooks/Drinks'
-import { sortingFns } from '../utils/constants'
-import { ITEMS_PER_PAGE } from '../utils/constants'
-import { useState } from 'react'
+import { useFavourites } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Favourites.css'
+import { ITEMS_PER_PAGE } from '../utils/constants'
+import { useCallback, useState } from 'react'
+import PageNavigation from '../components/PageNavigation'
 
 export default function FavouritesPage() {
-  const [currentPage] = useState<number>(1)
-  const storedFavourites = localStorage.getItem('favourites')
-  const { data, loading } = useDrinks('', ITEMS_PER_PAGE, (currentPage - 1) * ITEMS_PER_PAGE)
-  const favoriteDrinks: Drink[] = data
-    ? data.drinks.filter((drink: Drink) => storedFavourites?.includes(drink.id))
-    : []
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [isLastPage, setIsLastPage] = useState<boolean>(false)
+  const storedFavourites: string[] = JSON.parse(localStorage.getItem('favourites') || '[]')
+  const { data, loading } = useFavourites(
+    storedFavourites,
+    ITEMS_PER_PAGE,
+    (currentPage - 1) * ITEMS_PER_PAGE
+  )
+
+  const checkLastPage = useCallback(() => {
+    try {
+      if (data.favourites.length === 0) throw new Error('No drinks found')
+    } catch (error) {
+      setCurrentPage(currentPage - 1)
+      setIsLastPage(true)
+    }
+  }, [data])
+
+  checkLastPage()
+
+  const changePage = (delta: number) => {
+    if (currentPage + delta > 0) {
+      setCurrentPage(currentPage + delta)
+      setIsLastPage(false)
+    }
+  }
+
   if (loading) return <span className="loader"></span>
   return (
     <div className="favourite-page-container">
       <h1>Favoritter</h1>
       <div className="card-container">
-        {favoriteDrinks?.sort(sortingFns['alphabetically']).map((d) => <DrinkCard drink={d} />)}
+        {data.favourites.map((d: Drink) => (
+          <DrinkCard drink={d} />
+        ))}
       </div>
+      <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />
     </div>
   )
 }
