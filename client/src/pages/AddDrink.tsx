@@ -15,7 +15,7 @@ function AddDrink() {
 
   return (
     <div className="add-drink-container">
-      <h1>Add new drinks here</h1>
+      <h1>✨Add new drinks here✨</h1>
       <div className="add-drink-card">
         <form onSubmit={handleSubmit(onSubmit)}>
           <h3>Name: </h3>
