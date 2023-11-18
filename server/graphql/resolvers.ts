@@ -43,6 +43,18 @@ const resolvers = {
     async drink(_: any, { id }: { id: string }) {
       return await Drink.findById(id)
     },
+    async favourites(
+      _: any,
+      {
+        favourites,
+        limit,
+        skip,
+      }: { favourites: string[]; limit: number; skip: number }
+    ) {
+      return await Drink.find({ _id: { $in: favourites } })
+        .skip(skip)
+        .limit(limit)
+    },
   },
   Mutation: {
     async addDrink(
