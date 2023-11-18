@@ -1,8 +1,8 @@
 import { gql, useQuery } from '@apollo/client'
 
-function useDrinks(ing: string, skip: number) {
+function useDrinks(ing: string, limit: number, skip: number) {
   return useQuery(GET_ALL_DRINKS_QUERY, {
-    variables: { ing: ing, limit: 20, skip: skip },
+    variables: { ing: ing, limit: limit, skip: skip },
   })
 }
 
