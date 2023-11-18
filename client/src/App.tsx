@@ -3,6 +3,7 @@ import './App.css'
 import HomePage from './pages/Home'
 import InfoPage from './pages/Info'
 import FavouritesPage from './pages/Favourites'
+import AddDrink from './pages/AddDrink'
 import NavBar from './components/NavBar'
 import { NavBarItem } from './types'
 import { ApolloClient, NormalizedCacheObject, InMemoryCache, ApolloProvider } from '@apollo/client'
@@ -22,6 +23,10 @@ const navBarItems: NavBarItem[] = [
     text: 'Favourites',
     path: '/favourites',
   },
+  {
+    text: 'Add drink',
+    path: '/add_drink',
+  },
 ]
 
 function App() {
@@ -37,6 +42,7 @@ function App() {
               <Route path="/" element={<HomePage />}></Route>
               <Route path="/info/:id" element={<InfoPage />}></Route>
               <Route path="/favourites" element={<FavouritesPage />}></Route>
+              <Route path="/add_drink" element={<AddDrink />}></Route>
             </Routes>
           </BrowserRouter>
         </ApolloProvider>
