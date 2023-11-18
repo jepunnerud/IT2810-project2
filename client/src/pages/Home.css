@@ -31,3 +31,55 @@
   display: flex;
   align-items: center;
 }
+
+.page-navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.button-arrow {
+  width: fit-content;
+  color: var(--quaternary-color);
+  user-select: none;
+  &.dark {
+    color: white;
+  }
+}
+
+.page-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  background-color: var(--primary-color);
+  &.dark {
+    background-color: var(--dark-primary-color);
+    color: white;
+  }
+  &.disabled {
+    background-color: gray !important;
+    opacity: 0.4;
+    cursor: not-allowed !important;
+  }
+  color: black;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  height: 40px;
+  width: 110px;
+  border: none;
+  &:hover {
+    cursor: pointer;
+    &:not(:active) {
+      background-color: var(--secondary-color);
+      &.dark {
+        background-color: var(--dark-secondary-color);
+      }
+    }
+  }
+}

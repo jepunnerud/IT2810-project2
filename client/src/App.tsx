@@ -11,7 +11,7 @@ import { ThemeProvider } from './utils/ThemeContext'
 
 const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://localhost:3000/',
+  uri: 'http://localhost:3000',
 })
 
 const navBarItems: NavBarItem[] = [

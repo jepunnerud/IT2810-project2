@@ -5,6 +5,8 @@ function FilterDropdown(props: {
   value: string
   label: string
   changeHandler: React.Dispatch<React.SetStateAction<string>>
+  pageHandler: React.Dispatch<React.SetStateAction<number>>
+  lastPageHandler: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const theme = useTheme()
   const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
@@ -17,6 +19,8 @@ function FilterDropdown(props: {
         value={props.value}
         onChange={(e) => {
           props.changeHandler(e.target.value)
+          props.pageHandler(1)
+          props.lastPageHandler(false)
         }}
         className={`dropdown ${theme}`}
       >

@@ -9,4 +9,6 @@ const COLORS = {
   lightBackground: '#c7f9cc',
 }
 
-export { sortingFns, COLORS }
+const ITEMS_PER_PAGE = 12
+
+export { sortingFns, COLORS, ITEMS_PER_PAGE }
