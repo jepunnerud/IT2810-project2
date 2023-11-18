@@ -6,13 +6,9 @@ import FavouritesPage from './pages/Favourites'
 import AddDrink from './pages/AddDrink'
 import NavBar from './components/NavBar'
 import { NavBarItem } from './types'
-import { ApolloClient, NormalizedCacheObject, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from './utils/ThemeContext'
-
-const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-  cache: new InMemoryCache(),
-  uri: 'http://localhost:3000/',
-})
+import { apolloClient } from './hooks/Drinks'
 
 const navBarItems: NavBarItem[] = [
   {
@@ -52,5 +48,3 @@ function App() {
 }
 
 export default App
-
-export { apolloClient }

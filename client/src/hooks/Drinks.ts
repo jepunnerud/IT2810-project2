@@ -1,7 +1,12 @@
 import { gql, useQuery } from '@apollo/client'
 import { DrinkInput } from '../types'
-import { apolloClient } from '../App'
 import { badwords } from '../assets/badwords'
+import { ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/client'
+
+const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: 'http://localhost:3000/',
+})
 
 function useDrinks(ing: string) {
   return useQuery(GET_ALL_DRINKS_QUERY, {
@@ -103,4 +108,4 @@ function checkDrinkinput(drink: DrinkInput): boolean {
   return true
 }
 
-export { useDrinks, useDrink, addDrinkToServer }
+export { useDrinks, useDrink, addDrinkToServer, apolloClient }
