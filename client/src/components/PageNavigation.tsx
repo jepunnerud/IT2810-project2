@@ -21,7 +21,9 @@ const PageNavigation = (props: PageNavigationProps) => {
       Page {props.currentPage}
       <div
         className={`page-button ${props.isLastPage && 'disabled'} ${theme}`}
-        onClick={() => props.onChangePage(1)}
+        onClick={() => {
+          if (!props.isLastPage) props.onChangePage(1)
+        }}
       >
         Next
         <span className={`material-symbols-outlined button-arrow ${theme}`}>chevron_right</span>

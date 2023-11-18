@@ -4,7 +4,7 @@ import { useFavourites } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Favourites.css'
 import { ITEMS_PER_PAGE } from '../utils/constants'
-import { useCallback, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PageNavigation from '../components/PageNavigation'
 
 export default function FavouritesPage() {
@@ -17,16 +17,16 @@ export default function FavouritesPage() {
     (currentPage - 1) * ITEMS_PER_PAGE
   )
 
-  const checkLastPage = useCallback(() => {
-    try {
-      if (data.favourites.length === 0) throw new Error('No drinks found')
-    } catch (error) {
-      setCurrentPage(currentPage - 1)
-      setIsLastPage(true)
+  useEffect(() => {
+    if (data) {
+      try {
+        if (data.favourites.length === 0) throw new Error('No drinks found')
+      } catch (error) {
+        setCurrentPage(currentPage - 1)
+        setIsLastPage(true)
+      }
     }
   }, [data, currentPage])
-
-  checkLastPage()
 
   const changePage = (delta: number) => {
     if (currentPage + delta > 0) {
