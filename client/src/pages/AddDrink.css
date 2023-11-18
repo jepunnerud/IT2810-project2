@@ -71,7 +71,6 @@ input {
   }
   color: black;
   border-radius: 1rem;
-  margin: 0.5rem;
   height: 40px;
   width: 160px;
   border: none;
@@ -86,3 +85,20 @@ input {
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .add-drink-card {
+    width: 80%; /* Adjust as needed for your design */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .submit-button {
+    width: 100%; /* Make the button full width on smaller screens */
+  }
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.5rem; /* Adjust the font size for smaller screens */
+  }
+}
