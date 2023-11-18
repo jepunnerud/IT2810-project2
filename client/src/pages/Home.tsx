@@ -8,49 +8,38 @@ import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import Fuse from 'fuse.js'
 import { useCallback, useState } from 'react'
+import { ITEMS_PER_PAGE } from '../utils/constants'
+import PageNavigation from '../components/PageNavigation'
 
 function HomePage() {
+  const [currentPage, setCurrentPage] = useState<number>(1)
   const [filterParam, setFilterParam] = useState<string>('')
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
+  const [isLastPage, setIsLastPage] = useState<boolean>(false)
 
-  const includes_ingredient = (d: Drink, param: string) => {
-    if (!param) {
-      return true
-    }
-    console.log(d.ingredients)
-    const ingredients = d.ingredients.map((i) => i.ingredient.toLowerCase())
-    if (param === 'whisky') {
-      const accepted = ['whisky', 'whiskey', 'bourbon', 'scotch']
-      for (const ingredient of ingredients) {
-        for (const accept of accepted) {
-          if (ingredient.includes(accept)) {
-            return true
-          }
-        }
-      }
-    }
-    for (const ingredient of ingredients) {
-      if (ingredient.includes(param)) {
-        return true
-      }
-    }
-  }
-  //Add data from JSON, extraxt with function
-  //Dummy variables:
-  const { data, loading, error } = useDrinks()
-  console.log(data)
+  const { data, loading, error } = useDrinks(
+    filterParam,
+    ITEMS_PER_PAGE,
+    (currentPage - 1) * ITEMS_PER_PAGE
+  )
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.drinks]
+      try {
+        if (drinks.length === 0) throw new Error('No drinks found')
+      } catch (error) {
+        setCurrentPage(currentPage - 1)
+        setIsLastPage(true)
+      }
       const newDrinkOrder = drinks
         .sort(sortingFns['alphabetically'])
         .map((drink: Drink) => drink.id)
       console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
-  }, [data])
+  }, [data, currentPage])
 
   updateDrinkOrder()
 
@@ -71,14 +60,28 @@ function HomePage() {
     fuseResults.map((result) => results.push(result.item))
     setQueryData(results)
   }
+
+  const changePage = (delta: number) => {
+    if (currentPage + delta > 0) {
+      setCurrentPage(currentPage + delta)
+      setIsLastPage(false)
+    }
+  }
+
   return (
     <>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
+      />
       <div className="home-top-container">
         <SearchBar placeholder="Search" searchHandler={search} inputHandler={setSearchInput} />
         <FilterDropdown
           value={filterParam}
           changeHandler={setFilterParam}
           label="Filter by ingredient"
+          pageHandler={setCurrentPage}
+          lastPageHandler={setIsLastPage}
         />
       </div>
       {
@@ -89,11 +92,11 @@ function HomePage() {
             data!.drinks
               .filter((d: Drink) => queryData.includes(d.name) || queryData.length === 0)
               .sort(sortingFns['alphabetically'])
-              .filter((d: Drink) => includes_ingredient(d, filterParam))
               .map((d: Drink) => <DrinkCard drink={d} key={d.id} />)
           )}
         </div>
       }
+      <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />
     </>
   )
 }

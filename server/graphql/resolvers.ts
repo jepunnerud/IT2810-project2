@@ -3,11 +3,57 @@ import { DrinkInput } from '../types'
 
 const resolvers = {
   Query: {
-    drinks: async () => {
-      return await Drink.find()
+    drinks: async (
+      _: any,
+      { ing, limit, skip }: { ing: string; limit: number; skip: number }
+    ) => {
+      if (!ing) {
+        return await Drink.find().skip(skip).limit(limit)
+      }
+      if (ing === 'whisky') {
+        return await Drink.find({
+          ingredients: {
+            $elemMatch: {
+              ingredient: [
+                'Whisky',
+                'Bourbon',
+                'Scotch',
+                'Whiskey',
+                'whisky',
+                'bourbon',
+                'scotch',
+                'whiskey',
+              ],
+            },
+          },
+        })
+          .skip(skip)
+          .limit(limit)
+      }
+      return await Drink.find({
+        ingredients: {
+          $elemMatch: {
+            ingredient: [ing, ing.charAt(0).toUpperCase() + ing.slice(1)],
+          },
+        },
+      })
+        .skip(skip)
+        .limit(limit)
     },
     async drink(_: any, { id }: { id: string }) {
       return await Drink.findById(id)
+    },
+    async favourites(
+      _: any,
+      {
+        favourites,
+        limit,
+        skip,
+      }: { favourites: string[]; limit: number; skip: number }
+    ) {
+      return await Drink.find({ _id: { $in: favourites } })
+        .skip(skip)
+        .limit(limit)
     },
   },
   Mutation: {

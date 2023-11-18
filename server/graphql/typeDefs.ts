@@ -33,8 +33,9 @@ const typeDefs = gql`
   }
 
   type Query {
-    drinks: [Drink]
+    drinks(ing: String, limit: Int, skip: Int): [Drink]
     drink(id: ID!): Drink
+    favourites(favourites: [ID], limit: Int, skip: Int): [Drink]
   }
 
   type Mutation {

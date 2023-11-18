@@ -1,7 +1,9 @@
 import { gql, useQuery } from '@apollo/client'
 
-function useDrinks() {
-  return useQuery(GET_ALL_DRINKS_QUERY)
+function useDrinks(ing: string, limit: number, skip: number) {
+  return useQuery(GET_ALL_DRINKS_QUERY, {
+    variables: { ing: ing, limit: limit, skip: skip },
+  })
 }
 
 function useDrink(id: string) {
@@ -10,10 +12,16 @@ function useDrink(id: string) {
   })
 }
 
+function useFavourites(favourites: string[], limit: number, skip: number) {
+  return useQuery(GET_FAVOURITES_QUERY, {
+    variables: { favourites: favourites, limit: limit, skip: skip },
+  })
+}
+
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
-  query GetAllDrinks {
-    drinks {
+  query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
+    drinks(ing: $ing, limit: $limit, skip: $skip) {
       id
       name
       picture
@@ -38,6 +46,16 @@ const GET_SINGLE_DRINK_QUERY = gql`
         ingredient
         measure
       }
+    }
+  }
+`
+
+const GET_FAVOURITES_QUERY = gql`
+  query GetFavourites($favourites: [ID], $limit: Int, $skip: Int) {
+    favourites(favourites: $favourites, limit: $limit, skip: $skip) {
+      id
+      name
+      picture
     }
   }
 `
@@ -75,4 +93,4 @@ const GET_SINGLE_DRINK_QUERY = gql`
 //   }
 // }
 
-export { useDrinks, useDrink /*, addDrinkToServer*/ }
+export { useDrinks, useDrink, useFavourites /*, addDrinkToServer*/ }

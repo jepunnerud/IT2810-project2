@@ -18,7 +18,6 @@ interface IngredientInput {
   measure?: string
 }
 
-
 interface DrinkInput {
   name: string
   category: string
@@ -30,4 +29,3 @@ interface DrinkInput {
 }
 
 export type { DrinkType, IngredientType, DrinkInput, IngredientInput }
-

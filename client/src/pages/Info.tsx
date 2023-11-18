@@ -81,10 +81,6 @@ export default function InfoPage() {
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
       />
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
-      />
       <h1>{data!.drink.name}</h1>
       {windowWidth <= breakPoint && (
         <div className="mobile-arrows">
