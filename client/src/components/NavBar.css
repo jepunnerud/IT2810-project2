@@ -1,16 +1,16 @@
 .nav-bar-parent {
   display: flex;
   flex-direction: row;
-  gap: 15px;
+  gap: 0.9375rem;
   justify-content: right;
-  margin-right: 10px;
+  margin-right: 0.625rem;
   align-items: center;
 }
 
 .nav-bar-item {
   box-sizing: border-box;
-  height: 60px;
-  width: 80px;
+  height: 3.75rem;
+  width: 5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +24,7 @@
   bottom: 0;
   left: 0;
   width: 0;
-  height: 2px;
+  height: 0.125rem;
   transition: width 0.3s ease;
 }
 
@@ -48,8 +48,8 @@
 }
 
 .logo {
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 0.625rem;
+  margin-left: 0.625rem;
 }
 
 .nav-bar-parent-container {
@@ -59,7 +59,7 @@
   flex-wrap: wrap;
 }
 
-@media (max-width: 642px) {
+@media (max-width: 40.125rem) {
   .nav-bar-parent-container {
     flex-direction: column;
     align-items: center;
@@ -72,7 +72,7 @@
   justify-content: center;
   user-select: none;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 0.625rem;
   &:hover {
     cursor: pointer;
   }
