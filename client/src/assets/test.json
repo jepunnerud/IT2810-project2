@@ -1,0 +1,20 @@
+{
+  "name": "GG",
+  "category": "Ordinary Drink",
+  "alcoholic": true,
+  "glass": "Collins Glass",
+  "instructions": "Pour the Galliano liqueur over ice. Fill the remainder of the glass with ginger ale and thats all there is to it. You now have a your very own GG.",
+  "picture": "https://www.thecocktaildb.com/images/media/drink/vyxwut1468875960.jpg",
+  "ingredients": [
+    {
+      "ingredient": "Galliano",
+      "measure": "2 1/2 shots "
+    },
+    {
+      "ingredient": "Ginger ale"
+    },
+    {
+      "ingredient": "Ice"
+    }
+  ]
+}
