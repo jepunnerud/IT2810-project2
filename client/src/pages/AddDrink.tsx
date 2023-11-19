@@ -1,8 +1,10 @@
-import { useFieldArray, useForm, Controller } from 'react-hook-form'
+import { useFieldArray, useForm } from 'react-hook-form'
 import './AddDrink.css'
 import { addDrinkToServer } from '../hooks/Drinks'
 import { DrinkInput } from '../types'
 import { useTheme } from '../hooks/ThemeContext'
+import '../components/Dropdown.css'
+import { useEffect } from 'react'
 
 function AddDrink() {
   const theme = useTheme()
@@ -50,6 +52,8 @@ function AddDrink() {
         alert('Drink contains profanity. Change the input to add drink')
       } else {
         alert('Drink added successfully!')
+        const form = document.getElementById('form') as HTMLFormElement
+        form?.reset()
       }
     } catch (error) {
       console.error('Error in onSubmit:', error)
@@ -57,16 +61,21 @@ function AddDrink() {
     }
   }
 
+  useEffect(() => {
+    window.scrollTo(0, document.body.scrollHeight)
+  }, [])
+
   return (
     <div className={`add-drink-container ${theme}`}>
       <h1>✨Add new drinks here✨</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className="form" onSubmit={handleSubmit(onSubmit)} id="form">
         <div className={`add-drink-card ${theme}`}>
           <h3>
             Name:{' '}
             <input
+              className={`input ${theme}`}
               {...register('name', {
-                required: 'Your drink needs a name',
+                required: true,
               })}
             ></input>
           </h3>
@@ -74,7 +83,7 @@ function AddDrink() {
             Ingredients:
             <section>
               <button
-                className={`button ${theme}`}
+                className={`button form-button ${theme}`}
                 type="button"
                 onClick={() => {
                   append({ ingredient: '', measure: '' })
@@ -85,96 +94,125 @@ function AddDrink() {
             </section>
           </h3>
           <ul>
-            {fields.map((item, index) => {
-              return (
-                <p key={item.id}>
-                  <input
-                    {...register(`ingredients.${index}.ingredient`, {
-                      required: true,
-                    })}
-                    placeholder="ingredient"
-                  />
-                  <Controller
-                    render={({ field }) => <input {...field} placeholder="measure" />}
-                    name={`ingredients.${index}.measure`}
-                    control={control}
-                  />
-                  <button className={`button ${theme}`} type="button" onClick={() => remove(index)}>
-                    Delete ingredient
-                  </button>
-                </p>
-              )
-            })}
+            <div className="ingredient-input-container">
+              {fields.map((item, index) => {
+                return (
+                  <p key={item.id}>
+                    <div className="ingredient-input-wrapper">
+                      <input
+                        className={`input ${theme}`}
+                        {...register(`ingredients.${index}.ingredient`, {
+                          required: true,
+                        })}
+                        placeholder="ingredient"
+                      />
+                      <input
+                        className={`input ${theme}`}
+                        {...register(`ingredients.${index}.measure`, {
+                          required: false,
+                        })}
+                        placeholder="measure"
+                      />
+                      <span
+                        className={`material-symbols-outlined clear-button ${theme}`}
+                        onClick={() => {
+                          remove(index)
+                        }}
+                        tabIndex={0}
+                        onKeyDown={(e) => {
+                          if (e.key === 'Enter') {
+                            remove(index)
+                          }
+                        }}
+                      >
+                        close
+                      </span>
+                    </div>
+                  </p>
+                )
+              })}
+            </div>
           </ul>
           <h3>Instructions: </h3>
           <textarea
-            className="instructions-input"
+            className={`input text-area ${theme}`}
             {...register('instructions', {
-              required: 'Instructions is required',
+              required: true,
             })}
           ></textarea>
 
           <h3>Info: </h3>
-          <p>
-            Category:{' '}
-            <select
-              {...register('category', {
-                required: 'Category is required',
-              })}
-            >
-              <option value="ordinary">Ordinary drink</option>
-              <option value="cocktail">Cocktail</option>
-              <option value="shot">Shot</option>
-              <option value="punch">Punch / Party Drink</option>
-            </select>
-          </p>
-          <p>
-            Glass:{' '}
-            <select
-              {...register('glass', {
-                required: 'Glass is required',
-              })}
-            >
-              <option value="cocktail-glass">Cocktail Glass</option>
-              <option value="collins">Gollins Glass</option>
-              <option value="shot-glass">Shot Glass</option>
-              <option value="martini">Martini Glass</option>
-              <option value="wine">Wine Glass</option>
-              <option value="highball">Highball Glass</option>
-              <option value="beer">Beer Mug</option>
-              <option value="old-fashioned">Old-fashioned Glass</option>
-            </select>
-          </p>
-          <p>
-            Alcoholic:
-            <label>
+          <div className="info-container">
+            <p>
+              Category:{' '}
+              <select
+                className={`dropdown form-dropdown ${theme}`}
+                {...register('category', {
+                  required: true,
+                })}
+              >
+                <option value="ordinary">Ordinary drink</option>
+                <option value="cocktail">Cocktail</option>
+                <option value="shot">Shot</option>
+                <option value="punch">Punch / Party Drink</option>
+              </select>
+            </p>
+            <p>
+              Glass:{' '}
+              <select
+                className={`dropdown form-dropdown ${theme}`}
+                {...register('glass', {
+                  required: true,
+                })}
+              >
+                <option value="cocktail-glass">Cocktail Glass</option>
+                <option value="collins">Gollins Glass</option>
+                <option value="shot-glass">Shot Glass</option>
+                <option value="martini">Martini Glass</option>
+                <option value="wine">Wine Glass</option>
+                <option value="highball">Highball Glass</option>
+                <option value="beer">Beer Mug</option>
+                <option value="old-fashioned">Old-fashioned Glass</option>
+              </select>
+            </p>
+            <p>
+              Alcoholic:
+              <label>
+                <input
+                  className={`input input-radio ${theme}`}
+                  {...register('alcoholic')}
+                  type="radio"
+                  name="alcoholic"
+                  value={'yes'}
+                  checked
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  className={`input ${theme}`}
+                  {...register('alcoholic')}
+                  type="radio"
+                  name="alcoholic"
+                  value="false"
+                />
+                No
+              </label>
+            </p>
+            <h3>
+              Picture:{' '}
               <input
-                {...register('alcoholic')}
-                type="radio"
-                name="alcoholic"
-                value={'yes'}
-                checked
-              />
-              Yes
-            </label>
-            <label>
-              <input {...register('alcoholic')} type="radio" name="alcoholic" value="false" />
-              No
-            </label>
-          </p>
-          <h3>
-            Picture:{' '}
-            <input
-              className="input"
-              type="text"
-              {...register('picture', {
-                required: 'Picture is required',
-              })}
-              placeholder="picture address"
-            ></input>
-          </h3>
+                className={`input ${theme}`}
+                type="text"
+                {...register('picture', {
+                  required: true,
+                })}
+                placeholder="Image url"
+              ></input>
+            </h3>
+          </div>
         </div>
-        <button className={`submit-button ${theme}`} type="submit">
+        <button className={`button submit-button ${theme}`} type="submit">
           Add drink
         </button>
       </form>

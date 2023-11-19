@@ -44,6 +44,14 @@ function FilterDropdown(props: {
             props.pageHandler(1)
             props.lastPageHandler(false)
           }}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              props.changeHandler('')
+              props.pageHandler(1)
+              props.lastPageHandler(false)
+            }
+          }}
         >
           close
         </span>

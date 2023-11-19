@@ -37,7 +37,21 @@ function DrinkCard(props: { drink: Drink }) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
       <div className="card-wrapper">
-        <div className="favourite-icon-wrapper">
+        <Link to={'/info/' + props.drink.id}>
+          <div className={`card ${theme}`}>
+            <img src={props.drink.picture} alt={props.drink.name} />
+            <p className={theme}>{props.drink.name}</p>
+          </div>
+        </Link>
+        <div
+          className="favourite-icon-wrapper"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleOnClick()
+            }
+          }}
+        >
           <span
             className={`material-symbols-outlined favourite-icon ${
               isFavourite && 'is-favourite'
@@ -47,12 +61,6 @@ function DrinkCard(props: { drink: Drink }) {
             star
           </span>
         </div>
-        <Link to={'/info/' + props.drink.id}>
-          <div className={`card ${theme}`}>
-            <img src={props.drink.picture} alt={props.drink.name} />
-            <p className={theme}>{props.drink.name}</p>
-          </div>
-        </Link>
       </div>
     </>
   )

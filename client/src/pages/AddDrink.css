@@ -4,6 +4,14 @@
   justify-content: center;
   flex-direction: column;
   gap: 50px;
+  margin-bottom: 30px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .add-drink-card {
@@ -33,72 +41,108 @@ input {
   background-color: white;
 }
 
-.instructions-input {
-  width: 300px;
-  height: 50px;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-}
-
-.button {
+.form-button {
   font-size: 12px;
-  background-color: var(--tertiary-color);
-  &.dark {
-    background-color: var(--dark-tertiary-color);
-    color: black;
-  }
-  color: black;
-  border-radius: 1rem;
-  margin: 0.5rem;
   height: 30px;
   width: fit-content;
-  border: none;
+  background-color: var(--secondary-color) !important;
+  &.dark {
+    background-color: var(--dark-secondary-color) !important;
+    color: white;
+  }
   &:hover {
     cursor: pointer;
     &:not(:active) {
-      background-color: var(--secondary-color);
+      background-color: var(--tertiary-color) !important;
       &.dark {
-        background-color: var(--dark-secondary-color);
+        background-color: var(--quaternary-color) !important;
       }
     }
   }
 }
 
 .submit-button {
-  background-color: var(--tertiary-color);
-  &.dark {
-    background-color: var(--dark-tertiary-color);
-    color: black;
-  }
-  color: black;
-  border-radius: 1rem;
   height: 40px;
   width: 160px;
-  border: none;
-  &:hover {
-    cursor: pointer;
-    &:not(:active) {
-      background-color: var(--secondary-color);
-      &.dark {
-        background-color: var(--dark-secondary-color);
-      }
-    }
-  }
 }
 
-@media screen and (max-width: 1024px) {
+@media (max-width: 700px) {
   .add-drink-card {
-    width: 80%; /* Adjust as needed for your design */
+    width: 70%; /* Adjust as needed for your design */
+  }
+  .text-area {
+    max-width: 200px; /* Adjust as needed for your design */
   }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 500px) {
   .submit-button {
-    width: 100%; /* Make the button full width on smaller screens */
+    width: 70%; /* Make the button full width on smaller screens */
   }
 }
 
-@media screen and (max-width: 600px) {
+@media (max-width: 500px) {
   h1 {
     font-size: 1.5rem; /* Adjust the font size for smaller screens */
+  }
+}
+
+.input {
+  border-radius: 5px;
+  color: black;
+  border: 1px solid white;
+  padding: 5px;
+  &.dark {
+    color: white;
+    background-color: var(--dark-primary-color);
+  }
+}
+
+.text-area {
+  resize: none;
+  width: 450px;
+  height: 100px;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: white;
+}
+
+.ingredient-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ingredient-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-dropdown {
+  background-color: var(--secondary-color) !important;
+  &.dark {
+    background-color: var(--dark-secondary-color) !important;
+    color: white;
+  }
+  font-size: 12px;
+  height: 30px;
+  padding: 0px;
+  text-overflow: ellipsis;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+input[type='radio'] {
+  accent-color: var(--quaternary-color);
+  &.dark {
+    accent-color: var(--secondary-color);
   }
 }

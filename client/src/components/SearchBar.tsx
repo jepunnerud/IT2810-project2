@@ -41,6 +41,14 @@ function SearchBar(props: {
               props.searchHandler('')
               props.inputHandler('')
             }}
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                clearInput()
+                props.searchHandler('')
+                props.inputHandler('')
+              }
+            }}
           >
             close
           </span>
