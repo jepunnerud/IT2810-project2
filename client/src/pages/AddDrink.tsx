@@ -2,8 +2,10 @@ import { useFieldArray, useForm, Controller } from 'react-hook-form'
 import './AddDrink.css'
 import { addDrinkToServer } from '../hooks/Drinks'
 import { DrinkInput } from '../types'
+import { useTheme } from '../hooks/ThemeContext'
 
 function AddDrink() {
+  const theme = useTheme()
   const { register, control, handleSubmit } = useForm()
 
   const { fields, append, remove } = useFieldArray({
@@ -160,15 +162,20 @@ function AddDrink() {
               No
             </label>
           </p>
-          <button className="button" type="submit">
+          <h3>
+            Picture:{' '}
+            <input
+              className="input"
+              type="text"
+              {...register('picture', {
+                required: 'Picture is required',
+              })}
+              placeholder="picture address"
+            ></input>
+          </h3>
+          <button className={`submit-button ${theme}`} type="submit">
             Add drink
           </button>
-          <h3>PictureURL: </h3>
-          <input
-            {...register('picture', {
-              required: 'Your drink needs a picture',
-            })}
-          ></input>
         </form>
       </div>
     </div>
