@@ -20,12 +20,6 @@ function useDrink(id: string) {
   })
 }
 
-function useFavourites(favourites: string[], limit: number, skip: number) {
-  return useQuery(GET_FAVOURITES_QUERY, {
-    variables: { favourites: favourites, limit: limit, skip: skip },
-  })
-}
-
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
   query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
@@ -74,15 +68,7 @@ const ADD_DRINK_MUTATION = gql`
     }
   }
 `
-const GET_FAVOURITES_QUERY = gql`
-  query GetFavourites($favourites: [ID], $limit: Int, $skip: Int) {
-    favourites(favourites: $favourites, limit: $limit, skip: $skip) {
-      id
-      name
-      picture
-    }
-  }
-`
+
 
 async function addDrinkToServer(drink: DrinkInput): Promise<boolean> {
   const valid = checkDrinkinput(drink)
