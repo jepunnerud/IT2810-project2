@@ -86,7 +86,8 @@ const ADD_DRINK_MUTATION = gql`
 `
 
 async function addDrinkToServer(drink: DrinkInput): Promise<boolean> {
-  const valid = checkDrinkinput(drink)
+  //const valid = checkDrinkinput(drink)
+  const valid = true
   if (valid) {
     try {
       const { data } = await apolloClient.mutate({
@@ -101,6 +102,7 @@ async function addDrinkToServer(drink: DrinkInput): Promise<boolean> {
       throw error
     }
   }
+  console.log("not valid")
   return valid
 }
 

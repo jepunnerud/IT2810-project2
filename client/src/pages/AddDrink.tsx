@@ -3,6 +3,8 @@ import './AddDrink.css'
 import { addDrinkToServer } from '../hooks/Drinks'
 import { DrinkInput } from '../types'
 import { useTheme } from '../hooks/ThemeContext'
+import mainfunc from '../script/chatscript'
+import { useEffect, useState } from 'react'
 
 function AddDrink() {
   const theme = useTheme()
@@ -11,6 +13,25 @@ function AddDrink() {
     control,
     name: 'ingredients',
   })
+
+  const [isProcessing, setIsProcessing] = useState(false);
+  /*
+    useEffect(() => {
+      if (!isProcessing) {
+        setIsProcessing(true);
+        mainfunc()
+          .then(() => {
+            console.log("All drinks processed");
+          })
+          .catch((error: any) => {
+            console.error("Error processing drinks:", error);
+          })
+      }
+    }, []);
+  
+    */
+
+
 
   async function onSubmit(data: object) {
     console.log(data)
