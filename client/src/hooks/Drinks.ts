@@ -26,7 +26,6 @@ function useFavourites(favourites: string[], limit: number, skip: number) {
   })
 }
 
-
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
   query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
@@ -85,7 +84,6 @@ const ADD_DRINK_MUTATION = gql`
     }
   }
 `
-
 
 async function addDrinkToServer(drink: DrinkInput): Promise<boolean> {
   const valid = checkDrinkinput(drink)
