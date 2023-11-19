@@ -3,13 +3,13 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 50px;
+  gap: 3.125rem;
 }
 
 .content-parent {
   display: flex;
   align-items: center;
-  gap: 50px;
+  gap: 3.125rem;
   justify-content: space-around;
   flex-wrap: wrap;
 }
@@ -18,7 +18,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
+  gap: 1.875rem;
 }
 
 .info-card {
@@ -26,13 +26,14 @@
   background-color: var(--primary-color);
   border-radius: 1rem;
   height: fit-content;
-  width: 320px;
+  width: 20rem;
   display: flex;
   flex-direction: column;
   position: relative;
   justify-content: flex-start;
   align-items: flex-start;
   transition: all 0.25s ease-in-out;
+  margin-bottom: 1.25rem;
   &.dark {
     background-color: var(--dark-primary-color);
   }
@@ -58,22 +59,22 @@
 .mobile-arrows {
   display: flex;
   justify-content: center;
-  gap: 100px;
+  gap: 6.25rem;
   width: 100%;
 }
 
 p {
-  margin: 0px 0px;
+  margin: 0rem 0rem;
 }
 
 h2 {
-  margin: 0px 0px;
+  margin: 0rem 0rem;
 }
 
 img {
   position: relative;
-  max-width: 500px;
-  max-height: 400px;
+  max-width: 31.25rem;
+  max-height: 25rem;
 }
 
 .favourite-button {
@@ -85,8 +86,8 @@ img {
   color: black;
   border-radius: 1rem;
   margin: 0.5rem;
-  height: 40px;
-  width: 160px;
+  height: 2.5rem;
+  width: 10rem;
   border: none;
   &:hover {
     cursor: pointer;
