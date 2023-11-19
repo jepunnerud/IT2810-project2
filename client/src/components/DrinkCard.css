@@ -17,6 +17,12 @@
   }
 }
 
+@media (max-width: 500px) {
+  .card {
+    width: 250px;
+  }
+}
+
 .card p {
   position: absolute;
   bottom: 16px;
