@@ -1,5 +1,7 @@
 import { useFieldArray, useForm, Controller } from 'react-hook-form'
 import './AddDrink.css'
+import { addDrinkToServer } from '../hooks/Drinks'
+import { DrinkInput } from '../types'
 import { useTheme } from '../hooks/ThemeContext'
 
 function AddDrink() {
@@ -10,8 +12,49 @@ function AddDrink() {
     name: 'ingredients',
   })
 
-  function onSubmit(data: object) {
-    console.log('data', data)
+  async function onSubmit(data: object) {
+    console.log(data)
+
+    const formData = data as {
+      name: string
+      category: string
+      alcoholic: string
+      picture: string
+      instructions: string
+      ingredients: { ingredient: string; measure?: string }[]
+      glass: string
+    }
+
+    const alcoholicBoolean = formData.alcoholic === 'yes'
+
+    const ingredients = formData.ingredients.map((item) => ({
+      ingredient: item.ingredient,
+      measure: item.measure,
+    }))
+
+    const newDrink: DrinkInput = {
+      name: formData.name,
+      category: formData.category,
+      alcoholic: alcoholicBoolean,
+      picture: formData.picture,
+      instructions: formData.instructions,
+      ingredients: ingredients,
+      glass: formData.glass,
+    }
+
+    console.log(formData)
+
+    try {
+      const valid = await addDrinkToServer(newDrink)
+      if (!valid) {
+        alert('Drink contains profanity. Change the input to add drink')
+      } else {
+        alert('Drink added successfully!')
+      }
+    } catch (error) {
+      console.error('Error in onSubmit:', error)
+      alert('An error occurred while adding drink')
+    }
   }
 
   return (
@@ -124,7 +167,7 @@ function AddDrink() {
             <input
               className="input"
               type="text"
-              {...register('Picture', {
+              {...register('picture', {
                 required: 'Picture is required',
               })}
               placeholder="picture address"
