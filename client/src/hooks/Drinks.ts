@@ -26,6 +26,12 @@ function useFavourites(favourites: string[], limit: number, skip: number) {
   })
 }
 
+function useSearchResults(query: string, ingredient: string, limit: number, skip: number) {
+  return useQuery(GET_SEARCH_RESULT_QUERY, {
+    variables: { query: query, ingredient: ingredient, limit: limit, skip: skip },
+  })
+}
+
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
   query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
@@ -64,6 +70,19 @@ const GET_FAVOURITES_QUERY = gql`
       id
       name
       picture
+    }
+  }
+`
+
+const GET_SEARCH_RESULT_QUERY = gql`
+  query GetSearchResults($query: String, $ingredient: String, $limit: Int, $skip: Int) {
+    search(query: $query, ingredient: $ingredient, limit: $limit, skip: $skip) {
+      id
+      name
+      picture
+      ingredients {
+        ingredient
+      }
     }
   }
 `
@@ -124,4 +143,4 @@ function checkDrinkinput(drink: DrinkInput): boolean {
   return true
 }
 
-export { useDrinks, useDrink, addDrinkToServer, apolloClient, useFavourites }
+export { useDrinks, useDrink, addDrinkToServer, apolloClient, useFavourites, useSearchResults }

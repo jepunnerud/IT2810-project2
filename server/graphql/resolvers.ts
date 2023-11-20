@@ -8,7 +8,7 @@ const resolvers = {
       { ing, limit, skip }: { ing: string; limit: number; skip: number }
     ) => {
       if (!ing) {
-        return await Drink.find().skip(skip).limit(limit)
+        return await Drink.find().sort('name').skip(skip).limit(limit)
       }
       if (ing === 'whisky') {
         return await Drink.find({
@@ -54,6 +54,64 @@ const resolvers = {
       return await Drink.find({ _id: { $in: favourites } })
         .skip(skip)
         .limit(limit)
+    },
+    async search(
+      _: any,
+      {
+        query,
+        ingredient,
+        limit,
+        skip,
+      }: { query: string; ingredient: string; limit: number; skip: number }
+    ) {
+      if (!ingredient) {
+        return await Drink.find({ $text: { $search: query } })
+          .skip(skip)
+          .limit(limit)
+      }
+      if (ingredient === 'whisky') {
+        return await Drink.find({
+          $and: [
+            { $text: { $search: query } },
+            {
+              ingredients: {
+                $elemMatch: {
+                  ingredient: [
+                    'Whisky',
+                    'Bourbon',
+                    'Scotch',
+                    'Whiskey',
+                    'whisky',
+                    'bourbon',
+                    'scotch',
+                    'whiskey',
+                  ],
+                },
+              },
+            },
+          ],
+        })
+          .skip(skip)
+          .limit(limit)
+      } else {
+        return await Drink.find({
+          $and: [
+            { $text: { $search: query } },
+            {
+              ingredients: {
+                $elemMatch: {
+                  ingredient: [
+                    ingredient,
+                    ingredient.charAt(0).toUpperCase() + ingredient.slice(1),
+                  ],
+                },
+              },
+            },
+          ],
+        })
+          .skip(skip)
+          .limit(limit)
+      }
     },
   },
   Mutation: {
