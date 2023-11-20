@@ -10,19 +10,75 @@ import Fuse from 'fuse.js'
 import { useCallback, useState } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
+import { useSearchParams } from 'react-router-dom'
 
 function HomePage() {
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [filterParam, setFilterParam] = useState<string>('')
+  const [searchParams, setSearchParams] = useSearchParams()
   const [searchInput, setSearchInput] = useState<string>('')
   const [queryData, setQueryData] = useState<string[]>([])
-  const [isLastPage, setIsLastPage] = useState<boolean>(false)
 
   const { data, loading, error } = useDrinks(
-    filterParam,
+    searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
-    (currentPage - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
   )
+
+  const setIsLastPage = useCallback(
+    (isLastPage: boolean) => {
+      if (isLastPage)
+        setSearchParams((searchParams) => {
+          searchParams.set('lastPage', 'true')
+          return searchParams
+        })
+      else
+        setSearchParams((searchParams) => {
+          searchParams.delete('lastPage')
+          return searchParams
+        })
+    },
+    [setSearchParams]
+  )
+
+  const changePage = useCallback(
+    (delta: number) => {
+      const currentPage = parseInt(searchParams.get('page') || '1')
+      if (delta === -1) setIsLastPage(false)
+      if (currentPage + delta > 1) {
+        setSearchParams((searchParams) => {
+          searchParams.set('page', (currentPage + delta).toString())
+          return searchParams
+        })
+      } else if (currentPage + delta === 1) {
+        setSearchParams((searchParams) => {
+          searchParams.delete('page')
+          return searchParams
+        })
+      }
+    },
+    [searchParams, setIsLastPage, setSearchParams]
+  )
+
+  const goToFirstPage = () => {
+    setSearchParams((searchParams) => {
+      searchParams.delete('page')
+      return searchParams
+    })
+  }
+
+  const handleFilterChange = (value: string) => {
+    console.log(value)
+    if (value !== '') {
+      setSearchParams((searchParams) => {
+        searchParams.set('filter', value)
+        return searchParams
+      })
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.delete('filter')
+        return searchParams
+      })
+    }
+  }
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
@@ -30,7 +86,7 @@ function HomePage() {
       try {
         if (drinks.length === 0) throw new Error('No drinks found')
       } catch (error) {
-        setCurrentPage(currentPage - 1)
+        changePage(-1)
         setIsLastPage(true)
       }
       const newDrinkOrder = drinks
@@ -39,7 +95,7 @@ function HomePage() {
       console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
-  }, [data, currentPage])
+  }, [data, changePage, setIsLastPage])
 
   updateDrinkOrder()
 
@@ -61,13 +117,6 @@ function HomePage() {
     setQueryData(results)
   }
 
-  const changePage = (delta: number) => {
-    if (currentPage + delta > 0) {
-      setCurrentPage(currentPage + delta)
-      setIsLastPage(false)
-    }
-  }
-
   return (
     <>
       <link
@@ -77,10 +126,10 @@ function HomePage() {
       <div className="home-top-container">
         <SearchBar placeholder="Search" searchHandler={search} inputHandler={setSearchInput} />
         <FilterDropdown
-          value={filterParam}
-          changeHandler={setFilterParam}
+          value={searchParams.get('filter') || ''}
+          changeHandler={handleFilterChange}
           label="Filter by ingredient"
-          pageHandler={setCurrentPage}
+          pageHandler={goToFirstPage}
           lastPageHandler={setIsLastPage}
         />
       </div>
@@ -96,7 +145,11 @@ function HomePage() {
           )}
         </div>
       }
-      <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />
+      <PageNavigation
+        currentPage={parseInt(searchParams.get('page') || '1')}
+        isLastPage={searchParams.get('lastPage') === 'true'}
+        onChangePage={changePage}
+      />
     </>
   )
 }

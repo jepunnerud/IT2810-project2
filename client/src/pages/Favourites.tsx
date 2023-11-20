@@ -4,17 +4,51 @@ import { useFavourites } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Favourites.css'
 import { ITEMS_PER_PAGE } from '../utils/constants'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect } from 'react'
 import PageNavigation from '../components/PageNavigation'
+import { useSearchParams } from 'react-router-dom'
 
 export default function FavouritesPage() {
-  const [currentPage, setCurrentPage] = useState<number>(1)
-  const [isLastPage, setIsLastPage] = useState<boolean>(false)
-  const storedFavourites: string[] = JSON.parse(localStorage.getItem('favourites') || '[]')
-  const { data, loading } = useFavourites(
-    storedFavourites,
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { data, loading, error } = useFavourites(
+    JSON.parse(localStorage.getItem('favourites') || '[]'),
     ITEMS_PER_PAGE,
-    (currentPage - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
+  )
+
+  const setIsLastPage = useCallback(
+    (isLastPage: boolean) => {
+      if (isLastPage)
+        setSearchParams((searchParams) => {
+          searchParams.set('lastPage', 'true')
+          return searchParams
+        })
+      else
+        setSearchParams((searchParams) => {
+          searchParams.delete('lastPage')
+          return searchParams
+        })
+    },
+    [setSearchParams]
+  )
+
+  const changePage = useCallback(
+    (delta: number) => {
+      const currentPage = parseInt(searchParams.get('page') || '1')
+      if (delta === -1) setIsLastPage(false)
+      if (currentPage + delta > 1) {
+        setSearchParams((searchParams) => {
+          searchParams.set('page', (currentPage + delta).toString())
+          return searchParams
+        })
+      } else if (currentPage + delta === 1) {
+        setSearchParams((searchParams) => {
+          searchParams.delete('page')
+          return searchParams
+        })
+      }
+    },
+    [setSearchParams, setIsLastPage, searchParams]
   )
 
   useEffect(() => {
@@ -22,19 +56,13 @@ export default function FavouritesPage() {
       try {
         if (data.favourites.length === 0) throw new Error('No drinks found')
       } catch (error) {
-        setCurrentPage(currentPage - 1)
+        changePage(-1)
         setIsLastPage(true)
       }
     }
-  }, [data, currentPage])
+  }, [data, changePage, setIsLastPage])
 
-  const changePage = (delta: number) => {
-    if (currentPage + delta > 0) {
-      setCurrentPage(currentPage + delta)
-      setIsLastPage(false)
-    }
-  }
-
+  if (error) return <span className="error">Error: {error.message}</span>
   if (loading) return <span className="loader"></span>
   return (
     <div className="favourite-page-container">
@@ -44,7 +72,11 @@ export default function FavouritesPage() {
           <DrinkCard drink={d} key={d.id} />
         ))}
       </div>
-      <PageNavigation currentPage={currentPage} isLastPage={isLastPage} onChangePage={changePage} />
+      <PageNavigation
+        currentPage={parseInt(searchParams.get('page') || '1')}
+        isLastPage={searchParams.get('lastPage') === 'true'}
+        onChangePage={changePage}
+      />
     </div>
   )
 }
