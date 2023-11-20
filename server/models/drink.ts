@@ -16,6 +16,17 @@ const drinkSchema = new mongoose.Schema({
   glass: { type: String, required: true, trim: true },
 })
 
+drinkSchema.index(
+  {
+    name: 'text',
+    instructions: 'text',
+    'ingredients.ingredient': 'text',
+  },
+  {
+    name: 'searchIndex',
+    weights: { name: 10, instructions: 5, 'ingredients.ingredient': 2 },
+  }
+)
 export default mongoose.model<DrinkType & mongoose.Document>(
   'DrinkType',
   drinkSchema
