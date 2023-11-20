@@ -5,8 +5,8 @@
   height: 15rem;
   display: flex;
   flex-direction: column;
-  height: 240px;
-  width: 320px;
+  height: 15rem;
+  width: 20rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -17,15 +17,15 @@
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 31.25rem) {
   .card {
-    width: 250px;
+    width: 15.625rem;
   }
 }
 
 .card p {
   position: absolute;
-  bottom: 16px;
+  bottom: 1rem;
   justify-self: flex-end;
   align-self: center;
   margin: 0;
@@ -37,8 +37,8 @@
 
 .card img {
   position: relative;
-  max-width: 320px;
-  max-height: 213px;
+  max-width: 20rem;
+  max-height: 13.3125rem;
 }
 
 .material-symbols-outlined {
@@ -82,8 +82,8 @@
   width: fit-content;
   z-index: 999;
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 0.625rem;
+  right: 0.625rem;
   &:hover {
     cursor: pointer;
   }

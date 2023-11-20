@@ -1,12 +1,12 @@
 .searchbar-container {
   display: flex;
   width: fit-content;
-  max-width: 340px;
-  height: 50px;
-  border-bottom: 1px solid black;
+  max-width: 21.25rem;
+  height: 3.125rem;
+  border-bottom: 0.0625rem solid black;
   align-items: center;
   &.dark {
-    border-bottom: 1px solid white;
+    border-bottom: 0.0625rem solid white;
   }
 }
 
@@ -14,8 +14,8 @@
   background-color: transparent;
   font-size: 1rem;
   border: none;
-  padding: 10px;
-  width: 300px;
+  padding: 0.625rem;
+  width: 18.75rem;
   color: black;
   &::placeholder {
     color: gray;

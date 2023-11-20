@@ -77,6 +77,16 @@ img {
   max-height: 25rem;
 }
 
+@media (max-width: 31.25rem) {
+  img {
+    max-width: 15.625rem;
+    max-height: 20rem;
+  }
+  .info-card {
+    max-width: 15.625rem;
+  }
+}
+
 .favourite-button {
   background-color: var(--primary-color);
   &.dark {

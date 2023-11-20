@@ -11,6 +11,7 @@ const NavBar = (props: { items: NavBarItem[] }) => {
     <div className="nav-bar-parent-container">
       <Link to="/" key="logo">
         <img
+          className="logo"
           src={theme === 'dark' ? '/project2/logowhite.png' : '/project2/logo.png'}
           width="270"
           height="80"

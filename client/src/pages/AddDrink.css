@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 50px;
-  margin-bottom: 30px;
+  gap: 3.125rem;
+  margin-bottom: 1.875rem;
 }
 
 .form {
@@ -15,12 +15,12 @@
 }
 
 .add-drink-card {
-  margin-bottom: 20px;
+  margin-bottom: 1.25rem;
   padding: 2rem;
   background-color: var(--primary-color);
   border-radius: 1rem;
   height: fit-content;
-  width: 500px;
+  width: 31.25rem;
   line-height: 2;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
 }
 
 h3 {
-  margin: 0px 0px;
+  margin: 0rem 0rem;
 }
 
 input {
@@ -42,8 +42,8 @@ input {
 }
 
 .form-button {
-  font-size: 12px;
-  height: 30px;
+  font-size: 0.75rem;
+  height: 1.875rem;
   width: fit-content;
   background-color: var(--secondary-color) !important;
   &.dark {
@@ -62,36 +62,36 @@ input {
 }
 
 .submit-button {
-  height: 40px;
-  width: 160px;
+  height: 2.5rem;
+  width: 10rem;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 43.75rem) {
   .add-drink-card {
     width: 70%; /* Adjust as needed for your design */
   }
   .text-area {
-    max-width: 200px; /* Adjust as needed for your design */
+    max-width: 12.5rem; /* Adjust as needed for your design */
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 31.25rem) {
   .submit-button {
     width: 70%; /* Make the button full width on smaller screens */
   }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 31.25rem) {
   h1 {
     font-size: 1.5rem; /* Adjust the font size for smaller screens */
   }
 }
 
 .input {
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   color: black;
-  border: 1px solid white;
-  padding: 5px;
+  border: 0.0625rem solid white;
+  padding: 0.3125rem;
   &.dark {
     color: white;
     background-color: var(--dark-primary-color);
@@ -100,8 +100,8 @@ input {
 
 .text-area {
   resize: none;
-  width: 450px;
-  height: 100px;
+  width: 28.125rem;
+  height: 6.25rem;
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: white;
 }
@@ -111,7 +111,7 @@ input {
   align-items: center;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .ingredient-input-container {
@@ -119,7 +119,7 @@ input {
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 .form-dropdown {
@@ -128,16 +128,16 @@ input {
     background-color: var(--dark-secondary-color) !important;
     color: white;
   }
-  font-size: 12px;
-  height: 30px;
-  padding: 0px;
+  font-size: 0.75rem;
+  height: 1.875rem;
+  padding: 0rem;
   text-overflow: ellipsis;
 }
 
 .info-container {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 0.625rem;
 }
 
 input[type='radio'] {

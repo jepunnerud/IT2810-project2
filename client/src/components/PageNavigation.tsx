@@ -1,4 +1,5 @@
 import { useTheme } from '../hooks/ThemeContext'
+import './PageNavigation.css'
 
 interface PageNavigationProps {
   currentPage: number
