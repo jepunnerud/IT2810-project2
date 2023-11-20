@@ -37,7 +37,15 @@
 }
 
 .search-icon {
+  transition: ease-in-out 0.15s;
   &.dark {
     color: white;
+  }
+  & > span {
+    pointer-events: none;
+  }
+  &:hover {
+    cursor: pointer;
+    scale: 1.2;
   }
 }

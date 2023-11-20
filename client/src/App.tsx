@@ -5,6 +5,7 @@ import InfoPage from './pages/Info'
 import FavouritesPage from './pages/Favourites'
 import AddDrink from './pages/AddDrink'
 import NavBar from './components/NavBar'
+import SearchResultPage from './pages/SearchResult'
 import { NavBarItem } from './types'
 import { ApolloProvider } from '@apollo/client'
 import { ThemeProvider } from './utils/ThemeContext'
@@ -39,6 +40,7 @@ function App() {
               <Route path="/info/:id" element={<InfoPage />}></Route>
               <Route path="/favourites" element={<FavouritesPage />}></Route>
               <Route path="/add_drink" element={<AddDrink />}></Route>
+              <Route path="/search" element={<SearchResultPage />}></Route>
             </Routes>
           </BrowserRouter>
         </ApolloProvider>

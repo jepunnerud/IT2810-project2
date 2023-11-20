@@ -2,8 +2,9 @@ import DrinkCard from '../components/DrinkCard'
 import FilterDropdown from '../components/FilterDropdown'
 import SearchBar from '../components/SearchBar'
 import { Drink } from '../types'
+
 import '../utils/Loader.css'
-import { useDrinks } from '../hooks/Drinks'
+import { useSearchResults } from '../hooks/Drinks'
 import './Home.css'
 import { useCallback } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
@@ -13,7 +14,8 @@ import { useSearchParams } from 'react-router-dom'
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
-  const { data, loading, error } = useDrinks(
+  const { data, loading, error } = useSearchResults(
+    searchParams.get('q') || '',
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
     (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
@@ -77,7 +79,7 @@ function HomePage() {
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
-      const drinks = [...data!.drinks]
+      const drinks = [...data!.search]
       try {
         if (drinks.length === 0) throw new Error('No drinks found')
       } catch (error) {
@@ -85,7 +87,6 @@ function HomePage() {
         setIsLastPage(true)
       }
       const newDrinkOrder = drinks.map((drink: Drink) => drink.id)
-      console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }, [data, changePage, setIsLastPage])
@@ -113,7 +114,7 @@ function HomePage() {
       </div>
       {
         <div className="card-container">
-          {data!.drinks.map((d: Drink) => (
+          {data!.search.map((d: Drink) => (
             <DrinkCard drink={d} key={d.id} />
           ))}
         </div>
