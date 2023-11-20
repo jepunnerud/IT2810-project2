@@ -46,7 +46,7 @@ function SearchBar(props: { placeholder: string }) {
         ></input>
         {inputValue !== '' && (
           <span
-            className={`material-symbols-outlined clear-button ${theme} search-button`}
+            className={`material-symbols-outlined clear-button ${theme}`}
             onClick={() => {
               clearInput()
             }}
