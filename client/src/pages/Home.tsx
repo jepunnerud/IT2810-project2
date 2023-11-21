@@ -5,7 +5,7 @@ import { Drink } from '../types'
 import '../utils/Loader.css'
 import { useDrinks } from '../hooks/Drinks'
 import './Home.css'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
@@ -90,7 +90,9 @@ function HomePage() {
     }
   }, [data, changePage, setIsLastPage])
 
-  updateDrinkOrder()
+  useEffect(() => {
+    updateDrinkOrder()
+  }, [updateDrinkOrder])
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
