@@ -6,9 +6,9 @@ import { ThemeProvider } from '../utils/ThemeContext'
 const input = {
   value: 'vodka',
   label: 'Filter by ingredient',
-  changeHandler: (value: string) => {},
+  changeHandler: () => {},
   pageHandler: () => {},
-  lastPageHandler: (isLastPage: boolean) => {},
+  lastPageHandler: () => {},
 }
 
 describe('Testing filter dropdown', () => {
@@ -28,7 +28,6 @@ describe('Testing filter dropdown', () => {
   test('value of dropdown is Vodka', () => {
     const selectElement = screen.getByTestId('option-vodka')
     expect(selectElement.textContent).toBe('Vodka')
-    expect(screen.getByTestId('close-filter-button')).toBeDefined()
   })
 
   test('close filter button is visible when value is not empty', () => {
