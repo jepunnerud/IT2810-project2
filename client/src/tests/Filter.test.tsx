@@ -8,7 +8,7 @@ const input = {
   label: 'Filter by ingredient',
   changeHandler: (value: string) => {},
   pageHandler: () => {},
-  lastPageHandler: (isLastPage: any) => {},
+  lastPageHandler: (isLastPage: boolean) => {},
 }
 
 describe('Testing filter dropdown', () => {
@@ -25,18 +25,13 @@ describe('Testing filter dropdown', () => {
     expect(element).toBeDefined()
   })
 
-  //   test('test whisky', () => {
-  //     const selectElement = getByLabelText('Filter by ingredient')
+  test('value of dropdown is Vodka', () => {
+    const selectElement = screen.getByTestId('option-vodka')
+    expect(selectElement.textContent).toBe('Vodka')
+    expect(screen.getByTestId('close-filter-button')).toBeDefined()
+  })
 
-  //     // Check if the component renders correctly
-  //     expect(container.querySelector('.dropdown-wrapper')).toBeTruthy()
-
-  //     // Simulate a select change
-  //     fireEvent.change(selectElement, { target: { value: 'whisky' } })
-
-  //     // Check if changeHandler, pageHandler, and lastPageHandler are called with the expected arguments
-  //     expect(changeHandler).toHaveBeenCalledWith('whisky')
-  //     expect(pageHandler).toHaveBeenCalled()
-  //     expect(lastPageHandler).toHaveBeenCalledWith(false)
-  //   })
+  test('close filter button is visible when value is not empty', () => {
+    expect(screen.getByTestId('close-filter-button')).toBeDefined()
+  })
 })
