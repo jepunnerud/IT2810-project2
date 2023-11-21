@@ -18,7 +18,8 @@ function SearchResultPage() {
     searchParams.get('q') || '',
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
-    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE,
+    searchParams.get('sort') || ''
   )
 
   const setIsLastPage = useCallback(
@@ -86,7 +87,7 @@ function SearchResultPage() {
         changePage(-1)
         setIsLastPage(true)
       }
-      const newDrinkOrder = drinks.map((drink: Drink) => drink.id)
+      const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }, [data, changePage, setIsLastPage])
@@ -117,7 +118,7 @@ function SearchResultPage() {
       {
         <div className="card-container">
           {data!.search.map((d: Drink) => (
-            <DrinkCard drink={d} key={d.id} />
+            <DrinkCard drink={d} key={d._id} />
           ))}
         </div>
       }

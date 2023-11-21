@@ -9,6 +9,7 @@ import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
+import SortingDropdown from '../components/SortingDropdown'
 
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -16,7 +17,8 @@ function HomePage() {
   const { data, loading, error } = useDrinks(
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
-    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE,
+    searchParams.get('sort') || 'name-asc'
   )
 
   const setIsLastPage = useCallback(
@@ -75,6 +77,20 @@ function HomePage() {
     }
   }
 
+  const handleSortingChange = (value: string) => {
+    if (value !== 'name-asc') {
+      setSearchParams((searchParams) => {
+        searchParams.set('sort', value)
+        return searchParams
+      })
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.delete('sort')
+        return searchParams
+      })
+    }
+  }
+
   const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.drinks]
@@ -84,7 +100,7 @@ function HomePage() {
         changePage(-1)
         setIsLastPage(true)
       }
-      const newDrinkOrder = drinks.map((drink: Drink) => drink.id)
+      const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
       console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
@@ -112,11 +128,18 @@ function HomePage() {
           pageHandler={goToFirstPage}
           lastPageHandler={setIsLastPage}
         />
+        <SortingDropdown
+          value={searchParams.get('sort') || ''}
+          label={'Sort by'}
+          changeHandler={handleSortingChange}
+          pageHandler={goToFirstPage}
+          lastPageHandler={setIsLastPage}
+        />
       </div>
       {
         <div className="card-container">
           {data!.drinks.map((d: Drink) => (
-            <DrinkCard drink={d} key={d.id} />
+            <DrinkCard drink={d} key={d._id} />
           ))}
         </div>
       }
