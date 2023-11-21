@@ -25,6 +25,7 @@ function FilterDropdown(props: {
           props.changeHandler(e.target.value)
           props.pageHandler()
           props.lastPageHandler(false)
+          console.log(`lastPageHandler: ${props.lastPageHandler} `)
         }}
         className={`dropdown ${theme}`}
       >
