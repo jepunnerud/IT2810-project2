@@ -1,7 +1,7 @@
 stages:
   - Webapp build
   - Webapp test
-  - E2E Testing
+  - E2E Test
 cache:
   paths:
     - .yarn
@@ -34,15 +34,11 @@ Eslint:
     - yarn lint
   retry: 1
 
-E2E Testing:
-  image: node:18.4.0
-  stage: E2E Testing
+E2E Test:
+  image: cypress/browsers:node-20.9.0-chrome-118.0.5993.88-1-ff-118.0.2-edge-118.0.2088.46-1
+  stage: Client test
   script:
-    - cd server
+    - cd client
     - yarn install --frozen-lockfile --cache-folder .yarn
-    - yarn build:server
-    - yarn dev:server
-    - cd ../client
-    - yarn install --frozen-lockfile --cache-folder .yarn
-    - yarn dev
-    - yarn e2e
+    - yarn dev &
+    - yarn cypress run --browser chrome
