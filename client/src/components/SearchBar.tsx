@@ -20,6 +20,7 @@ function SearchBar(props: { placeholder: string }) {
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
         />
         <span
+          data-testid="search-icon"
           className={`material-symbols-outlined search-icon ${theme}`}
           onClick={() => {
             const q = (document.getElementById('input') as HTMLInputElement).value
@@ -29,6 +30,7 @@ function SearchBar(props: { placeholder: string }) {
           search
         </span>
         <input
+          data-testid="search"
           id="input"
           className={`searchbar-input ${theme}`}
           placeholder={props.placeholder}

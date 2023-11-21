@@ -9,7 +9,7 @@ const NavBar = (props: { items: NavBarItem[] }) => {
 
   return (
     <div className="nav-bar-parent-container">
-      <Link to="/" key="logo">
+      <Link to="/" key="logo" data-testid="logo">
         <img
           className="logo"
           src={theme === 'dark' ? '/project2/logowhite.png' : '/project2/logo.png'}
@@ -19,7 +19,7 @@ const NavBar = (props: { items: NavBarItem[] }) => {
       </Link>
       <div className="nav-bar-parent">
         {props.items.map((item: NavBarItem) => (
-          <Link to={item.path} key={item.text}>
+          <Link to={item.path} key={item.text} data-testid={`navbar-${item.text}`}>
             <div className={`nav-bar-item ${theme === 'dark' ? 'dark' : 'light'}`}>{item.text}</div>
           </Link>
         ))}

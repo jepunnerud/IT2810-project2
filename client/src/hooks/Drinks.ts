@@ -103,6 +103,26 @@ const ADD_DRINK_MUTATION = gql`
     }
   }
 `
+const DELETE_DRINK_MUTATION = gql`
+  mutation DeleteDrink($deleteDrinkId: ID!) {
+    deleteDrink(id: $deleteDrinkId)
+  }
+`
+async function deleteDrinkFromServer(id: string): Promise<boolean> {
+  try {
+    const { data } = await apolloClient.mutate({
+      mutation: DELETE_DRINK_MUTATION,
+      variables: {
+        deleteDrinkId: id,
+      },
+    })
+    return data.deleteDrink
+  } catch (error) {
+    console.error('Error adding drink to server:', error)
+    throw error
+  }
+  return false
+}
 
 async function addDrinkToServer(drink: DrinkInput): Promise<boolean> {
   const valid = checkDrinkinput(drink)
@@ -143,4 +163,12 @@ function checkDrinkinput(drink: DrinkInput): boolean {
   return true
 }
 
-export { useDrinks, useDrink, addDrinkToServer, apolloClient, useFavourites, useSearchResults }
+export {
+  useDrinks,
+  useDrink,
+  addDrinkToServer,
+  apolloClient,
+  useFavourites,
+  useSearchResults,
+  deleteDrinkFromServer,
+}

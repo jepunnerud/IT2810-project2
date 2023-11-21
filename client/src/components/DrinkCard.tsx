@@ -37,7 +37,7 @@ function DrinkCard(props: { drink: Drink }) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
       <div className="card-wrapper">
-        <Link to={'/info/' + props.drink.id}>
+        <Link to={'/info/' + props.drink.id} data-testid={`drink-card-${props.drink.name}`}>
           <div className={`card ${theme}`}>
             <img src={props.drink.picture} alt={props.drink.name} />
             <p className={theme}>{props.drink.name}</p>
@@ -53,6 +53,7 @@ function DrinkCard(props: { drink: Drink }) {
           }}
         >
           <span
+            data-testid={`favourite-button-${props.drink.name}`}
             className={`material-symbols-outlined favourite-icon ${
               isFavourite && 'is-favourite'
             } ${theme}`}

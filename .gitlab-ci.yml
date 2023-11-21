@@ -1,6 +1,7 @@
 stages:
   - Webapp build
   - Webapp test
+  - E2E Testing
 cache:
   paths:
     - .yarn
@@ -32,3 +33,16 @@ Eslint:
     - yarn install --frozen-lockfile --cache-folder .yarn
     - yarn lint
   retry: 1
+
+E2E Testing:
+  image: node:18.4.0
+  stage: E2E Testing
+  script:
+    - cd server
+    - yarn install --frozen-lockfile --cache-folder .yarn
+    - yarn build:server
+    - yarn dev:server
+    - cd ../client
+    - yarn install --frozen-lockfile --cache-folder .yarn
+    - yarn dev
+    - yarn e2e
