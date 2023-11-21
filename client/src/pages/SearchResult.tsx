@@ -11,7 +11,7 @@ import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
 
-function HomePage() {
+function SearchResultPage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const { data, loading, error } = useSearchResults(
@@ -130,4 +130,4 @@ function HomePage() {
   )
 }
 
-export default HomePage
+export default SearchResultPage
