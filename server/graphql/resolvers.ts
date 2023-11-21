@@ -3,18 +3,21 @@ import { DrinkInput } from '../types'
 
 const resolvers = {
   Query: {
-    drinks: async (
+    async drinks(
       _: any,
-      { ing, limit, skip }: { ing: string; limit: number; skip: number }
-    ) => {
-      if (!ing) {
-        return await Drink.find().sort('name').skip(skip).limit(limit)
-      }
-      if (ing === 'whisky') {
-        return await Drink.find({
-          ingredients: {
-            $elemMatch: {
-              ingredient: [
+      {
+        ingredient,
+        limit,
+        skip,
+        sort,
+      }: { ingredient: string; limit: number; skip: number; sort: string }
+    ) {
+      let ingredientFilter = null
+      if (ingredient !== '') {
+        if (ingredient === 'whisky') {
+          ingredientFilter = {
+            'ingredients.ingredient': {
+              $in: [
                 'Whisky',
                 'Bourbon',
                 'Scotch',
@@ -25,20 +28,52 @@ const resolvers = {
                 'whiskey',
               ],
             },
-          },
-        })
-          .skip(skip)
-          .limit(limit)
+          }
+        } else {
+          ingredientFilter = {
+            'ingredients.ingredient': {
+              $in: [
+                ingredient,
+                ingredient.charAt(0).toUpperCase() + ingredient.slice(1),
+              ],
+            },
+          }
+        }
       }
-      return await Drink.find({
-        ingredients: {
-          $elemMatch: {
-            ingredient: [ing, ing.charAt(0).toUpperCase() + ing.slice(1)],
+      const sortType = sort.split('-')[0]
+      const sortDirection = sort.split('-')[1] === 'asc' ? 1 : -1
+      let sortObj: Record<string, 1 | -1> = {}
+      sortObj[sortType] = sortDirection
+      if (ingredientFilter) {
+        return await Drink.aggregate([
+          {
+            $match: ingredientFilter,
           },
-        },
-      })
-        .skip(skip)
-        .limit(limit)
+          {
+            $project: {
+              name: 1,
+              picture: 1,
+              difficulty: { $strLenCP: '$instructions' },
+            },
+          },
+          { $sort: sortObj },
+          { $skip: skip },
+          { $limit: limit },
+        ])
+      } else {
+        return await Drink.aggregate([
+          {
+            $project: {
+              name: 1,
+              picture: 1,
+              difficulty: { $strLenCP: '$instructions' },
+            },
+          },
+          { $sort: sortObj },
+          { $skip: skip },
+          { $limit: limit },
+        ])
+      }
     },
     async drink(_: any, { id }: { id: string }) {
       return await Drink.findById(id)
@@ -62,55 +97,77 @@ const resolvers = {
         ingredient,
         limit,
         skip,
-      }: { query: string; ingredient: string; limit: number; skip: number }
-    ) {
-      if (!ingredient) {
-        return await Drink.find({ $text: { $search: query } })
-          .skip(skip)
-          .limit(limit)
+        sort,
+      }: {
+        query: string
+        ingredient: string
+        limit: number
+        skip: number
+        sort: string
       }
-      if (ingredient === 'whisky') {
-        return await Drink.find({
-          $and: [
-            { $text: { $search: query } },
-            {
-              ingredients: {
-                $elemMatch: {
-                  ingredient: [
-                    'Whisky',
-                    'Bourbon',
-                    'Scotch',
-                    'Whiskey',
-                    'whisky',
-                    'bourbon',
-                    'scotch',
-                    'whiskey',
-                  ],
-                },
-              },
+    ) {
+      let ingredientFilter = null
+      if (ingredient !== '') {
+        if (ingredient === 'whisky') {
+          ingredientFilter = {
+            'ingredients.ingredient': {
+              $in: [
+                'Whisky',
+                'Bourbon',
+                'Scotch',
+                'Whiskey',
+                'whisky',
+                'bourbon',
+                'scotch',
+                'whiskey',
+              ],
             },
-          ],
-        })
-          .skip(skip)
-          .limit(limit)
+          }
+        } else {
+          ingredientFilter = {
+            'ingredients.ingredient': {
+              $in: [
+                ingredient,
+                ingredient.charAt(0).toUpperCase() + ingredient.slice(1),
+              ],
+            },
+          }
+        }
+      }
+      const sortType = sort.split('-')[0]
+      const sortDirection = sort.split('-')[1] === 'asc' ? 1 : -1
+      let sortObj: Record<string, 1 | -1> = {}
+      sortObj[sortType] = sortDirection
+      if (ingredientFilter) {
+        return await Drink.aggregate([
+          {
+            $match: { $and: [ingredientFilter, { $text: { $search: query } }] },
+          },
+          {
+            $project: {
+              name: 1,
+              picture: 1,
+              difficulty: { $strLenCP: '$instructions' },
+            },
+          },
+          { $sort: sortObj },
+          { $skip: skip },
+          { $limit: limit },
+        ])
       } else {
-        return await Drink.find({
-          $and: [
-            { $text: { $search: query } },
-            {
-              ingredients: {
-                $elemMatch: {
-                  ingredient: [
-                    ingredient,
-                    ingredient.charAt(0).toUpperCase() + ingredient.slice(1),
-                  ],
-                },
-              },
+        return await Drink.aggregate([
+          { $match: { $text: { $search: query } } },
+          {
+            $project: {
+              name: 1,
+              picture: 1,
+              difficulty: { $strLenCP: '$instructions' },
             },
-          ],
-        })
-          .skip(skip)
-          .limit(limit)
+          },
+          { $sort: sortObj },
+          { $skip: skip },
+          { $limit: limit },
+        ])
       }
     },
   },
@@ -139,13 +196,12 @@ const resolvers = {
         glass,
       })
       const res = await addedDrink.save()
-      return { id: res.id }
+      return { id: res._id }
     },
-
-    updateDrink: async (
+    async updateDrink(
       _: any,
       { id, input }: { id: string; input: DrinkInput }
-    ) => {
+    ) {
       const updatedDrink = await Drink.findByIdAndUpdate(id, input, {
         new: true,
       })
