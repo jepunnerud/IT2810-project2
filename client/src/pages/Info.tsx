@@ -76,7 +76,7 @@ export default function InfoPage() {
   if (error) return <span>Error</span>
 
   return (
-    <div className="info-page-container">
+    <div className="info-page-container" data-testid="info-page">
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"

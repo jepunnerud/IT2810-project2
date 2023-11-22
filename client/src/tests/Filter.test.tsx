@@ -6,9 +6,9 @@ import { ThemeProvider } from '../utils/ThemeContext'
 const input = {
   value: 'vodka',
   label: 'Filter by ingredient',
-  changeHandler: () => {},
-  pageHandler: () => {},
-  lastPageHandler: () => {},
+  changeHandler: () => { },
+  pageHandler: () => { },
+  lastPageHandler: () => { },
 }
 
 describe('Testing filter dropdown', () => {
