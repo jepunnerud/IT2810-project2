@@ -4,7 +4,6 @@ import { addDrinkToServer } from '../hooks/Drinks'
 import { DrinkInput } from '../types'
 import { useTheme } from '../hooks/ThemeContext'
 import '../components/Dropdown.css'
-import { deleteDrinkFromServer } from '../hooks/Drinks'
 
 function AddDrink() {
   const theme = useTheme()
@@ -13,8 +12,6 @@ function AddDrink() {
     control,
     name: 'ingredients',
   })
-
-  console.log(deleteDrinkFromServer('655b31a7f377fd64ed4a6478'))
 
   async function onSubmit(data: object) {
     console.log(data)
