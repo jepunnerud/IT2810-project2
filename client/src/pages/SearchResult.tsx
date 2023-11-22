@@ -10,6 +10,7 @@ import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
+import SortingDropdown from '../components/SortingDropdown'
 
 function SearchResultPage() {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -19,7 +20,7 @@ function SearchResultPage() {
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
     (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE,
-    searchParams.get('sort') || ''
+    searchParams.get('sort') || 'name-asc'
   )
 
   const setIsLastPage = useCallback(
@@ -78,6 +79,20 @@ function SearchResultPage() {
     }
   }
 
+  const handleSortingChange = (value: string) => {
+    if (value !== 'name-asc') {
+      setSearchParams((searchParams) => {
+        searchParams.set('sort', value)
+        return searchParams
+      })
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.delete('sort')
+        return searchParams
+      })
+    }
+  }
+
   const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.search]
@@ -111,6 +126,13 @@ function SearchResultPage() {
           value={searchParams.get('filter') || ''}
           changeHandler={handleFilterChange}
           label="Filter by ingredient"
+          pageHandler={goToFirstPage}
+          lastPageHandler={setIsLastPage}
+        />
+        <SortingDropdown
+          value={searchParams.get('sort') || ''}
+          label={'Sort by'}
+          changeHandler={handleSortingChange}
           pageHandler={goToFirstPage}
           lastPageHandler={setIsLastPage}
         />
