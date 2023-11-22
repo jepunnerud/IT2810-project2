@@ -6,19 +6,20 @@ import { Drink } from '../types'
 import '../utils/Loader.css'
 import { useSearchResults } from '../hooks/Drinks'
 import './Home.css'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
 
-function HomePage() {
+function SearchResultPage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const { data, loading, error } = useSearchResults(
     searchParams.get('q') || '',
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
-    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE,
+    searchParams.get('sort') || ''
   )
 
   const setIsLastPage = useCallback(
@@ -86,12 +87,14 @@ function HomePage() {
         changePage(-1)
         setIsLastPage(true)
       }
-      const newDrinkOrder = drinks.map((drink: Drink) => drink.id)
+      const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }, [data, changePage, setIsLastPage])
 
-  updateDrinkOrder()
+  useEffect(() => {
+    updateDrinkOrder()
+  }, [updateDrinkOrder])
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
@@ -115,7 +118,7 @@ function HomePage() {
       {
         <div className="card-container">
           {data!.search.map((d: Drink) => (
-            <DrinkCard drink={d} key={d.id} />
+            <DrinkCard drink={d} key={d._id} />
           ))}
         </div>
       }
@@ -128,4 +131,4 @@ function HomePage() {
   )
 }
 
-export default HomePage
+export default SearchResultPage
