@@ -8,20 +8,20 @@ function DrinkCard(props: { drink: Drink }) {
   const [isFavourite, setIsFavourite] = useState(false)
 
   useEffect(() => {
-    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+    const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
     setIsFavourite(storedFavourites.includes(props.drink._id))
   }, [props.drink._id])
 
   function handleOnClick() {
-    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+    const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
 
     if (!isFavourite) {
       storedFavourites.push(props.drink._id)
-      localStorage.setItem('favourites', JSON.stringify(storedFavourites))
+      localStorage.setItem('drink-favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
       localStorage.setItem(
-        'favourites',
+        'drink-favourites',
         JSON.stringify(storedFavourites.filter((id: string) => id !== props.drink._id))
       )
       setIsFavourite(false)
