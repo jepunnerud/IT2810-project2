@@ -11,7 +11,7 @@ import { useSearchParams } from 'react-router-dom'
 export default function FavouritesPage() {
   const [searchParams, setSearchParams] = useSearchParams()
   const { data, loading, error } = useFavourites(
-    JSON.parse(localStorage.getItem('favourites') || '[]'),
+    JSON.parse(localStorage.getItem('drink-favourites') || '[]'),
     ITEMS_PER_PAGE,
     (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
   )
