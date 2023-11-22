@@ -50,11 +50,24 @@ describe('End 2 end application test', () => {
     // Click the "Home" button
     cy.get('[data-testid="logo"]').click()
 
+    // Check that the filter and sorting dropdowns are rendering
+    cy.get('#filter-parameter').should('exist')
+    cy.get('#sort-parameter').should('exist')
+
+    // Click the filter dropdown, and select whiskey
+    cy.get('#filter-parameter').select('Whiskey')
+
     // Search for the drink
     cy.get('[data-testid="search"]').type('Death')
     cy.get('[data-testid="search-icon"]').click()
 
-    // Click the drink card
+    // Check that the drink doesn't show up (as it doesn't contain whiskey)
+    cy.get('[data-testid="drink-card-Death"]').should('not.exist')
+
+    // Click the filter dropdown, and select vodka
+    cy.get('#filter-parameter').select('')
+
+    // Check tha the drink shows up, and click the drink card
     cy.get('[data-testid="drink-card-Death"]').should('exist')
     cy.get('[data-testid="drink-card-Death"]').click()
 
