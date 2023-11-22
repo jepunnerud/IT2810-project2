@@ -28,7 +28,7 @@ function SearchBar(props: { placeholder: string }) {
               navigate(
                 `/search?q=${inputValue}${
                   searchParams.get('filter') ? `&filter=${searchParams.get('filter')}` : ''
-                }`
+                }${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`
               )
           }}
         >
@@ -49,7 +49,7 @@ function SearchBar(props: { placeholder: string }) {
               navigate(
                 `/search?q=${inputValue}${
                   searchParams.get('filter') ? `&filter=${searchParams.get('filter')}` : ''
-                }`
+                }${searchParams.get('sort') ? `&sort=${searchParams.get('sort')}` : ''}`
               )
             }
           }}
