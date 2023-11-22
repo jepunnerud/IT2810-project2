@@ -18,10 +18,10 @@ const resolvers = {
           ingredientFilter = {
             'ingredients.ingredient': {
               $in: [
-                'Whisky',
+                'Whiskey',
                 'Bourbon',
                 'Scotch',
-                'Whiskey',
+                'Whisky',
                 'whisky',
                 'bourbon',
                 'scotch',
@@ -112,10 +112,10 @@ const resolvers = {
           ingredientFilter = {
             'ingredients.ingredient': {
               $in: [
-                'Whisky',
+                'Whiskey',
                 'Bourbon',
                 'Scotch',
-                'Whiskey',
+                'Whisky',
                 'whisky',
                 'bourbon',
                 'scotch',

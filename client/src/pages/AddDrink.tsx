@@ -4,7 +4,6 @@ import { addDrinkToServer } from '../hooks/Drinks'
 import { DrinkInput } from '../types'
 import { useTheme } from '../hooks/ThemeContext'
 import '../components/Dropdown.css'
-import { useEffect } from 'react'
 
 function AddDrink() {
   const theme = useTheme()
@@ -61,10 +60,6 @@ function AddDrink() {
     }
   }
 
-  useEffect(() => {
-    window.scrollTo(0, document.body.scrollHeight)
-  }, [])
-
   return (
     <div className={`add-drink-container ${theme}`}>
       <h1>✨Add new drinks here✨</h1>
@@ -73,6 +68,7 @@ function AddDrink() {
           <h3>
             Name:{' '}
             <input
+              data-testid="name-input"
               className={`input ${theme}`}
               {...register('name', {
                 required: true,
@@ -83,6 +79,7 @@ function AddDrink() {
             Ingredients:
             <section>
               <button
+                data-testid="add-ingredient-button"
                 className={`button form-button ${theme}`}
                 type="button"
                 onClick={() => {
@@ -100,6 +97,7 @@ function AddDrink() {
                   <p key={item.id}>
                     <div className="ingredient-input-wrapper">
                       <input
+                        data-testid={`ingredient-${index}`}
                         className={`input ${theme}`}
                         {...register(`ingredients.${index}.ingredient`, {
                           required: true,
@@ -107,6 +105,7 @@ function AddDrink() {
                         placeholder="ingredient"
                       />
                       <input
+                        data-testid={`measure-${index}`}
                         className={`input ${theme}`}
                         {...register(`ingredients.${index}.measure`, {
                           required: false,
@@ -114,6 +113,7 @@ function AddDrink() {
                         placeholder="measure"
                       />
                       <span
+                        data-testid={`delete-ingredient-${index}`}
                         className={`material-symbols-outlined clear-button ${theme}`}
                         onClick={() => {
                           remove(index)
@@ -135,6 +135,7 @@ function AddDrink() {
           </ul>
           <h3>Instructions: </h3>
           <textarea
+            data-testid="instructions-input"
             className={`input text-area ${theme}`}
             {...register('instructions', {
               required: true,
@@ -163,6 +164,7 @@ function AddDrink() {
             <p>
               Glass:{' '}
               <select
+                data-testid="glass"
                 className={`dropdown form-dropdown ${theme}`}
                 {...register('glass', {
                   required: true,
@@ -205,6 +207,7 @@ function AddDrink() {
             <h3>
               Picture:{' '}
               <input
+                data-testid="picture"
                 className={`input ${theme}`}
                 type="text"
                 {...register('picture', {
@@ -215,7 +218,11 @@ function AddDrink() {
             </h3>
           </div>
         </div>
-        <button className={`button submit-button ${theme}`} type="submit">
+        <button
+          data-testid="add-drink-button"
+          className={`button submit-button ${theme}`}
+          type="submit"
+        >
           Add drink
         </button>
       </form>
