@@ -66,10 +66,10 @@ export default function FavouritesPage() {
   if (loading) return <span className="loader"></span>
   return (
     <div className="favourite-page-container">
-      <h1>Favoritter</h1>
+      <h1>Favourites</h1>
       <div className="card-container">
         {data.favourites.map((d: Drink) => (
-          <DrinkCard drink={d} key={d.id} />
+          <DrinkCard drink={d} key={d._id} />
         ))}
       </div>
       <PageNavigation

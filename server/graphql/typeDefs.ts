@@ -7,7 +7,7 @@ const typeDefs = gql`
   }
 
   type Drink {
-    id: ID!
+    _id: ID!
     name: String
     category: String
     alcoholic: Boolean
@@ -33,10 +33,16 @@ const typeDefs = gql`
   }
 
   type Query {
-    drinks(ing: String, limit: Int, skip: Int): [Drink]
+    drinks(ingredient: String, limit: Int, skip: Int, sort: String): [Drink]
     drink(id: ID!): Drink
     favourites(favourites: [ID], limit: Int, skip: Int): [Drink]
-    search(query: String, ingredient: String, limit: Int, skip: Int): [Drink]
+    search(
+      query: String
+      ingredient: String
+      limit: Int
+      skip: Int
+      sort: String
+    ): [Drink]
   }
 
   type Mutation {

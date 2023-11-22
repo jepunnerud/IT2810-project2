@@ -9,20 +9,20 @@ function DrinkCard(props: { drink: Drink }) {
 
   useEffect(() => {
     const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
-    setIsFavourite(storedFavourites.includes(props.drink.id))
-  }, [props.drink.id])
+    setIsFavourite(storedFavourites.includes(props.drink._id))
+  }, [props.drink._id])
 
   function handleOnClick() {
     const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
 
     if (!isFavourite) {
-      storedFavourites.push(props.drink.id)
+      storedFavourites.push(props.drink._id)
       localStorage.setItem('favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
       localStorage.setItem(
         'favourites',
-        JSON.stringify(storedFavourites.filter((id: string) => id !== props.drink.id))
+        JSON.stringify(storedFavourites.filter((id: string) => id !== props.drink._id))
       )
       setIsFavourite(false)
     }
@@ -37,7 +37,7 @@ function DrinkCard(props: { drink: Drink }) {
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
       />
       <div className="card-wrapper">
-        <Link to={'/info/' + props.drink.id} data-testid={`drink-card-${props.drink.name}`}>
+        <Link to={'/info/' + props.drink._id} data-testid={`drink-card-${props.drink.name}`}>
           <div className={`card ${theme}`}>
             <img src={props.drink.picture} alt={props.drink.name} />
             <p className={theme}>{props.drink.name}</p>

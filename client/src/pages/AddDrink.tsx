@@ -155,10 +155,13 @@ function AddDrink() {
                   required: true,
                 })}
               >
-                <option value="ordinary">Ordinary drink</option>
-                <option value="cocktail">Cocktail</option>
-                <option value="shot">Shot</option>
-                <option value="punch">Punch / Party Drink</option>
+                <option value="Ordinary drink">Ordinary drink</option>
+                <option value="Cocktail">Cocktail</option>
+                <option value="Shot">Shot</option>
+                <option value="Punch / Party Drink">Punch / Party Drink</option>
+                <option value="Shake">Shake</option>
+                <option value="Coffee / Tea">Coffee / Tea</option>
+                <option value="Other / Unknown">Other / Unknown</option>
               </select>
             </p>
             <p>
@@ -170,14 +173,14 @@ function AddDrink() {
                   required: true,
                 })}
               >
-                <option value="cocktail-glass">Cocktail Glass</option>
-                <option value="collins">Gollins Glass</option>
-                <option value="shot-glass">Shot Glass</option>
-                <option value="martini">Martini Glass</option>
-                <option value="wine">Wine Glass</option>
-                <option value="highball">Highball Glass</option>
-                <option value="beer">Beer Mug</option>
-                <option value="old-fashioned">Old-fashioned Glass</option>
+                <option value="Cocktail Glass">Cocktail Glass</option>
+                <option value="Gollins Glass">Gollins Glass</option>
+                <option value="Shot Glass">Shot Glass</option>
+                <option value="Martini Glass">Martini Glass</option>
+                <option value="Wine Glass">Wine Glass</option>
+                <option value="Highball Glass">Highball Glass</option>
+                <option value="Beer Mu">Beer Mug</option>
+                <option value="Old-fashioned Glass">Old-fashioned Glass</option>
               </select>
             </p>
             <p>

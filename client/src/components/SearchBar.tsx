@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { useTheme } from '../hooks/ThemeContext.ts'
 import './SearchBar.css'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 function SearchBar(props: { placeholder: string }) {
   const theme = useTheme()
   const [inputValue, setInputValue] = useState('')
   const navigate = useNavigate()
+  const [searchParams] = useSearchParams()
   const clearInput = () => {
     const inputField = document.getElementById('input') as HTMLInputElement
     inputField.value = ''
@@ -23,8 +24,12 @@ function SearchBar(props: { placeholder: string }) {
           data-testid="search-icon"
           className={`material-symbols-outlined search-icon ${theme}`}
           onClick={() => {
-            const q = (document.getElementById('input') as HTMLInputElement).value
-            if (q !== '') navigate(`/search?q=${q}`)
+            if (inputValue !== '')
+              navigate(
+                `/search?q=${inputValue}${
+                  searchParams.get('filter') ? `&filter=${searchParams.get('filter')}` : ''
+                }`
+              )
           }}
         >
           search
@@ -41,8 +46,11 @@ function SearchBar(props: { placeholder: string }) {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               e.preventDefault()
-              const q = e.currentTarget.value
-              navigate(`/search?q=${q}`)
+              navigate(
+                `/search?q=${inputValue}${
+                  searchParams.get('filter') ? `&filter=${searchParams.get('filter')}` : ''
+                }`
+              )
             }
           }}
         ></input>
