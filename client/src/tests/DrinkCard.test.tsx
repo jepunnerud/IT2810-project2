@@ -49,7 +49,7 @@ describe('Testing DrinkCard', () => {
     const favouriteButton = await screen.findByTestId('favourite-button-mockDrink')
     fireEvent.click(favouriteButton)
 
-    const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+    const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
     expect(storedFavourites.includes('1')).toBeTruthy()
 
     //expect(storedFavourites.contains('1'))
