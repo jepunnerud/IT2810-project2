@@ -2,7 +2,7 @@
 
 The website can be found at [http://it2810-06.idi.ntnu.no/project2/](http://it2810-06.idi.ntnu.no/project2/).
 
-If you want to run the site locally, first clone the project, then do `yarn` or `npm install` in the project's client folder. Then, can do `yarn dev` or `npm run dev` and head to [http://localhost:5173](http://localhost5173) to find the local server.
+If you want to run the site locally, first clone the project, then do `yarn` or `npm install` in the project's client folder. Then, do `yarn dev` or `npm run dev` and head to [http://localhost:5173](http://localhost5173) to find the local server.
 
 The website shows a collection of different drinks.
 
@@ -26,6 +26,7 @@ We set up some tools at the start of the project:
 
 - Extensive use of flexbox to ensure responsive design.
 - Use of Fuse.js library to implement fuzzy search since this would have taken too much time to implement on our own.
+- Conistent design throughout the whole website with reuse of components and colors, including dark mode.
 
 ### Backend
 
@@ -49,11 +50,16 @@ For the frontend of our project, we have used the following technologies and lib
 
 Feel free to explore the code and enjoy exploring the world of cocktails with Cocktail Connoisseur!
 
-## The plan
+## New functions in this version
 
-There is still som work remaining. This is what we plan on implementing for the next submission:
-
-- **Adding drinks.** We made a page for adding your own drinks to the database, which works on both front- and backend. However, the user will not be able to try it out in this release since we don't have validation for inappropiate inputs. Before implementing this feature, we either want a good filter for inappropriate inputs, or for it to only be accessable for admin users.
-- **Search, sorting and filtering in backend.** We have a working backend, but for now the searching, sorting and filtering takes place in frontend.
+- **Adding drinks:** We made a page for adding your own drinks to the database.
 - **Pagination**
-- **Testing**
+- **Search, sorting and filtering in backend:** We moved these parameters from frontend to backend. They all work combined.
+
+## Testing
+
+Vitest is used for testing components. To run the test do `yarn test` or `npm run test` in the client folder.
+
+We made tests for the components we consider the most important, being the filter dropdown and the searchbar. The tests checks that the components render and that the initial setup is correct. Since these tests test the components isolated, there is a limited amount of tests that are useful to implement. Also, the interaction of the components and the app are covered by the end-2-end test.
+
+For end-2-end testing we chose cypress due to

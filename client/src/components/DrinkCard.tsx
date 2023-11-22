@@ -39,7 +39,7 @@ function DrinkCard(props: { drink: Drink }) {
       <div className="card-wrapper">
         <Link to={'/info/' + props.drink._id} data-testid={`drink-card-${props.drink.name}`}>
           <div className={`card ${theme}`}>
-            <img src={props.drink.picture} alt={props.drink.name} />
+            <img src={props.drink.picture} alt={props.drink.name} data-testid="picture" />
             <p className={theme}>{props.drink.name}</p>
           </div>
         </Link>
