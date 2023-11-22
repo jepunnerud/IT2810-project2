@@ -1,6 +1,6 @@
 interface Drink {
   name: string
-  id: string
+  _id: string
   category: string
   picture: string
   instructions: string

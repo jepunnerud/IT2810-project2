@@ -5,12 +5,12 @@ import { ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/clie
 
 const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://localhost:3000/',
+  uri: 'http://it2810-06.idi.ntnu.no:3000',
 })
 
-function useDrinks(ing: string, limit: number, skip: number) {
+function useDrinks(ingredient: string, limit: number, skip: number, sort: string) {
   return useQuery(GET_ALL_DRINKS_QUERY, {
-    variables: { ing: ing, limit: limit, skip: skip },
+    variables: { ingredient: ingredient, limit: limit, skip: skip, sort: sort },
   })
 }
 
@@ -26,17 +26,23 @@ function useFavourites(favourites: string[], limit: number, skip: number) {
   })
 }
 
-function useSearchResults(query: string, ingredient: string, limit: number, skip: number) {
+function useSearchResults(
+  query: string,
+  ingredient: string,
+  limit: number,
+  skip: number,
+  sort: string
+) {
   return useQuery(GET_SEARCH_RESULT_QUERY, {
-    variables: { query: query, ingredient: ingredient, limit: limit, skip: skip },
+    variables: { query: query, ingredient: ingredient, limit: limit, skip: skip, sort: sort },
   })
 }
 
 // Define the GraphQL query
 const GET_ALL_DRINKS_QUERY = gql`
-  query GetAllDrinks($ing: String, $limit: Int, $skip: Int) {
-    drinks(ing: $ing, limit: $limit, skip: $skip) {
-      id
+  query GetAllDrinks($ingredient: String, $limit: Int, $skip: Int, $sort: String) {
+    drinks(ingredient: $ingredient, limit: $limit, skip: $skip, sort: $sort) {
+      _id
       name
       picture
       ingredients {
@@ -49,7 +55,7 @@ const GET_ALL_DRINKS_QUERY = gql`
 const GET_SINGLE_DRINK_QUERY = gql`
   query GetSingleDrink($id: ID!) {
     drink(id: $id) {
-      id
+      _id
       name
       category
       alcoholic
@@ -67,7 +73,7 @@ const GET_SINGLE_DRINK_QUERY = gql`
 const GET_FAVOURITES_QUERY = gql`
   query GetFavourites($favourites: [ID], $limit: Int, $skip: Int) {
     favourites(favourites: $favourites, limit: $limit, skip: $skip) {
-      id
+      _id
       name
       picture
     }
@@ -75,9 +81,15 @@ const GET_FAVOURITES_QUERY = gql`
 `
 
 const GET_SEARCH_RESULT_QUERY = gql`
-  query GetSearchResults($query: String, $ingredient: String, $limit: Int, $skip: Int) {
-    search(query: $query, ingredient: $ingredient, limit: $limit, skip: $skip) {
-      id
+  query GetSearchResults(
+    $query: String
+    $ingredient: String
+    $limit: Int
+    $skip: Int
+    $sort: String
+  ) {
+    search(query: $query, ingredient: $ingredient, limit: $limit, skip: $skip, sort: $sort) {
+      _id
       name
       picture
       ingredients {

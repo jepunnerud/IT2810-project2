@@ -6,19 +6,21 @@ import { Drink } from '../types'
 import '../utils/Loader.css'
 import { useSearchResults } from '../hooks/Drinks'
 import './Home.css'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
 import PageNavigation from '../components/PageNavigation'
 import { useSearchParams } from 'react-router-dom'
+import SortingDropdown from '../components/SortingDropdown'
 
-function HomePage() {
+function SearchResultPage() {
   const [searchParams, setSearchParams] = useSearchParams()
 
   const { data, loading, error } = useSearchResults(
     searchParams.get('q') || '',
     searchParams.get('filter') || '',
     ITEMS_PER_PAGE,
-    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE
+    (parseInt(searchParams.get('page') || '1') - 1) * ITEMS_PER_PAGE,
+    searchParams.get('sort') || 'name-asc'
   )
 
   const setIsLastPage = useCallback(
@@ -77,6 +79,20 @@ function HomePage() {
     }
   }
 
+  const handleSortingChange = (value: string) => {
+    if (value !== 'name-asc') {
+      setSearchParams((searchParams) => {
+        searchParams.set('sort', value)
+        return searchParams
+      })
+    } else {
+      setSearchParams((searchParams) => {
+        searchParams.delete('sort')
+        return searchParams
+      })
+    }
+  }
+
   const updateDrinkOrder = useCallback(() => {
     if (data) {
       const drinks = [...data!.search]
@@ -86,12 +102,14 @@ function HomePage() {
         changePage(-1)
         setIsLastPage(true)
       }
-      const newDrinkOrder = drinks.map((drink: Drink) => drink.id)
+      const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }, [data, changePage, setIsLastPage])
 
-  updateDrinkOrder()
+  useEffect(() => {
+    updateDrinkOrder()
+  }, [updateDrinkOrder])
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
@@ -111,11 +129,18 @@ function HomePage() {
           pageHandler={goToFirstPage}
           lastPageHandler={setIsLastPage}
         />
+        <SortingDropdown
+          value={searchParams.get('sort') || ''}
+          label={'Sort by'}
+          changeHandler={handleSortingChange}
+          pageHandler={goToFirstPage}
+          lastPageHandler={setIsLastPage}
+        />
       </div>
       {
         <div className="card-container">
           {data!.search.map((d: Drink) => (
-            <DrinkCard drink={d} key={d.id} />
+            <DrinkCard drink={d} key={d._id} />
           ))}
         </div>
       }
@@ -128,4 +153,4 @@ function HomePage() {
   )
 }
 
-export default HomePage
+export default SearchResultPage
