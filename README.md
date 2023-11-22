@@ -101,6 +101,17 @@ Vitest is used for testing components. To run the test do `yarn test` or `npm ru
 
 We made tests for the components we consider the most important, being the filter dropdown and the searchbar. The tests checks that the components render and that the initial setup is correct. Since these tests test the components isolated, there is a limited amount of tests that are useful to implement. Also, the interaction between the components and the database are covered by the end-2-end test.
 
+### Snapshot test
+
+Snapshot testing is integral to our project for maintaining the consistency and reliability of our software. It captures a "snapshot" of the application’s UI or state, which is then used as a benchmark to detect unintended changes after code updates. 
+
+Our choice to implement snapshot testing was influenced by:
+
+* Complex UI Components: Ensures intricate UI elements remain consistent across updates.
+* Collaborative Development: Provides a safety net in team settings, maintaining code quality and consistency.
+* Complements Existing Tests: Fills the gaps in visual testing not covered by unit and End-to-end testning.
+
+
 ### End-to-end testing
 
 Cypress is employed for end-to-end (E2E) testing, providing a robust and effective solution for testing the website's functionality. Cypress is chosen for its user-friendly API, real-time reloading, and the ability to simulate user interactions with the application.
