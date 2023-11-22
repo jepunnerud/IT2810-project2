@@ -29,6 +29,12 @@
   }
 }
 
+@media (max-width: 31.25rem) {
+  .searchbar-container {
+    width: 18.75rem;
+  }
+}
+
 .clear-button {
   cursor: pointer;
   &.dark {
