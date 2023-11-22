@@ -14,15 +14,15 @@ const resolvers = {
     ) {
       let ingredientFilter = null
       if (ingredient !== '') {
-        if (ingredient === 'whisky') {
+        if (ingredient === 'whiskey') {
           ingredientFilter = {
             'ingredients.ingredient': {
               $in: [
-                'Whisky',
+                'Whiskey',
                 'Bourbon',
                 'Scotch',
                 'Whiskey',
-                'whisky',
+                'whiskey',
                 'bourbon',
                 'scotch',
                 'whiskey',
@@ -108,15 +108,15 @@ const resolvers = {
     ) {
       let ingredientFilter = null
       if (ingredient !== '') {
-        if (ingredient === 'whisky') {
+        if (ingredient === 'whiskey') {
           ingredientFilter = {
             'ingredients.ingredient': {
               $in: [
-                'Whisky',
+                'Whiskey',
                 'Bourbon',
                 'Scotch',
                 'Whiskey',
-                'whisky',
+                'whiskey',
                 'bourbon',
                 'scotch',
                 'whiskey',

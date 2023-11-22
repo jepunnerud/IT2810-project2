@@ -491,7 +491,7 @@ export const drinks = [
       'Zuckerwürfel in ein old fashioned Glas geben und mit Bitterstoff sättigen, einen Schuss Wasser hinzufügen. Vermischen, bis sie sich auflösen.',
     strInstructionsFR: null,
     strInstructionsIT:
-      "Mettere la zolletta di zucchero nel bicchiere vecchio stile e saturare con il bitter, aggiungere un goccio di acqua naturale.\r\nPestare finché non si scioglie.\r\nRiempi il bicchiere con cubetti di ghiaccio e aggiungi il whisky.\r\nGuarnire con una scorza d'arancia e una ciliegina al maraschino.",
+      "Mettere la zolletta di zucchero nel bicchiere vecchio stile e saturare con il bitter, aggiungere un goccio di acqua naturale.\r\nPestare finché non si scioglie.\r\nRiempi il bicchiere con cubetti di ghiaccio e aggiungi il whiskey.\r\nGuarnire con una scorza d'arancia e una ciliegina al maraschino.",
     'strInstructionsZH-HANS': null,
     'strInstructionsZH-HANT': null,
     picture: 'https://www.thecocktaildb.com/images/media/drink/vrwquq1478252802.jpg',
