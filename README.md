@@ -54,6 +54,8 @@ For the backend of our project, we have utilized the following technologies and 
 
 - **Apollo Server**: We have implemented Apollo Server to create a GraphQL server for handling queries and mutations. Apollo Server simplifies the process of setting up a GraphQL server and integrates seamlessly with our MongoDB database.
 
+Read more in the server folder's README: [/server/README.md](/server/README.md)
+
 ## Frontend
 
 For the frontend of our project, we have used the following technologies and libraries:
