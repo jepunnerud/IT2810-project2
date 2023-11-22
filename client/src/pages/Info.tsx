@@ -15,7 +15,7 @@ export default function InfoPage() {
   const theme = useTheme()
   const breakPoint = 1024
 
-  const storedFavourites = JSON.parse(localStorage.getItem('favourites') || '[]')
+  const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
 
   useEffect(() => {
     // Update the window width whenever the window is resized
@@ -41,11 +41,11 @@ export default function InfoPage() {
   function handleOnClick() {
     if (!isFavourite) {
       storedFavourites.push(id)
-      localStorage.setItem('favourites', JSON.stringify(storedFavourites))
+      localStorage.setItem('drink-favourites', JSON.stringify(storedFavourites))
       setIsFavourite(true)
     } else {
       const newList: string[] = storedFavourites.filter((drinkid: string) => drinkid !== id)
-      localStorage.setItem('favourites', JSON.stringify(newList))
+      localStorage.setItem('drink-favourites', JSON.stringify(newList))
       setIsFavourite(false)
     }
   }
@@ -76,7 +76,7 @@ export default function InfoPage() {
   if (error) return <span>Error</span>
 
   return (
-    <div className="info-page-container">
+    <div className="info-page-container" data-testid="info-page">
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"
