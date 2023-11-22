@@ -37,7 +37,6 @@ function SearchBar(props: { placeholder: string }) {
         <input
           data-testid="search"
           id="input"
-          data-testid="input-field"
           className={`searchbar-input ${theme}`}
           placeholder={props.placeholder}
           onInput={(e) => {

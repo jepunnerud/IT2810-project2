@@ -58,8 +58,6 @@ describe('End 2 end application test', () => {
     cy.get('[data-testid="drink-card-Death"]').should('exist')
     cy.get('[data-testid="drink-card-Death"]').click()
 
-    // Check that the drink page is displayed
-
     // Click the "Add to favourites" button
     cy.get('[data-testid="add-to-favourites-button"').click()
 
