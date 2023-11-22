@@ -9,7 +9,7 @@ function FilterDropdown(props: {
   lastPageHandler: (b: boolean) => void
 }) {
   const theme = useTheme()
-  const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whiskey', 'tequila', 'rum']
+  const possibleFilterParams: string[] = ['', 'vodka', 'gin', 'whisky', 'tequila', 'rum']
 
   return (
     <div className="dropdown-wrapper">
