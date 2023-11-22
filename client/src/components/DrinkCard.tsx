@@ -54,8 +54,9 @@ function DrinkCard(props: { drink: Drink }) {
         >
           <span
             data-testid={`favourite-button-${props.drink.name}`}
-            className={`material-symbols-outlined favourite-icon ${isFavourite && 'is-favourite'
-              } ${theme}`}
+            className={`material-symbols-outlined favourite-icon ${
+              isFavourite && 'is-favourite'
+            } ${theme}`}
             onClick={() => handleOnClick()}
           >
             star
