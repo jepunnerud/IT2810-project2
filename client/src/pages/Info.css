@@ -79,7 +79,7 @@ img {
 
 @media (max-width: 31.25rem) {
   img {
-    max-width: 15.625rem;
+    max-width: 17rem;
     max-height: 20rem;
   }
   .info-card {

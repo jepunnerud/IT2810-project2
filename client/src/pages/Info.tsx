@@ -110,7 +110,11 @@ export default function InfoPage() {
         <div className="picture-button-container">
           <img src={data!.drink.picture} alt={data!.drink.name} />
           {
-            <button onClick={handleOnClick} className={`favourite-button ${theme}`}>
+            <button
+              onClick={handleOnClick}
+              className={`favourite-button ${theme}`}
+              data-testid="add-to-favourites-button"
+            >
               {message}
             </button>
           }
