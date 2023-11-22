@@ -30,7 +30,7 @@ function FilterDropdown(props: {
       >
         {possibleFilterParams.map((p, idx) => {
           return (
-            <option value={p} key={idx}>
+            <option value={p} key={idx} data-testid={`option-${p}`}>
               {p.charAt(0).toUpperCase() + p.slice(1)}
             </option>
           )
@@ -39,6 +39,7 @@ function FilterDropdown(props: {
       {props.value !== '' && (
         <span
           className={`material-symbols-outlined clear-button ${theme}`}
+          data-testid="close-filter-button"
           onClick={() => {
             props.changeHandler('')
             props.pageHandler()

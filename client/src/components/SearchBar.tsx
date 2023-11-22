@@ -15,7 +15,7 @@ function SearchBar(props: { placeholder: string }) {
 
   return (
     <>
-      <div className={`searchbar-container ${theme}`}>
+      <div className={`searchbar-container ${theme}`} data-testid="searchbar-container">
         <link
           rel="stylesheet"
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
@@ -35,6 +35,7 @@ function SearchBar(props: { placeholder: string }) {
         </span>
         <input
           id="input"
+          data-testid="input-field"
           className={`searchbar-input ${theme}`}
           placeholder={props.placeholder}
           onInput={(e) => {
@@ -55,6 +56,7 @@ function SearchBar(props: { placeholder: string }) {
         {inputValue !== '' && (
           <span
             className={`material-symbols-outlined clear-button ${theme}`}
+            data-testid="clear-search-button"
             onClick={() => {
               clearInput()
             }}
