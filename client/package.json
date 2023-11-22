@@ -10,10 +10,12 @@
     "preview": "vite preview",
     "prettier": "prettier . --write",
     "lint:prettier": "prettier . --check",
-    "test": "vitest"
+    "test": "vitest",
+    "cypress": "cypress open"
   },
   "dependencies": {
     "@apollo/client": "^3.8.7",
+    "@testing-library/react": "^14.1.2",
     "graphql": "^16.8.1",
     "prettier": "^3.0.3",
     "react": "^18.2.0",
@@ -27,6 +29,7 @@
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
+    "cypress": "^13.5.1",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",

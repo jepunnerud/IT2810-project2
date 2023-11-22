@@ -101,7 +101,6 @@ function HomePage() {
         setIsLastPage(true)
       }
       const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
-      console.log(newDrinkOrder)
       localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
     }
   }, [data, changePage, setIsLastPage])
