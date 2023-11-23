@@ -65,6 +65,8 @@
 
 p {
   margin: 0rem 0rem;
+  word-break: break-all;
+  white-space: normal;
 }
 
 h2 {
