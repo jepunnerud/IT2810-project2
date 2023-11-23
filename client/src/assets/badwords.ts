@@ -167,4 +167,8 @@ export const badwords = [
   'tøyte',
   'tispe',
   'megge',
+  'porn',
+  'sex',
+  'cum',
+  'pussy',
 ]
