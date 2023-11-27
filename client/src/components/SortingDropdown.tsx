@@ -38,6 +38,7 @@ function FilterDropdown(props: {
           props.lastPageHandler(false)
         }}
         className={`dropdown ${theme}`}
+        data-testid="sorting"
       >
         {possibleFilterParams.map((p, idx) => {
           return (

@@ -1,6 +1,6 @@
 import { deleteDrinkFromServer } from '../../src/hooks/Drinks'
 
-describe('End 2 end application test', () => {
+describe('End 2 end application test for adding drink', () => {
   it('Adding a drink, searching for it, and viewing the drink page', () => {
     cy.visit('http://localhost:5173')
 
@@ -108,5 +108,92 @@ describe('End 2 end application test', () => {
 
     // Go back to the home page
     cy.get('[data-testid="logo"]').click()
+  })
+})
+
+describe('Test sorting', () => {
+  beforeEach(() => {
+    cy.visit('http://localhost:5173')
+  })
+
+  it('Sorting by name ascending', () => {
+    cy.get('#sort-parameter').should('exist')
+
+    cy.get('#sort-parameter').select('name-asc')
+
+    //Collect all drink names
+    cy.get('[data-testid="drinkname"]').then((drinkElements) => {
+      const extractedNames = drinkElements.map((_index, el) => Cypress.$(el).text()).get()
+
+      // Check if the names are in alphabetical order
+      const sortedNames = [...extractedNames].sort()
+      expect(extractedNames).to.deep.equal(sortedNames)
+    })
+  })
+  it('Sorting by name descending', () => {
+    cy.get('#sort-parameter').select('name-desc')
+
+    // Collect all drink names
+    cy.get('[data-testid="drinkname"]').then((drinkElements) => {
+      const extractedNames = drinkElements.map((_index, el) => Cypress.$(el).text()).get()
+
+      // Check if the names are in reverse alphabetical order
+      const sortedNames = [...extractedNames].sort().reverse()
+      expect(extractedNames).to.deep.equal(sortedNames)
+    })
+  })
+
+  it('Sorting by difficulty acending', () => {
+    cy.get('#sort-parameter').select('difficulty-asc')
+
+    const instructionLengths: number[] = []
+
+    // Function to get the length of instructions and add to the list by clicking in on drink
+    const getInstructionLength = (index: number) => {
+      cy.get('[data-testid="drinkname"]').eq(index).click()
+      cy.get('[data-testid="instructions"]')
+        .invoke('text')
+        .then((text) => {
+          instructionLengths.push(text.length)
+          cy.go('back')
+        })
+    }
+
+    getInstructionLength(0)
+    getInstructionLength(1)
+    getInstructionLength(2)
+
+    //Checks that the
+    cy.then(() => {
+      const sortedLengths = [...instructionLengths].sort((a, b) => a - b)
+      expect(instructionLengths).to.deep.equal(sortedLengths)
+    })
+  })
+
+  it('Sorting by name ascending', () => {
+    cy.get('#sort-parameter').select('difficulty-asc')
+
+    const instructionLengths: number[] = []
+
+    // Function to get the length of instructions and add to the list
+    const getInstructionLength = (index: number) => {
+      cy.get('[data-testid="drinkname"]').eq(index).click()
+      cy.get('[data-testid="instructions"]')
+        .invoke('text')
+        .then((text) => {
+          instructionLengths.push(text.length)
+          cy.go('back')
+        })
+    }
+
+    getInstructionLength(0)
+    getInstructionLength(1)
+    getInstructionLength(2)
+
+    // Click on the second drink
+    cy.then(() => {
+      const sortedLengths = [...instructionLengths].sort((a, b) => a - b)
+      expect(instructionLengths).to.deep.equal(sortedLengths)
+    })
   })
 })
