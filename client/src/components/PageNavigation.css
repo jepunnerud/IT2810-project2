@@ -1,12 +1,26 @@
 .page-navigation {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   gap: 1.25rem;
   align-items: center;
   padding: 2rem;
   text-align: center;
   overflow-x: hidden;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 46.375rem) {
+  .page-navigation {
+    flex-direction: column;
+  }
+}
+
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 0.5rem;
 }
 
 .button-arrow {
@@ -37,7 +51,9 @@
   border-radius: 1rem;
   margin: 0.5rem;
   height: 2.5rem;
-  width: 6.875rem;
+  width: fit-content;
+  padding-left: 0.625rem;
+  padding-right: 0.625rem;
   border: none;
   &:hover {
     cursor: pointer;

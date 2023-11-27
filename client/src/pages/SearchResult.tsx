@@ -95,7 +95,7 @@ function SearchResultPage() {
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
-      const drinks = [...data!.search]
+      const drinks = [...data!.search.drinks]
       try {
         if (drinks.length === 0) throw new Error('No drinks found')
       } catch (error) {
@@ -137,22 +137,21 @@ function SearchResultPage() {
           lastPageHandler={setIsLastPage}
         />
       </div>
-      {data!.search.length === 0 ? (
+      {data!.search.drinks.length === 0 ? (
         <p className="search-result-text">No drinks matched your search</p>
       ) : (
         <>
           <p className="search-result-text">Showing results for "{searchParams.get('q')}"</p>
           <div className="card-container">
-            {data!.search.map((d: Drink) => (
+            {data!.search.drinks.map((d: Drink) => (
               <DrinkCard drink={d} key={d._id} />
             ))}
           </div>
         </>
       )}
       <PageNavigation
-        drinksOnPage={data!.search.length}
         currentPage={parseInt(searchParams.get('page') || '1')}
-        isLastPage={searchParams.get('lastPage') === 'true'}
+        totalPages={data!.search!.pageInfo!.totalPages}
         onChangePage={changePage}
       />
     </>

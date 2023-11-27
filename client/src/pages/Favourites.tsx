@@ -54,7 +54,7 @@ export default function FavouritesPage() {
   useEffect(() => {
     if (data) {
       try {
-        if (data.favourites.length === 0) throw new Error('No drinks found')
+        if (data.favourites.drinks.length === 0) throw new Error('No drinks found')
       } catch (error) {
         changePage(-1)
         setIsLastPage(true)
@@ -68,14 +68,13 @@ export default function FavouritesPage() {
     <div className="favourite-page-container">
       <h1>Favourites</h1>
       <div className="card-container">
-        {data.favourites.map((d: Drink) => (
+        {data.favourites.drinks.map((d: Drink) => (
           <DrinkCard drink={d} key={d._id} />
         ))}
       </div>
       <PageNavigation
-        drinksOnPage={data.favourites.length}
         currentPage={parseInt(searchParams.get('page') || '1')}
-        isLastPage={searchParams.get('lastPage') === 'true'}
+        totalPages={data!.favourites.pageInfo.totalPages}
         onChangePage={changePage}
       />
     </div>

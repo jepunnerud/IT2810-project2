@@ -69,7 +69,6 @@ describe('Home Page snapshot test', () => {
 
   it('should render the home page', async () => {
     const homePage = renderHomePage()
-    console.log(homePage)
     await waitFor(() => {
       screen.getAllByTestId('drink-card-TestDrink')
     })

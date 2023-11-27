@@ -93,7 +93,7 @@ function HomePage() {
 
   const updateDrinkOrder = useCallback(() => {
     if (data) {
-      const drinks = [...data!.drinks]
+      const drinks = [...data!.drinks.drinks]
       try {
         if (drinks.length === 0) throw new Error('No drinks found')
       } catch (error) {
@@ -137,15 +137,14 @@ function HomePage() {
       </div>
       {
         <div className="card-container">
-          {data!.drinks.map((d: Drink) => (
+          {data!.drinks.drinks.map((d: Drink) => (
             <DrinkCard drink={d} key={d._id} />
           ))}
         </div>
       }
       <PageNavigation
-        drinksOnPage={data!.drinks.length}
         currentPage={parseInt(searchParams.get('page') || '1')}
-        isLastPage={searchParams.get('lastPage') === 'true'}
+        totalPages={data!.drinks.pageInfo.totalPages}
         onChangePage={changePage}
       />
     </>
