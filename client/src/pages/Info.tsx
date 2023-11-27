@@ -127,7 +127,7 @@ export default function InfoPage() {
             </div>
           ))}
           <h2>Instructions</h2>
-          <p>{data!.drink.instructions}</p>
+          <p data-testid="instructions">{data!.drink.instructions}</p>
           <h2>Info</h2>
           <p>
             <b>Category:</b> {data!.drink.category}
