@@ -43,11 +43,14 @@ function useSearchResults(
 const GET_ALL_DRINKS_QUERY = gql`
   query GetAllDrinks($ingredient: String, $limit: Int, $skip: Int, $sort: String) {
     drinks(ingredient: $ingredient, limit: $limit, skip: $skip, sort: $sort) {
-      _id
-      name
-      picture
-      ingredients {
-        ingredient
+      drinks {
+        _id
+        name
+        picture
+      }
+      pageInfo {
+        totalCount
+        totalPages
       }
     }
   }
@@ -74,9 +77,15 @@ const GET_SINGLE_DRINK_QUERY = gql`
 const GET_FAVOURITES_QUERY = gql`
   query GetFavourites($favourites: [ID], $limit: Int, $skip: Int) {
     favourites(favourites: $favourites, limit: $limit, skip: $skip) {
-      _id
-      name
-      picture
+      drinks {
+        _id
+        name
+        picture
+      }
+      pageInfo {
+        totalCount
+        totalPages
+      }
     }
   }
 `
@@ -90,11 +99,14 @@ const GET_SEARCH_RESULT_QUERY = gql`
     $sort: String
   ) {
     search(query: $query, ingredient: $ingredient, limit: $limit, skip: $skip, sort: $sort) {
-      _id
-      name
-      picture
-      ingredients {
-        ingredient
+      drinks {
+        _id
+        name
+        picture
+      }
+      pageInfo {
+        totalCount
+        totalPages
       }
     }
   }
@@ -184,4 +196,5 @@ export {
   useFavourites,
   useSearchResults,
   deleteDrinkFromServer,
+  GET_ALL_DRINKS_QUERY,
 }

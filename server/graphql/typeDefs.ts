@@ -27,22 +27,32 @@ const typeDefs = gql`
     ingredients: [IngredientInput]
   }
 
+  type PageInfo {
+    totalCount: Int
+    totalPages: Int
+  }
+
+  type DrinksPage {
+    drinks: [Drink]
+    pageInfo: PageInfo
+  }
+
   input IngredientInput {
     ingredient: String
     measure: String
   }
 
   type Query {
-    drinks(ingredient: String, limit: Int, skip: Int, sort: String): [Drink]
+    drinks(ingredient: String, limit: Int, skip: Int, sort: String): DrinksPage
     drink(id: ID!): Drink
-    favourites(favourites: [ID], limit: Int, skip: Int): [Drink]
+    favourites(favourites: [ID], limit: Int, skip: Int): DrinksPage
     search(
       query: String
       ingredient: String
       limit: Int
       skip: Int
       sort: String
-    ): [Drink]
+    ): DrinksPage
   }
 
   type Mutation {
