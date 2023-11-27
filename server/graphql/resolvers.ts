@@ -1,3 +1,4 @@
+import { Mongoose, Types } from 'mongoose'
 import Drink from '../models/drink'
 import { DrinkInput } from '../types'
 
@@ -45,34 +46,80 @@ const resolvers = {
       let sortObj: Record<string, 1 | -1> = {}
       sortObj[sortType] = sortDirection
       if (ingredientFilter) {
-        return await Drink.aggregate([
+        const result = await Drink.aggregate([
           {
             $match: ingredientFilter,
           },
           {
-            $project: {
-              name: 1,
-              picture: 1,
-              difficulty: { $strLenCP: '$instructions' },
+            $facet: {
+              drinks: [
+                {
+                  $project: {
+                    name: 1,
+                    picture: 1,
+                    difficulty: { $strLenCP: '$instructions' },
+                  },
+                },
+                { $sort: sortObj },
+                { $skip: skip },
+                { $limit: limit },
+              ],
+              pageInfo: [{ $count: 'totalCount' }],
             },
           },
-          { $sort: sortObj },
-          { $skip: skip },
-          { $limit: limit },
-        ])
-      } else {
-        return await Drink.aggregate([
           {
             $project: {
-              name: 1,
-              picture: 1,
-              difficulty: { $strLenCP: '$instructions' },
+              pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+              drinks: '$drinks',
             },
           },
-          { $sort: sortObj },
-          { $skip: skip },
-          { $limit: limit },
+          {
+            $addFields: {
+              pageInfo: {
+                totalPages: {
+                  $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+                },
+              },
+            },
+          },
         ])
+        return result[0]
+      } else {
+        const result = await Drink.aggregate([
+          {
+            $facet: {
+              drinks: [
+                {
+                  $project: {
+                    name: 1,
+                    picture: 1,
+                    difficulty: { $strLenCP: '$instructions' },
+                  },
+                },
+                { $sort: sortObj },
+                { $skip: skip },
+                { $limit: limit },
+              ],
+              pageInfo: [{ $count: 'totalCount' }],
+            },
+          },
+          {
+            $project: {
+              pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+              drinks: '$drinks',
+            },
+          },
+          {
+            $addFields: {
+              pageInfo: {
+                totalPages: {
+                  $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+                },
+              },
+            },
+          },
+        ])
+        return result[0]
       }
     },
     async drink(_: any, { id }: { id: string }) {
@@ -86,9 +133,50 @@ const resolvers = {
         skip,
       }: { favourites: string[]; limit: number; skip: number }
     ) {
-      return await Drink.find({ _id: { $in: favourites } })
-        .skip(skip)
-        .limit(limit)
+      const result = await Drink.aggregate([
+        {
+          $match: {
+            $expr: {
+              $in: [
+                '$_id',
+                favourites.map((i: string) => new Types.ObjectId(i)),
+              ],
+            },
+          },
+        },
+        {
+          $facet: {
+            drinks: [
+              {
+                $project: {
+                  name: 1,
+                  picture: 1,
+                  difficulty: { $strLenCP: '$instructions' },
+                },
+              },
+              { $skip: skip },
+              { $limit: limit },
+            ],
+            pageInfo: [{ $count: 'totalCount' }],
+          },
+        },
+        {
+          $project: {
+            pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+            drinks: '$drinks',
+          },
+        },
+        {
+          $addFields: {
+            pageInfo: {
+              totalPages: {
+                $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+              },
+            },
+          },
+        },
+      ])
+      return result[0]
     },
     async search(
       _: any,
@@ -139,35 +227,81 @@ const resolvers = {
       let sortObj: Record<string, 1 | -1> = {}
       sortObj[sortType] = sortDirection
       if (ingredientFilter) {
-        return await Drink.aggregate([
+        const result = await Drink.aggregate([
           {
             $match: { $and: [ingredientFilter, { $text: { $search: query } }] },
           },
           {
-            $project: {
-              name: 1,
-              picture: 1,
-              difficulty: { $strLenCP: '$instructions' },
+            $facet: {
+              drinks: [
+                {
+                  $project: {
+                    name: 1,
+                    picture: 1,
+                    difficulty: { $strLenCP: '$instructions' },
+                  },
+                },
+                { $sort: sortObj },
+                { $skip: skip },
+                { $limit: limit },
+              ],
+              pageInfo: [{ $count: 'totalCount' }],
             },
           },
-          { $sort: sortObj },
-          { $skip: skip },
-          { $limit: limit },
-        ])
-      } else {
-        return await Drink.aggregate([
-          { $match: { $text: { $search: query } } },
           {
             $project: {
-              name: 1,
-              picture: 1,
-              difficulty: { $strLenCP: '$instructions' },
+              pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+              drinks: '$drinks',
             },
           },
-          { $sort: sortObj },
-          { $skip: skip },
-          { $limit: limit },
+          {
+            $addFields: {
+              pageInfo: {
+                totalPages: {
+                  $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+                },
+              },
+            },
+          },
         ])
+        return result[0]
+      } else {
+        const result = await Drink.aggregate([
+          { $match: { $text: { $search: query } } },
+          {
+            $facet: {
+              drinks: [
+                {
+                  $project: {
+                    name: 1,
+                    picture: 1,
+                    difficulty: { $strLenCP: '$instructions' },
+                  },
+                },
+                { $sort: sortObj },
+                { $skip: skip },
+                { $limit: limit },
+              ],
+              pageInfo: [{ $count: 'totalCount' }],
+            },
+          },
+          {
+            $project: {
+              pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+              drinks: '$drinks',
+            },
+          },
+          {
+            $addFields: {
+              pageInfo: {
+                totalPages: {
+                  $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+                },
+              },
+            },
+          },
+        ])
+        return result[0]
       }
     },
   },

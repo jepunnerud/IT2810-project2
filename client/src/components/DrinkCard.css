@@ -17,12 +17,6 @@
   }
 }
 
-@media (max-width: 31.25rem) {
-  .card {
-    width: 15.625rem;
-  }
-}
-
 .card p {
   position: absolute;
   bottom: 1rem;
@@ -41,16 +35,6 @@
   max-height: 13.3125rem;
 }
 
-.material-symbols-outlined {
-  &:hover {
-    font-variation-settings:
-      'FILL' 1,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-  }
-}
-
 .favourite-icon {
   color: var(--tertiary-color);
   &.dark {
@@ -64,13 +48,6 @@
     'wght' 400,
     'GRAD' 0,
     'opsz' 24;
-  &:hover {
-    font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-  }
   color: var(--quaternary-color);
   &.dark {
     color: var(--dark-quaternary-color);
@@ -84,10 +61,11 @@
   position: absolute;
   top: 0.625rem;
   right: 0.625rem;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
   &:hover {
     cursor: pointer;
   }
-  user-select: none;
 }
 
 .card-wrapper {
@@ -96,7 +74,26 @@
   display: flex;
   position: relative;
   transition: all 0.25s ease-in-out;
-  &:hover {
-    transform: scale(1.05);
+}
+
+@media (max-width: 31.25rem) {
+  .card {
+    width: 15.625rem;
+  }
+  .favourite-icon-wrapper {
+    transform: scale(1.3);
+  }
+}
+
+@media (min-width: 31.25rem) {
+  .card-wrapper {
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  .favourite-icon-wrapper {
+    &:hover {
+      transform: scale(1.3);
+    }
   }
 }

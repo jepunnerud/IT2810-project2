@@ -6,6 +6,7 @@ import { useTheme } from '../hooks/ThemeContext'
 
 function DrinkCard(props: { drink: Drink }) {
   const [isFavourite, setIsFavourite] = useState(false)
+  const theme = useTheme()
 
   useEffect(() => {
     const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
@@ -27,8 +28,6 @@ function DrinkCard(props: { drink: Drink }) {
       setIsFavourite(false)
     }
   }
-
-  const theme = useTheme()
 
   return (
     <>
