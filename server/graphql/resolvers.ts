@@ -1,3 +1,4 @@
+import { Mongoose, Types } from 'mongoose'
 import Drink from '../models/drink'
 import { DrinkInput } from '../types'
 
@@ -132,9 +133,50 @@ const resolvers = {
         skip,
       }: { favourites: string[]; limit: number; skip: number }
     ) {
-      return await Drink.find({ _id: { $in: favourites } })
-        .skip(skip)
-        .limit(limit)
+      const result = await Drink.aggregate([
+        {
+          $match: {
+            $expr: {
+              $in: [
+                '$_id',
+                favourites.map((i: string) => new Types.ObjectId(i)),
+              ],
+            },
+          },
+        },
+        {
+          $facet: {
+            drinks: [
+              {
+                $project: {
+                  name: 1,
+                  picture: 1,
+                  difficulty: { $strLenCP: '$instructions' },
+                },
+              },
+              { $skip: skip },
+              { $limit: limit },
+            ],
+            pageInfo: [{ $count: 'totalCount' }],
+          },
+        },
+        {
+          $project: {
+            pageInfo: { $arrayElemAt: ['$pageInfo', 0] },
+            drinks: '$drinks',
+          },
+        },
+        {
+          $addFields: {
+            pageInfo: {
+              totalPages: {
+                $ceil: { $divide: ['$pageInfo.totalCount', limit] },
+              },
+            },
+          },
+        },
+      ])
+      return result[0]
     },
     async search(
       _: any,
