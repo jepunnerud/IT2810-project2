@@ -23,11 +23,14 @@ describe('Home Page snapshot test', () => {
         query: gql`
           query GetAllDrinks($ingredient: String, $limit: Int, $skip: Int, $sort: String) {
             drinks(ingredient: $ingredient, limit: $limit, skip: $skip, sort: $sort) {
-              _id
-              name
-              picture
-              ingredients {
-                ingredient
+              drinks {
+                _id
+                name
+                picture
+              }
+              pageInfo {
+                totalCount
+                totalPages
               }
             }
           }
@@ -41,18 +44,21 @@ describe('Home Page snapshot test', () => {
       },
       result: {
         data: {
-          drinks: [
-            {
-              _id: '1',
-              name: 'TestDrink',
-              picture: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
-              ingredients: [
-                {
-                  ingredient: 'Test Ingredient',
-                },
-              ],
-            },
-          ],
+          drinks: {
+            drinks: [
+              {
+                _id: '1',
+                name: 'TestDrink',
+                picture: 'https://www.thecocktaildb.com/images/media/drink/5noda61589575158.jpg',
+                ingredients: [
+                  {
+                    ingredient: 'Test Ingredient',
+                  },
+                ],
+              },
+            ],
+            pageInfo: { totalCount: 1, totalPages: 1 },
+          },
         },
       },
     },
