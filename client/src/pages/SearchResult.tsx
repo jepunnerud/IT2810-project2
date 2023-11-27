@@ -137,14 +137,20 @@ function SearchResultPage() {
           lastPageHandler={setIsLastPage}
         />
       </div>
-      {
-        <div className="card-container">
-          {data!.search.map((d: Drink) => (
-            <DrinkCard drink={d} key={d._id} />
-          ))}
-        </div>
-      }
+      {data!.search.length === 0 ? (
+        <p className="search-result-text">No drinks matched your search</p>
+      ) : (
+        <>
+          <p className="search-result-text">Showing results for "{searchParams.get('q')}"</p>
+          <div className="card-container">
+            {data!.search.map((d: Drink) => (
+              <DrinkCard drink={d} key={d._id} />
+            ))}
+          </div>
+        </>
+      )}
       <PageNavigation
+        drinksOnPage={data!.search.length}
         currentPage={parseInt(searchParams.get('page') || '1')}
         isLastPage={searchParams.get('lastPage') === 'true'}
         onChangePage={changePage}

@@ -53,7 +53,7 @@ export default function InfoPage() {
   //For back jump
   //Henter forrige element lagret i drinkorder lista og setter som ny url
   function handleBackButton() {
-    if (currentDrinkIndex != null && currentDrinkIndex > 0) {
+    if (currentDrinkIndex != null) {
       return '' + drinkOrder[currentDrinkIndex - 1].toString()
     } else if (id != null) {
       return '' + id.toString()
@@ -64,12 +64,24 @@ export default function InfoPage() {
   //For forward jump
   //Henter neste element lagret i drinkorder lista og setter som ny url
   function handleForwardButton() {
-    if (currentDrinkIndex != null && currentDrinkIndex < drinkOrder.length - 1) {
+    if (currentDrinkIndex != null) {
       return '' + drinkOrder[currentDrinkIndex + 1].toString()
     } else if (id != null) {
       return '' + id.toString()
     }
     return ''
+  }
+
+  function splitLongWords(text: string) {
+    const splitText = text.split(' ')
+    const newText = splitText.map((word) => {
+      if (word.length > 45) {
+        return word.slice(0, 45) + '\n' + word.slice(45)
+      } else {
+        return word
+      }
+    })
+    return newText.join(' ')
   }
 
   if (loading) return <span className="loader"></span>
@@ -84,22 +96,26 @@ export default function InfoPage() {
       <h1>{data!.drink.name}</h1>
       {windowWidth <= breakPoint && (
         <div className="mobile-arrows">
-          <Link
-            to={`/info/${handleBackButton()}`}
-            className={`material-symbols-outlined arrow ${theme}`}
-          >
-            arrow_back_ios
-          </Link>
-          <Link
-            to={`/info/${handleForwardButton()}`}
-            className={`material-symbols-outlined arrow ${theme}`}
-          >
-            arrow_forward_ios
-          </Link>
+          {currentDrinkIndex > 0 && (
+            <Link
+              to={`/info/${handleBackButton()}`}
+              className={`material-symbols-outlined arrow ${theme}`}
+            >
+              arrow_back_ios
+            </Link>
+          )}
+          {currentDrinkIndex < drinkOrder.length - 1 && (
+            <Link
+              to={`/info/${handleForwardButton()}`}
+              className={`material-symbols-outlined arrow ${theme}`}
+            >
+              arrow_forward_ios
+            </Link>
+          )}
         </div>
       )}
       <div className="content-parent">
-        {windowWidth > breakPoint && (
+        {windowWidth > breakPoint && currentDrinkIndex > 0 && (
           <Link
             to={`/info/${handleBackButton()}`}
             className={`material-symbols-outlined arrow ${theme}`}
@@ -121,13 +137,13 @@ export default function InfoPage() {
         </div>
         <div className={`info-card ${theme}`}>
           <h2>Ingredients</h2>
-          {data!.drink.ingredients.map((ingredient: Ingredient, idx: number) => (
+          {data!.drink!.ingredients!.map((ingredient: Ingredient, idx: number) => (
             <div key={idx}>
               <p>{ingredient.ingredient + (ingredient.measure ? ': ' + ingredient.measure : '')}</p>
             </div>
           ))}
           <h2>Instructions</h2>
-          <p>{data!.drink.instructions}</p>
+          <p>{splitLongWords(data!.drink.instructions)}</p>
           <h2>Info</h2>
           <p>
             <b>Category:</b> {data!.drink.category}
@@ -139,7 +155,7 @@ export default function InfoPage() {
             <b>Alcoholic</b>: {data!.drink.alcoholic ? 'Yes' : 'No'}
           </p>
         </div>
-        {windowWidth > breakPoint && (
+        {windowWidth > breakPoint && currentDrinkIndex < drinkOrder.length - 1 && (
           <Link
             to={`/info/${handleForwardButton()}`}
             className={`material-symbols-outlined arrow ${theme}`}

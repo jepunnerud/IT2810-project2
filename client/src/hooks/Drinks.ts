@@ -5,7 +5,8 @@ import { ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/clie
 
 const apolloClient: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: 'http://it2810-06.idi.ntnu.no:3000',
+  uri: 'http://it2810-06.idi.ntnu.no:3000', // For deployment
+  // uri: 'http://localhost:3000', // For local testing
 })
 
 function useDrinks(ingredient: string, limit: number, skip: number, sort: string) {

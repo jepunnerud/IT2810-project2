@@ -9,15 +9,21 @@ function FilterDropdown(props: {
   lastPageHandler: (b: boolean) => void
 }) {
   const theme = useTheme()
-  const possibleFilterParams: string[] = [
-    'name-asc',
-    'name-desc',
-    'difficulty-asc',
-    'difficulty-desc',
+
+  interface filterParam {
+    value: string
+    label: string
+  }
+
+  const possibleFilterParams: filterParam[] = [
+    { value: 'name-asc', label: 'Name A-Z' },
+    { value: 'name-desc', label: 'Name Z-A' },
+    { value: 'difficulty-asc', label: 'Difficulty (easiest first)' },
+    { value: 'difficulty-desc', label: 'Difficulty (hardest first)' },
   ]
 
   return (
-    <div className="dropdown-wrapper">
+    <div className="dropdown-wrapper sort">
       <link
         rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
@@ -35,11 +41,8 @@ function FilterDropdown(props: {
       >
         {possibleFilterParams.map((p, idx) => {
           return (
-            <option value={p} key={idx}>
-              {p.split('-')[0].charAt(0).toUpperCase() +
-                p.split('-')[0].slice(1) +
-                ' - ' +
-                p.split('-')[1].toUpperCase()}
+            <option value={p.value} key={idx}>
+              {p.label}
             </option>
           )
         })}

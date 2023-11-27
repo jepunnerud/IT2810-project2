@@ -143,6 +143,7 @@ function HomePage() {
         </div>
       }
       <PageNavigation
+        drinksOnPage={data!.drinks.length}
         currentPage={parseInt(searchParams.get('page') || '1')}
         isLastPage={searchParams.get('lastPage') === 'true'}
         onChangePage={changePage}

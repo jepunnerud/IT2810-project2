@@ -13,9 +13,28 @@ function AddDrink() {
     name: 'ingredients',
   })
 
-  async function onSubmit(data: object) {
-    console.log(data)
+  const drinkTypes: string[] = [
+    'Ordinary drink',
+    'Cocktail',
+    'Shot',
+    'Punch / Party Drink',
+    'Shake',
+    'Coffee / Tea',
+    'Other / Unknown',
+  ]
 
+  const glassTypes: string[] = [
+    'Cocktail Glass',
+    'Collins Glass',
+    'Shot Glass',
+    'Martini Glass',
+    'Wine Glass',
+    'Highball Glass',
+    'Beer Mug',
+    'Old-fashioned Glass',
+  ]
+
+  async function onSubmit(data: object) {
     const formData = data as {
       name: string
       category: string
@@ -43,8 +62,6 @@ function AddDrink() {
       glass: formData.glass,
     }
 
-    console.log(formData)
-
     try {
       const valid = await addDrinkToServer(newDrink)
       if (!valid) {
@@ -68,6 +85,7 @@ function AddDrink() {
           <h3>
             Name:{' '}
             <input
+              maxLength={50}
               data-testid="name-input"
               className={`input ${theme}`}
               {...register('name', {
@@ -97,6 +115,7 @@ function AddDrink() {
                   <p key={item.id}>
                     <div className="ingredient-input-wrapper">
                       <input
+                        maxLength={50}
                         data-testid={`ingredient-${index}`}
                         className={`input ${theme}`}
                         {...register(`ingredients.${index}.ingredient`, {
@@ -105,6 +124,7 @@ function AddDrink() {
                         placeholder="ingredient"
                       />
                       <input
+                        maxLength={50}
                         data-testid={`measure-${index}`}
                         className={`input ${theme}`}
                         {...register(`ingredients.${index}.measure`, {
@@ -135,13 +155,13 @@ function AddDrink() {
           </ul>
           <h3>Instructions: </h3>
           <textarea
+            maxLength={1000}
             data-testid="instructions-input"
             className={`input text-area ${theme}`}
             {...register('instructions', {
               required: true,
             })}
           ></textarea>
-
           <h3>Info: </h3>
           <div className="info-container">
             <p>
@@ -152,13 +172,11 @@ function AddDrink() {
                   required: true,
                 })}
               >
-                <option value="Ordinary drink">Ordinary drink</option>
-                <option value="Cocktail">Cocktail</option>
-                <option value="Shot">Shot</option>
-                <option value="Punch / Party Drink">Punch / Party Drink</option>
-                <option value="Shake">Shake</option>
-                <option value="Coffee / Tea">Coffee / Tea</option>
-                <option value="Other / Unknown">Other / Unknown</option>
+                {drinkTypes.map((type, idx) => (
+                  <option key={idx} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
             </p>
             <p>
@@ -170,14 +188,11 @@ function AddDrink() {
                   required: true,
                 })}
               >
-                <option value="Cocktail Glass">Cocktail Glass</option>
-                <option value="Gollins Glass">Gollins Glass</option>
-                <option value="Shot Glass">Shot Glass</option>
-                <option value="Martini Glass">Martini Glass</option>
-                <option value="Wine Glass">Wine Glass</option>
-                <option value="Highball Glass">Highball Glass</option>
-                <option value="Beer Mu">Beer Mug</option>
-                <option value="Old-fashioned Glass">Old-fashioned Glass</option>
+                {glassTypes.map((type, idx) => (
+                  <option key={idx} value={type}>
+                    {type}
+                  </option>
+                ))}
               </select>
             </p>
             <p>
@@ -207,6 +222,7 @@ function AddDrink() {
             <h3>
               Picture:{' '}
               <input
+                maxLength={2000}
                 data-testid="picture"
                 className={`input ${theme}`}
                 type="text"
