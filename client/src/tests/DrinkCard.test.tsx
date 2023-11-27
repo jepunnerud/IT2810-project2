@@ -51,7 +51,5 @@ describe('Testing DrinkCard', () => {
 
     const storedFavourites = JSON.parse(localStorage.getItem('drink-favourites') || '[]')
     expect(storedFavourites.includes('1')).toBeTruthy()
-
-    //expect(storedFavourites.contains('1'))
   })
 })
