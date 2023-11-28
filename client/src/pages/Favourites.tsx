@@ -53,7 +53,7 @@ export default function FavouritesPage() {
 
   useEffect(() => {
     if (data) updateDrinkOrder([...data.favourites.drinks])
-  }, [updateDrinkOrder])
+  }, [data])
 
   if (error) return <span className="error">Error: {error.message}</span>
   if (loading) return <span className="loader"></span>
