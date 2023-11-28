@@ -3,7 +3,7 @@ import FilterDropdown from '../components/FilterDropdown'
 import SearchBar from '../components/SearchBar'
 import { Drink } from '../types'
 import '../utils/Loader.css'
-import { useDrinks } from '../hooks/Drinks'
+import { updateDrinkOrder, useDrinks } from '../hooks/Drinks'
 import './Home.css'
 import { useCallback, useEffect } from 'react'
 import { ITEMS_PER_PAGE } from '../utils/constants'
@@ -91,23 +91,9 @@ function HomePage() {
     }
   }
 
-  const updateDrinkOrder = useCallback(() => {
-    if (data) {
-      const drinks = [...data!.drinks.drinks]
-      try {
-        if (drinks.length === 0) throw new Error('No drinks found')
-      } catch (error) {
-        changePage(-1)
-        setIsLastPage(true)
-      }
-      const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
-      localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
-    }
-  }, [data, changePage, setIsLastPage])
-
   useEffect(() => {
-    updateDrinkOrder()
-  }, [updateDrinkOrder])
+    if (data) updateDrinkOrder([...data.drinks.drinks])
+  }, [data])
 
   if (loading) return <span className="loader"></span>
   if (error) return <span>Error</span>
