@@ -1,6 +1,6 @@
 import { Drink } from '../types'
 import DrinkCard from '../components/DrinkCard'
-import { useFavourites } from '../hooks/Drinks'
+import { updateDrinkOrder, useFavourites } from '../hooks/Drinks'
 import '../utils/Loader.css'
 import './Favourites.css'
 import { ITEMS_PER_PAGE } from '../utils/constants'
@@ -52,15 +52,8 @@ export default function FavouritesPage() {
   )
 
   useEffect(() => {
-    if (data) {
-      try {
-        if (data.favourites.drinks.length === 0) throw new Error('No drinks found')
-      } catch (error) {
-        changePage(-1)
-        setIsLastPage(true)
-      }
-    }
-  }, [data, changePage, setIsLastPage])
+    if (data) updateDrinkOrder([...data.favourites.drinks])
+  }, [updateDrinkOrder])
 
   if (error) return <span className="error">Error: {error.message}</span>
   if (loading) return <span className="loader"></span>

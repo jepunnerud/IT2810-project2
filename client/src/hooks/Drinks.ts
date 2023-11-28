@@ -1,5 +1,5 @@
 import { gql, useQuery } from '@apollo/client'
-import { DrinkInput } from '../types'
+import { Drink, DrinkInput } from '../types'
 import { badwords } from '../assets/badwords'
 import { ApolloClient, NormalizedCacheObject, InMemoryCache } from '@apollo/client'
 
@@ -188,6 +188,13 @@ function checkDrinkinput(drink: DrinkInput): boolean {
   return true
 }
 
+function updateDrinkOrder(drinks: Drink[]) {
+  if (drinks) {
+    const newDrinkOrder = drinks.map((drink: Drink) => drink._id)
+    localStorage.setItem('drinkOrder', JSON.stringify(newDrinkOrder))
+  }
+}
+
 export {
   useDrinks,
   useDrink,
@@ -197,4 +204,5 @@ export {
   useSearchResults,
   deleteDrinkFromServer,
   GET_ALL_DRINKS_QUERY,
+  updateDrinkOrder,
 }
