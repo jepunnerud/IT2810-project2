@@ -4,7 +4,7 @@ For our final project, we've crafted a website centered around discovering and s
 
 The website can be found at [http://it2810-06.idi.ntnu.no/project2/](http://it2810-06.idi.ntnu.no/project2/).
 
-If you want to run the site locally, first clone the project, then do `yarn` or `npm install` in the project's client folder. Then, do `yarn dev` or `npm run dev` and head to [http://localhost:5173](http://localhost:5173) to find the local server.
+If you want to run the site locally, first clone the project, then do `yarn` or `npm install` in the project's client folder. Then, do `yarn dev` or `npm run dev` and head to [http://localhost:5173](http://localhost:5173) to find the local server. By default, this local server uses the backend hosted on `mongodb://it2810-06.idi.ntnu.no:27017`. If you want to run a local backend, see how in the [backend documentation](#backend).
 
 The website shows a collection of different drinks.
 
@@ -15,6 +15,19 @@ Clicking on a drink card will lead to an info page for this drink. Here, the use
 Favorites are stored using localStorage and can be found on the favorites page. After clicking on a drink, you can toggle between different drinks using arrow buttons.
 
 In addition, the navbar contains a dark mode toggle button. Try it out in when you are searching for drinks at nighttime!
+
+Feel free to explore the code and enjoy exploring the world of cocktails with Cocktail Connoisseur!
+
+## Overview
+
+1.  [The progress](#the-progress)
+2.  [Universal design](#universal-design)
+3.  [Sustainable development](#sustainable-development)
+4.  [Global state management](#global-state-management)
+5.  [Backend](#backend)
+6.  [Frontend](#frontend)
+7.  [Progress](#progress)
+8.  [Testing](#testing)
 
 ## The progress
 
@@ -98,35 +111,39 @@ For the frontend of our project, we have used the following technologies and lib
 
 - **Apollo Client**: To interact with our GraphQL backend, we've integrated Apollo Client into our React application. Apollo Client simplifies data fetching and caching, making it easier to work with GraphQL data in our components.
 
-Feel free to explore the code and enjoy exploring the world of cocktails with Cocktail Connoisseur!
+### Responsive design
+
+We have put a lot of focus into making the website responsive. This is to make sure it works just as well on mobile devices as it does on laptop and desktop.
+
+To achieve good responsive design, we have used a lot of flexboxes, as well as css media queries to conditionally add css properties based on the screen size. Media queries are used to, for example, reduce the width of drink cards when the screen size is adequately small. Also, we increase the size of the favourite buttons to make them easier to click for users on mobile devices.
+
+In addition, we used a couple window screen size listeners to conditionally render components. For example the "Go to page 1" and "Go to page 33" buttons.
 
 ## Progress
 
-### Changes before first delivery
+### Changes done before first delivery
 
 - Add simple graphical user interface to show drinks on the home page.
 - Drinks stored in a file on the client side.
 
-### Changes before second delivery
+### Changes done before second delivery
 
 - Functional database for storing drinks.
 - Filter and Search is only implemented on the client side.
 - Incremental changes to the graphical user interface.
 
-### Changes before third delivery
+### Changes done before third delivery
 
 - **Adding drinks:** We made a page for adding your own drinks to the database with appropriate validation of user input.
 - **Pagination**
 - **Search, sorting and filtering in backend:** We moved these parameters from frontend to backend. They all work perfectly in combination with each other.
 
-### Changes before final delivery
+### Changes done before final delivery
 
 - Add buttons to skip to the first and last page.
 - Add information about pagination in the response to queries that fetch multiple records from the database.
 - Further validation of user inputs in the AddDrink feature.
 - Additional end-to-end test.
-
-### Changes
 
 ## Testing
 
@@ -144,7 +161,7 @@ Our choice to implement snapshot testing was influenced by:
 
 - Complex UI Components: Ensures intricate UI elements remain consistent across updates.
 - Collaborative Development: Provides a safety net in team settings, maintaining code quality and consistency.
-- Complements Existing Tests: Fills the gaps in visual testing not covered by unit and End-to-end testning.
+- Complements Existing Tests: Fills the gaps in visual testing not covered by unit and end-to-end testing.
 
 ### End-to-end testing
 
@@ -154,4 +171,4 @@ End-to-end testing with Cypress is implemented to check the functionality of the
 
 This comprehensive test coverage ensures that the website is robust and operates seamlessly under various user scenarios. By addressing both unit tests and E2E testing, the project maintains a high level of quality and reliability.
 
-To run the test locally, first start a dev server with `yarn dev --host` in the client folder (the `--host` flag exposes the server to enable Cypress to access it), then with the server running in the background, do `npx cypress run --browser chrome` (or whichever browser you would like). This will run the e2e tests in the terminal. To run the tests with a visual, do `yarn cypress`.
+To run the tests locally, first start a dev server with `yarn dev --host` or `npm run dev -- --host` in the client folder (the `--host` flag exposes the server to enable Cypress to access it), then with the server running in the background, do `npx cypress run --browser chrome` (or whichever browser you would like). This will run the e2e tests in the terminal. To run the tests with a visual, do `yarn cypress` or `npm run cypress`.
