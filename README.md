@@ -2,7 +2,7 @@
 
 For our final project, we've crafted a website centered around discovering and sharing drink recipes. Explore, experiment, and add your own twist – let's shake up the world of drinks together!
 
-The website can be found at [http://it2810-06.idi.ntnu.no/project2/](http://it2810-06.idi.ntnu.no/project2/).
+The website can be found at [http://it2810-06.idi.ntnu.no/project2/](http://it2810-06.idi.ntnu.no/project2/). (OLD).
 
 If you want to run the site locally, first clone the project, then do `yarn` or `npm install` in the project's client folder. Then, do `yarn dev` or `npm run dev` and head to [http://localhost:5173](http://localhost:5173) to find the local server. By default, this local server uses the backend hosted on `mongodb://it2810-06.idi.ntnu.no:27017`. If you want to run a local backend, see how in the [backend documentation](#backend).
 
